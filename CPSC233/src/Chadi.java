@@ -1,14 +1,11 @@
 
 
 public class Chadi {
+	
 	public static boolean charsMatch(char lowercase, char uppercase) {
-		return 'a' <= lowercase && lowercase <= 'z' && 'A' <= uppercase && uppercase <= 'Z';
-				
-			
-		
-		
-		
+		return 'a' <= lowercase && lowercase <= 'z' && 'A' <= uppercase && uppercase <= 'Z';			
 	}
+	
 	public static long roundUp(double num) {
 		return (long)num;
 	}
