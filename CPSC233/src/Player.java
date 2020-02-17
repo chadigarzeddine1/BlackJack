@@ -17,7 +17,7 @@ public class Player {
 		balance = 0;
 		bust = false;
 	}
-	//sum of all the cards in your hand
+	//Sum of all the cards in your hand
 	//No Parameter
 	public int sum() {
 		int sum = 0;
