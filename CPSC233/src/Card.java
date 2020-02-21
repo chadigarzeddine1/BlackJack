@@ -16,7 +16,6 @@ public class Card {
 		} else {
 			return Integer.parseInt(this.value);
 		}
-		//return "♥, ♦, ♣, or ♠ ";
 	}
 	
 	public String getCard() {

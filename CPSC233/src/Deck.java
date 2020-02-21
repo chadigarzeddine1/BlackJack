@@ -6,20 +6,10 @@ public class Deck {
 	public Deck() {
 		this.cards = new ArrayList<Card>();
 		String[] suits = {"♥", "♦", "♣","♠"};
+		String[] labels = {"A", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
 		for (String suit: suits) {
 			for (int i = 0; i < 13; i++) {
-				Card newCard;
-				if (i == 1) {
-					newCard = new Card("A", suit);
-				} else if (i == 11) {
-					newCard = new Card("J", suit);
-				} else if (i == 12) {
-					newCard = new Card("Q", suit);
-				} else if (i == 13) {
-					newCard = new Card("K", suit);
-				} else {
-					newCard = new Card("" + i, suit);
-				}
+				Card newCard = new Card(labels[i], suit);
 				cards.add(newCard);
 			}
 		}

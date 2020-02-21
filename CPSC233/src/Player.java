@@ -22,8 +22,9 @@ public class Player {
 	public int sum() {
 		int sum = 0;
 		for (Card card : hand) {
-			sum += card.getValue();
+			sum += card.getNumber();
 		}
+		return sum;
 	}
 	//add a card to your hand
 	//Parameter: 
