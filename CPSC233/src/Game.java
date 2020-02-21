@@ -89,15 +89,15 @@ public class Game {
 	//goes through all the players and returns the players with the best hand
 	public ArrayList<Player> bestHand() {
 		ArrayList<Player> highest = new ArrayList<Player>();
-		Player best;
+		Player best = new Player();
 		for(Player p:players) {
-			if (p.sum() > best.sum() & p.getBbust() == false) {
+			if (p.sum() > best.sum() & p.getBusted() == false) {
 				best = p;
 			}
 		}
 		highest.add(best);
 		for(Player p:players) {
-			if (p.sum() == best.sum() & p.getBust() == false) {
+			if (p.sum() == best.sum() & p.getBusted() == false) {
 				highest.add(p);
 			}
 		}
