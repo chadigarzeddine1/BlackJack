@@ -84,13 +84,13 @@ public class Player {
 	//Add winnings to the players balance
 	public void win() {
 		balance += stake*2;
-		stake = 0;
+		//stake = 0;
 	}
 	//The player loses the round so their stakes reset to zero
 	//Returns:
 	//	None
 	public void lose() {
-		stake = 0;
+		//stake = 0;
 	}
 	
 	//The player ties with the dealer so they get their stake back
@@ -99,7 +99,6 @@ public class Player {
 	//	None
 	public void push() {
 		balance += stake;
-		stake = 0;
 	}
 	
 	public int getSteak() {
@@ -137,7 +136,6 @@ public class Player {
 	}
 	
 	public void resetPlayerForRound() {
-		this.stake = 0;
 		this.isStanding = false;
 		this.hand = new ArrayList<Card>();
 	}

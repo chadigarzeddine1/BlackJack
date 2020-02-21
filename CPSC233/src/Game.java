@@ -44,11 +44,6 @@ public class Game {
 				System.out.println("Your bet was: " + betStr);
 			}
 			
-			for (Player p : players) {
-				System.out.println("Balance of " + p.getName() + " is " + p.getBalance() + ".");
-				System.out.println("Steak of " + p.getName() + " is " + p.getSteak() + ".");
-			}
-			
 			deal();
 
 			// cycle through plays
@@ -88,18 +83,18 @@ public class Game {
 			}
 
 			if (dealer.getBusted()) {
-				System.out.println("Dealer been busted! HAHA!");
-			}
-			
-			for (Player p : players) {
-				System.out.println("Balance of " + p.getName() + " is " + p.getBalance() + ".");
-				System.out.println("Steak of " + p.getName() + " is " + p.getSteak() + ".");
+				System.out.println("Dealer busted! HAHA!");
 			}
 			
 			rewardWinner(); 
 
 			for (Player p : players) {
 				System.out.println("Balance of " + p.getName() + " is " + p.getBalance() + ".");
+				if (p.getBalance() <= 0) {
+					System.out.println(p.getName() + " is broke af and has been ejected from this game.");
+					players.remove(p);
+				}
+				
 			}
 			
 			System.out.println("Play another round? Y/N");
@@ -107,7 +102,7 @@ public class Game {
 			
 			if (answer.equals("N")) {
 				playAnotherRound = false;
-				System.out.println("The richest player was: " + richestplayer().getName());
+				System.out.println("The richest player was: " + richestplayer());
 			}
 		}
 		
@@ -164,24 +159,25 @@ public class Game {
 
 	//goes through each player in the game and checks if there isStanding variable is true or not.
 	public boolean allPlayersStand() {
-		boolean result = true;
 		for (Player p : players) {
 			if (p.getIsStanding() == false) {
-				result = false;
+				return false;
 			}
 		}
-		return result;
+		return true;
 	}
 
 
-	public Player richestplayer() {
-		Player rich = new Player("Player -1");
+	public String richestplayer() {
+		int highestBal = 0;
+		String nameOfPlayer = "Nobody";
 		for (Player p : players) {
-			if (rich.getBalance() < p.getBalance()) {
-				rich = p;
+			if (p.getBalance() > highestBal) {
+				highestBal = p.getBalance();
+				nameOfPlayer = p.getName();
 			}
 		}
-		return rich;
+		return nameOfPlayer;
 	}
 
 	public static void main (String []args) {
