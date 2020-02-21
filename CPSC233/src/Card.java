@@ -8,6 +8,11 @@ public class Card {
 		this.suit = suit;
 	}
 	
+	public Card(Card card) {
+		this.value = card.value;
+		this.suit = card.suit;
+	}
+	
 	public int getNumber() {
 		if (this.value.equals("A")) {
 			return 11;
@@ -15,6 +20,14 @@ public class Card {
 			return 10;
 		} else {
 			return Integer.parseInt(this.value);
+		}
+	}
+	
+	public int getNumberWithAceAs1() {
+		if (this.value.contentEquals("A")) {
+			return 1;
+		} else {
+			return this.getNumber();
 		}
 	}
 	

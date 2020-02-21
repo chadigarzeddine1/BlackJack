@@ -6,16 +6,14 @@ public class Player {
 	private ArrayList<Card> hand;
 	private boolean isStanding;
 	private int balance;
-	private boolean bust;
 	private int stake;
 	
-	public Player() {
-		name = "name";
+	public Player(String name) {
+		this.name = name;
 		hand = new ArrayList<Card>();
 		isStanding = false;
 		balance = 500;
 		stake = 0;
-		bust = false;
 	}
 	//Sum of all the cards in your hand
 	//No Parameter
@@ -24,12 +22,19 @@ public class Player {
 		for (Card card : hand) {
 			sum += card.getNumber();
 		}
+		
+		if (sum >= 21) {
+			sum = 0;
+			for (Card card : hand) {
+				sum += card.getNumberWithAceAs1();
+			}
+		}
 		return sum;
 	}
 	//add a card to your hand
 	//Parameter: 
 	//	Card - that you want to add
-	public void setHand(Card card) {
+	public void addCardToHand(Card card) {
 		hand.add(card);
 	}
 	
@@ -45,12 +50,11 @@ public class Player {
 	//	The option the player chose
 	//	Update the player status to bust if they busted
 	//	Update the player status if they stand
-	public String go() {
-		Scanner input = new Scanner(System.in);
+	public String go(Scanner input) {
 		if (sum() < 21) {
 			System.out.print("Hit or Stand: ");
 			String option = input.next();
-			input.close();
+			
 			if (option.equals("Hit")) {
 				return "Hit";
 			}
@@ -58,14 +62,12 @@ public class Player {
 				isStanding = true;
 				return "Stand";
 			}
+			
 		}
 		else if (sum() == 21) {
-			input.close();
 			return "You win!";
 		}
 		else {
-			bust = true;
-			input.close();
 			return "You've busted.";
 		}
 	}
@@ -80,7 +82,7 @@ public class Player {
 	}
 	
 	//Add winnings to the players balance
-	public void Win() {
+	public void win() {
 		balance += stake*2;
 		stake = 0;
 	}
@@ -103,13 +105,18 @@ public class Player {
 	public boolean getIsStanding() {
 		return isStanding;
 	}
+	
+	public void setIsStanding(boolean standing) {
+		this.isStanding = standing;
+	}
+	
 	//Return the balance of the player
 	public int getBalance() {
 		return balance;
 	}
 	
 	public boolean getBusted() {
-        return bust;
+        return sum() > 21;
 	}
 	
 	public String hand() {
@@ -119,4 +126,15 @@ public class Player {
 		}
 		return hand;
 	}
+	
+	public String getName() {
+		return this.name;
+	}
+	
+	public void resetPlayerForRound() {
+		this.stake = 0;
+		this.isStanding = false;
+		this.hand = new ArrayList<Card>();
+	}
+	
 }
