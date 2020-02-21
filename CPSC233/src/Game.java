@@ -9,14 +9,19 @@ public class Game {
 	private Deck deck;
 	
 	//Asks user for number of players and then adds that many players to the players list plus the dealer player
-	public void start() {
+	public void start(ArrayList<Player> x) {
+		if (x.isEmpty()) {
 		Scanner input = new Scanner(System.in);
 		System.out.println("Enter number of players:");
 		String numPlayers = input.nextLine();
 		int num = Integer.parseInt(numPlayers);
 		for (int i = 0; i < num; i++) {
-			Player p;
+			Player p = new Player();
 			players.add(p);
+		}
+		}
+		else {
+			players = x;
 		}
 		deck.shuffle();
 		
@@ -26,29 +31,36 @@ public class Game {
 			String play = p.go();
 			if (play == "Hit") {
 				hit(p);}
-			
-			else if(play == "Stand"){
-				stand(p);
-			}
-		}	
 		}
 		ArrayList<Player> win = bestHand(); 
 		Card c1 = deck.draw();
 		Card c2 = deck.draw();
 		this.dealer.setHand(c1);
 		this.dealer.setHand(c2);
-		while (dealer.isStand == false) {
+		while (dealer.getIsStanding() == false) {
 			String play = dealer.go();
 			if (play == "Hit") {
 				hit(dealer);}
-			
-			else if(play == "Stand"){
-				stand(dealer);
 		}
+		Player p = win.get(0);
+		if (p.sum() > dealer.sum()) {
+			System.out.println(win+"Has won the round");
 		}
-		Player p = win[0];
-		if (p.sum()  > dealer.sum()) {
-			
+		else if (p.sum()  == dealer.sum()) {
+			System.out.println(win+"Has tied with the dealer");
+		}
+		else if (p.sum() < dealer.sum()) {
+			System.out.println("The dealer has won the round");
+		}
+		Scanner inputt = new Scanner(System.in);
+		System.out.println("Play another round? Y/N");
+		String answer = inputt.nextLine();
+		if (answer == "Y") {
+			start(players);
+		}
+		else {
+			System.out.println("The richest player was" + richestplayer());
+		}
 		}
 	}
 	
@@ -65,7 +77,7 @@ public class Game {
 	
 	// if the player is not standing will be dealt another card
 	public void hit(Player p) {
-		if (p.isStanding == true) {
+		if (p.getIsStanding() == true) {
 			System.out.println("This player is already standing and can't hit.");
 		}
 		else {
@@ -74,25 +86,19 @@ public class Game {
 		}
 	}
 	
-	//When called will set the player status to be stand
-	public void stand(Player p) {
-		p.isStanding = true;
-	}
-	
-	
 	//goes through all the players and returns the players with the best hand
 	public ArrayList<Player> bestHand() {
 		ArrayList<Player> highest = new ArrayList<Player>();
 		Player best;
 		for(Player p:players) {
-			if (p.sum > best.sum & p.bust == false) {
+			if (p.sum() > best.sum() & p.getBbust() == false) {
 				best = p;
 			}
 		}
-		hightest.add(best);
+		highest.add(best);
 		for(Player p:players) {
-			if (p.sum == best.sum & p.bust == false) {
-				hightest.add(p);
+			if (p.sum() == best.sum() & p.getBust() == false) {
+				highest.add(p);
 			}
 		}
 		return highest;
@@ -102,16 +108,28 @@ public class Game {
 	public boolean allPlayersStand() {
 		boolean result = true;
 		for (Player p : players) {
-			if (p.isStanding == false) {
+			if (p.getIsStanding() == false) {
 				result = false;
 			}
 		}
 		return result;
 	}
 	
+	
+	public Player richestplayer() {
+		Player rich = new Player();
+		for (Player p : players) {
+			if (rich.getBalance() < p.getBalance()) {
+				rich = p;
+			}
+		}
+		return rich;
+	}
+	
 	public static void main (String []args) {
 		Game g = new Game();
-		g.start();
+		ArrayList<Player> y = new ArrayList<Player>();
+		g.start(y);
 	}
 	
 	
