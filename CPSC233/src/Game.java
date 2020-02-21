@@ -97,13 +97,15 @@ public class Game {
 			}
 			players.removeAll(playersToRemove);
 			
-			System.out.println("Play another round? Y/N");
-			String answer = input.next();
-			
-			if (answer.equals("N")) {
-				playAnotherRound = false;
-				System.out.println("The richest player was: " + richestplayer());
+			playAnotherRound = false;
+			if (!players.isEmpty()) {
+				System.out.println("Play another round? Y/N");
+				String answer = input.next();
+				if (answer.equals("Y")) {
+					playAnotherRound = true;
+				}
 			}
+			System.out.println("The richest player was: " + richestplayer());
 		}
 		
 		input.close();
