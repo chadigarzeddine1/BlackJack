@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Game {
 	private ArrayList<Player> players = new ArrayList<Player>();
-	private Player dealer;
+	private PlayerAI dealer;
 	private Deck deck;
 	
 	//Asks user for number of players and then adds that many players to the players list plus the dealer player
@@ -14,13 +14,42 @@ public class Game {
 		System.out.println("Enter number of players:");
 		String numPlayers = input.nextLine();
 		int num = Integer.parseInt(numPlayers);
-		dealer = new Player(PlayerAI);
-		players.add(dealer);
 		for (int i = 0; i < num; i++) {
-			new Player p;
+			Player p;
 			players.add(p);
 		}
 		deck.shuffle();
+		
+		deal();	
+		while (allPlayersStand() == false) {
+		for (Player p :players) {
+			String play = p.go();
+			if (play == "Hit") {
+				hit(p);}
+			
+			else if(play == "Stand"){
+				stand(p);
+			}
+		}	
+		}
+		ArrayList<Player> win = bestHand(); 
+		Card c1 = deck.draw();
+		Card c2 = deck.draw();
+		this.dealer.setHand(c1);
+		this.dealer.setHand(c2);
+		while (dealer.isStand == false) {
+			String play = dealer.go();
+			if (play == "Hit") {
+				hit(dealer);}
+			
+			else if(play == "Stand"){
+				stand(dealer);
+		}
+		}
+		Player p = win[0];
+		if (p.sum()  > dealer.sum()) {
+			
+		}
 	}
 	
 	//takes each player and deals them 2 cards
@@ -37,7 +66,7 @@ public class Game {
 	// if the player is not standing will be dealt another card
 	public void hit(Player p) {
 		if (p.isStanding == true) {
-			System.out.Println("This player is already standing and can't hit.");
+			System.out.println("This player is already standing and can't hit.");
 		}
 		else {
 		Card c = deck.draw();
@@ -54,7 +83,7 @@ public class Game {
 	//goes through all the players and returns the players with the best hand
 	public ArrayList<Player> bestHand() {
 		ArrayList<Player> highest = new ArrayList<Player>();
-		new Player best;
+		Player best;
 		for(Player p:players) {
 			if (p.sum > best.sum & p.bust == false) {
 				best = p;
@@ -80,6 +109,10 @@ public class Game {
 		return result;
 	}
 	
+	public static void main (String []args) {
+		Game g = new Game();
+		g.start();
+	}
 	
 	
 	
