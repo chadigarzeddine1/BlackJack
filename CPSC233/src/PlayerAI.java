@@ -7,7 +7,13 @@ public class PlayerAI extends Player{
 			}
 			else {
 				return "Hit";
-			}
+			}		
+		}
+		else if (sum() == 21) {
+			return "You win!";
+		}
+		else {
+			return "Bust";
 		}
 	}
 }

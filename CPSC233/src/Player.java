@@ -4,27 +4,26 @@ import java.util.Scanner;
 public class Player {
 	private String name;
 	private ArrayList<Card> hand;
-	private int score;
 	private boolean isStanding;
 	private int balance;
 	private boolean bust;
+	private int stake;
 	
 	public Player() {
 		name = "name";
 		hand = new ArrayList<Card>();
-		score = 0;
 		isStanding = false;
-		balance = 0;
+		balance = 500;
+		stake = 0;
 		bust = false;
 	}
 	//Sum of all the cards in your hand
 	//No Parameter
 	public int sum() {
 		int sum = 0;
-		for (int i = 0; 0 < hand.size(); i++) {
-			sum += hand.get(i);
+		for (Card card : hand) {
+			sum += card.getValue();
 		}
-		return sum;
 	}
 	//add a card to your hand
 	//Parameter: 
@@ -59,6 +58,7 @@ public class Player {
 			bust = true;
 			System.out.println("You've busted.");
 		}
+		input.close();
 	}
 	
 	//The player decides on the amount they want to bet and the money gets added to the pot
@@ -67,12 +67,35 @@ public class Player {
 	//	None
 	public void bet(int amount) {
 		balance -= amount;
-		Game.pot += amount;
+		stake += amount;
 	}
 	
 	//Add winnings to the players balance
-	public void grantWinnings(int winnings) {
-		balance += winnings;
+	public void Win() {
+		balance += stake*2;
+		stake = 0;
+	}
+	//The player loses the round so their stakes reset to zero
+	//Returns:
+	//	None
+	public void Lose() {
+		stake = 0;
 	}
 	
+	//The player ties with the dealer so they get their stake back
+	//Stake returns to zero
+	//Returns:
+	//	None
+	public void Push() {
+		balance += stake;
+		stake = 0;
+	}
+	//Returns the state of the player to see if they're standing or not
+	public boolean getIsStanding() {
+		return isStanding;
+	}
+	//Return the balance of the player
+	public int getBalance() {
+		return balance;
+	}
 }
