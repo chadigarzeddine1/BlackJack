@@ -35,6 +35,20 @@ public class Game {
 		boolean playAnotherRound = true;
 		
 		while (playAnotherRound) {
+			
+			// all players bet
+			for (Player p : players) {
+				System.out.println(p.getName() + ", please enter your bet: (current balance: " + p.getBalance() + " )");
+				String betStr = input.next();
+				p.bet(Integer.parseInt(betStr));
+				System.out.println("Your bet was: " + betStr);
+			}
+			
+			for (Player p : players) {
+				System.out.println("Balance of " + p.getName() + " is " + p.getBalance() + ".");
+				System.out.println("Steak of " + p.getName() + " is " + p.getSteak() + ".");
+			}
+			
 			deal();
 
 			// cycle through plays
@@ -77,14 +91,23 @@ public class Game {
 				System.out.println("Dealer been busted! HAHA!");
 			}
 			
+			for (Player p : players) {
+				System.out.println("Balance of " + p.getName() + " is " + p.getBalance() + ".");
+				System.out.println("Steak of " + p.getName() + " is " + p.getSteak() + ".");
+			}
+			
 			rewardWinner(); 
 
+			for (Player p : players) {
+				System.out.println("Balance of " + p.getName() + " is " + p.getBalance() + ".");
+			}
+			
 			System.out.println("Play another round? Y/N");
 			String answer = input.next();
-
+			
 			if (answer.equals("N")) {
 				playAnotherRound = false;
-				System.out.println("The richest player was: " + richestplayer());
+				System.out.println("The richest player was: " + richestplayer().getName());
 			}
 		}
 		
@@ -107,6 +130,7 @@ public class Game {
 		this.dealer.resetPlayerForRound();
 		this.dealer.addCardToHand(c1);
 		this.dealer.addCardToHand(c2);
+		System.out.println("Dealer's first card is: " + c1.toString());
 	}
 
 
@@ -129,10 +153,10 @@ public class Game {
 				p.win();
 				System.out.println(p.getName() + " beat the dealer this round.");
 			} else if (p.sum() == dealer.sum()) {
-				System.out.print(p.getName() + " tied with the dealer.");
-				p.Push();
+				System.out.println(p.getName() + " tied with the dealer.");
+				p.push();
 			} else {
-				p.Lose();
+				p.lose();
 				System.out.println(p.getName() + " was crushed by the dealer.");
 			}
 		}

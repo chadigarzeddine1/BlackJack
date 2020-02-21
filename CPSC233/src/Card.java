@@ -31,11 +31,7 @@ public class Card {
 		}
 	}
 	
-	public String getCard() {
-		return value + suit;
-	}
-	
 	public String toString() {
-		return getCard();
+		return value + suit;
 	}
 }

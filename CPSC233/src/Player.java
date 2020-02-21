@@ -78,7 +78,7 @@ public class Player {
 	//	None
 	public void bet(int amount) {
 		balance -= amount;
-		stake += amount;
+		stake = amount;
 	}
 	
 	//Add winnings to the players balance
@@ -89,7 +89,7 @@ public class Player {
 	//The player loses the round so their stakes reset to zero
 	//Returns:
 	//	None
-	public void Lose() {
+	public void lose() {
 		stake = 0;
 	}
 	
@@ -97,10 +97,15 @@ public class Player {
 	//Stake returns to zero
 	//Returns:
 	//	None
-	public void Push() {
+	public void push() {
 		balance += stake;
 		stake = 0;
 	}
+	
+	public int getSteak() {
+		return stake;
+	}
+	
 	//Returns the state of the player to see if they're standing or not
 	public boolean getIsStanding() {
 		return isStanding;
