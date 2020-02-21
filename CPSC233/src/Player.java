@@ -22,8 +22,9 @@ public class Player {
 	public int sum() {
 		int sum = 0;
 		for (Card card : hand) {
-			sum += card.getValue();
+			sum += card.getNumber();
 		}
+		return sum;
 	}
 	//add a card to your hand
 	//Parameter: 
@@ -50,11 +51,9 @@ public class Player {
 				isStanding = true;
 				return "Stand";
 			}
-		}
-		else if (sum() == 21) {
+		} else if (sum() == 21) {
 			System.out.println("You win!");
-		}
-		else {
+		} else {
 			bust = true;
 			System.out.println("You've busted.");
 		}
@@ -98,4 +97,9 @@ public class Player {
 	public int getBalance() {
 		return balance;
 	}
+	
+	public boolean getBusted() {
+        return bust;
+	}
+}
 }
