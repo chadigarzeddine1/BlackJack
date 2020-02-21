@@ -17,6 +17,7 @@ public class Game {
 			Scanner input = new Scanner(System.in);
 			System.out.println("Enter number of players:");
 			String numPlayers = input.nextLine();
+			input.close();
 			int num = Integer.parseInt(numPlayers);
 			for (int i = 0; i < num; i++) {
 				Player p = new Player();
@@ -62,6 +63,7 @@ public class Game {
 			Scanner inputt = new Scanner(System.in);
 			System.out.println("Play another round? Y/N");
 			String answer = inputt.nextLine();
+			inputt.close();
 			if (answer == "Y") {
 				start(players);
 			}
