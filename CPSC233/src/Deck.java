@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Deck {
 	private ArrayList<Card> cards;
@@ -16,10 +18,22 @@ public class Deck {
 		
 	}
 	
+	// Implementing Fisher–Yates shuffle
+	// From https://stackoverflow.com/questions/1519736/random-shuffling-of-an-array
+	// Adjusted to use ArrayList<Card> instead of original int[].
 	public void shuffle() {
-		
+		ArrayList<Card> ar = this.cards;
+		// If running on Java 6 or older, use `new Random()` on RHS here
+		Random rnd = ThreadLocalRandom.current();
+		for (int i = ar.size() - 1; i > 0; i--) {
+			int index = rnd.nextInt(i + 1);
+			// Simple swap
+			Card a = ar.get(index);
+			ar.set(index, ar.get(i));
+			ar.set(i, a);
+		}
 	}
-	
+
 	public Card draw() {
 		int random = (int )(Math.random() * cards.size());
 		Card returnCard = cards.get(random);

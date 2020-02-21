@@ -51,11 +51,9 @@ public class Player {
 				isStanding = true;
 				return "Stand";
 			}
-		}
-		else if (sum() == 21) {
+		} else if (sum() == 21) {
 			System.out.println("You win!");
-		}
-		else {
+		} else {
 			bust = true;
 			System.out.println("You've busted.");
 		}
@@ -99,4 +97,9 @@ public class Player {
 	public int getBalance() {
 		return balance;
 	}
+	
+	public boolean getBusted() {
+        return bust;
+	}
+}
 }
