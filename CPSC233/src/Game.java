@@ -11,6 +11,8 @@ public class Game {
 	//Asks user for number of players and then adds that many players to the players list plus the dealer player
 	public void start(ArrayList<Player> x) {
 		
+		this.deck = new Deck();
+		
 		if (x.isEmpty()) {
 			Scanner input = new Scanner(System.in);
 			System.out.println("Enter number of players:");
@@ -29,6 +31,10 @@ public class Game {
 		deal();	
 		while (allPlayersStand() == false) {
 			for (Player p :players) {
+				// tell them what they have
+				
+				System.out.println(p.hand());
+				
 				String play = p.go();
 				if (play == "Hit") {
 					hit(p);}

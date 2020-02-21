@@ -111,4 +111,12 @@ public class Player {
 	public boolean getBusted() {
         return bust;
 	}
+	
+	public String hand() {
+		String hand = "";
+		for (Card card: this.hand) {
+			hand += card.toString() + ", ";
+		}
+		return hand;
+	}
 }
