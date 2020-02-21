@@ -87,15 +87,15 @@ public class Game {
 			}
 			
 			rewardWinner(); 
-
+			ArrayList<Player> playersToRemove = new ArrayList<Player>();
 			for (Player p : players) {
 				System.out.println("Balance of " + p.getName() + " is " + p.getBalance() + ".");
 				if (p.getBalance() <= 0) {
 					System.out.println(p.getName() + " is broke af and has been ejected from this game.");
-					players.remove(p);
+					playersToRemove.add(p);
 				}
-				
 			}
+			players.removeAll(playersToRemove);
 			
 			System.out.println("Play another round? Y/N");
 			String answer = input.next();
