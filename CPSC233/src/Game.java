@@ -1,8 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
-
 public class Game {
 	private ArrayList<Player> players = new ArrayList<Player>();
 	private PlayerAI dealer;
