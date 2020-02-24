@@ -8,8 +8,6 @@ Authors: Andrew, Chady, Raymond, Hayden.
 
 To run text-based version, run the Game class, which has a main function.
 
-Last updated: February 24, 2019.
-=======
 ## System Requirments
 To be able to play this game a **Java JDK 8 System** is required. <a href  = "https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html"> Click Here </a> to download a the Java System. </br>
 
@@ -48,3 +46,5 @@ Hayden Mcnally </br>
 Raymond Vong </br>
 Andrew Barnett </br>
 Chadi Garzeddine </br>
+
+#####Last updated: February 24, 2019.
