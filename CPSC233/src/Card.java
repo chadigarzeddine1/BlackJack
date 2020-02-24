@@ -4,7 +4,11 @@ public class Card {
 	private String value;
 	private String suit;
 	
-	//
+	/**
+     * Creates a new Card object that has more potential than a blank Card object
+     * @param value  String value of a given Card
+     * @param suit String of the Card
+     */
 	public Card(String value, String suit) {
 		this.value = value;
 		this.suit = suit;
