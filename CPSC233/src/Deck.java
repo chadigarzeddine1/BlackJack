@@ -5,6 +5,9 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Deck {
 	private ArrayList<Card> cards;
 	
+	/**
+     * Constructs a Deck of 52 Cards by filling the cards ArrayList<Card>
+     */
 	public Deck() {
 		this.cards = new ArrayList<Card>();
 		//String[] suits = {"♥", "♦", "♣","♠"};
@@ -35,6 +38,7 @@ public class Deck {
 		}
 	}
 
+	
 	public Card draw() {
 		int random = (int )(Math.random() * cards.size());
 		Card returnCard = new Card(cards.get(random));
