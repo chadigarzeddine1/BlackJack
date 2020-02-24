@@ -8,6 +8,11 @@ public class Player {
 	private int balance;
 	private int stake;
 	
+	
+	 /**
+     * Creates a new Player with a blank name, an empty Hand, a given account balance of 500, and a stake of 0
+     * @param balance is the amount of money to start with
+     */
 	public Player(String name) {
 		this.name = name;
 		hand = new ArrayList<Card>();
@@ -101,6 +106,10 @@ public class Player {
 		balance += stake;
 	}
 	
+	 /**
+     * Accessor for the current stake
+     * @return current stake
+     */
 	public int getSteak() {
 		return stake;
 	}
@@ -119,6 +128,7 @@ public class Player {
 		return balance;
 	}
 	
+	
 	public boolean getBusted() {
         return sum() > 21;
 	}
@@ -131,9 +141,14 @@ public class Player {
 		return hand;
 	}
 	
+	 /**
+     * Accessor for the player's name
+     * @returnplayer's name
+     */
 	public String getName() {
 		return this.name;
 	}
+	
 	
 	public void resetPlayerForRound() {
 		this.isStanding = false;

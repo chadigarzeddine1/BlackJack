@@ -1,8 +1,14 @@
 
 public class Card {
+	//Setting instance variables
 	private String value;
 	private String suit;
 	
+	/**
+     * Creates a new Card object that has more potential than a blank Card object
+     * @param value  String value of a given Card
+     * @param suit String of the Card
+     */
 	public Card(String value, String suit) {
 		this.value = value;
 		this.suit = suit;
@@ -13,6 +19,10 @@ public class Card {
 		this.suit = card.suit;
 	}
 	
+	/**
+     * Accessor for value
+     * @return value integer value of the Card
+     */
 	public int getNumber() {
 		if (this.value.equals("A")) {
 			return 11;
@@ -23,6 +33,10 @@ public class Card {
 		}
 	}
 	
+	/**
+     * Accessor for value in case value of the card is an Ace
+     * @return value integer value of the Ace Card
+     */
 	public int getNumberWithAceAs1() {
 		if (this.value.contentEquals("A")) {
 			return 1;
@@ -31,7 +45,16 @@ public class Card {
 		}
 	}
 	
+<<<<<<< HEAD
 	@Override
+=======
+	/**
+     * Displays all necessary qualities of a Card:
+     * Suit and Value
+     * @return value and suit String of qualities
+     *@Override
+     */
+>>>>>>> branch 'master' of https://github.com/chadigarzeddine1/Team23CPSC233
 	public String toString() {
 		return value + suit;
 	}
