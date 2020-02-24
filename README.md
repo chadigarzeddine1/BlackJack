@@ -47,4 +47,4 @@ Raymond Vong </br>
 Andrew Barnett </br>
 Chadi Garzeddine </br>
 
-#####Last updated: February 24, 2019.
+Last updated: February 24, 2019.
