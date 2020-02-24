@@ -1,4 +1,8 @@
 # Team23CPSC233
-This is a repository for our CPSC 233 Winter 2020 Group Project
+Blackjack game for CPSC 233 Group Project.
 
-ANDREW WAS HERE PUSHING THIS AROUND!
+Authors: Andrew, Chady, Raymond, Hayden.
+
+To run text-based version, run the Game class, which has a main function.
+
+Last updated: February 24, 2019.
