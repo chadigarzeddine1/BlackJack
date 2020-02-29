@@ -43,40 +43,6 @@ public class Player {
 		hand.add(card);
 	}
 	
-	//Give players options based on their current hands
-	//No parameter
-	//Return:
-	//	The option the player chose
-	//	Update the player status to bust if they busted
-	//	Update the player status if they stand
-	//Give players options based on their current hands
-	//No parameter
-	//Return:
-	//	The option the player chose
-	//	Update the player status to bust if they busted
-	//	Update the player status if they stand
-	public String go(Scanner input) {
-		if (sum() < 21) {
-			System.out.print("Hit or Stand: ");
-			String option = input.next();
-			
-			if (option.equals("Hit")) {
-				return "Hit";
-			}
-			else {
-				isStanding = true;
-				return "Stand";
-			}
-			
-		}
-		else if (sum() == 21) {
-			return "You win!";
-		}
-		else {
-			return "You've busted.";
-		}
-	}
-	
 	//The player decides on the amount they want to bet and the money gets added to the pot
 	//The player balance decrease based on the amount used to bet
 	//Returns:

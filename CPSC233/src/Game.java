@@ -1,7 +1,11 @@
-import java.util.ArrayList;
-import java.util.Scanner;
+//import java.util.ArrayList;
+//import java.util.Scanner;
+
+
+// DO NOT TOUCH, HERE FOR REFERENCE ONLY. NO LONGER IN USE.
 
 public class Game {
+	/*
 	private ArrayList<Player> players = new ArrayList<Player>();
 	private PlayerAI dealer;
 	private Deck deck;
@@ -185,7 +189,7 @@ public class Game {
 		ArrayList<Player> y = new ArrayList<Player>();
 		g.start(y);
 	}
-
+*/
 
 
 }

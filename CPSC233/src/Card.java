@@ -45,16 +45,6 @@ public class Card {
 		}
 	}
 	
-<<<<<<< HEAD
-	@Override
-=======
-	/**
-     * Displays all necessary qualities of a Card:
-     * Suit and Value
-     * @return value and suit String of qualities
-     *@Override
-     */
->>>>>>> branch 'master' of https://github.com/chadigarzeddine1/Team23CPSC233
 	public String toString() {
 		return value + suit;
 	}
