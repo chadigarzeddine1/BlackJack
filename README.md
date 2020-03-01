@@ -12,12 +12,12 @@ To run text-based version, run the Game class, which has a main function.
 To be able to play this game a **Java JDK 8 System** is required. <a href  = "https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html"> Click Here </a> to download a the Java System. </br>
 
 ## Game Installation
-1) Go to the Code Repository under the <a href = "https://github.com/chadigarzeddine1/Team23CPSC233">Main branch </a> </br>
+1) Go to the Code Repository under the <a href = "https://github.com/chadigarzeddine1/BlackJack-05-23">Main branch </a> </br>
 2) Download the files under the main branch as a ZIP file </br>
 3) Extract files from ZIP file </br>
 > Could look like any of this two: </br>
-\Users\Username\Downloads\BlackJack-master </br> 
-\Users\Username\Downloads\BlackJack-Demo1  </br>
+\Users\Username\Downloads\BlackJack-05-23-master </br> 
+\Users\Username\Downloads\BlackJack-05-23-Demo1  </br>
 
 ### Terminal
 1) Open the computer's terminal </br>
@@ -31,7 +31,7 @@ To be able to play this game a **Java JDK 8 System** is required. <a href  = "ht
 2) Keep the files on Downloads file </br>
 3) Enter Eclipse and create a "New Project" under the "File" button </br>
 4) Name it as you wish </br>
-5) Go to Import &#8594; General &#8594; File System &#8594; Browse &#8594; Downloads &#8594; BlackJack-master &#8594; src </br>
+5) Go to Import &#8594; General &#8594; File System &#8594; Browse &#8594; Downloads &#8594; BlackJack-05-23-master &#8594; src </br>
 6) Import every file from the src folder to the game </br>
 7) Go to the laucher class "left" click and go to "Run As" then **click** on Java Aplication </br>
 
@@ -47,4 +47,4 @@ Raymond Vong </br>
 Andrew Barnett </br>
 Chadi Garzeddine </br>
 
-Last updated: February 25, 2020.
+Last updated: March 1, 2020.
