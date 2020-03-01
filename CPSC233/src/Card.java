@@ -45,6 +45,12 @@ public class Card {
 		}
 	}
 	
+	public String getValue() {
+		return this.value;
+	}
+	public String getSuit() {
+		return this.suit;
+	}
 	public String toString() {
 		return value + suit;
 	}

@@ -10,6 +10,7 @@ public class GraphicalGameUI implements GameUI {
 		GraphicalGameUI ui = new GraphicalGameUI();
 		GameSystem sys = new GameSystem(ui);
 		sys.start();
+		UILayout UI = new UILayout();
 	}
 	
 	public ArrayList<Player> setPlayers() {
@@ -49,4 +50,5 @@ public class GraphicalGameUI implements GameUI {
 		return false;
 	}
 
+	
 }

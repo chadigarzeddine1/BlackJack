@@ -107,6 +107,10 @@ public class Player {
 		return hand;
 	}
 	
+	public Card getHand(int n) {
+		return hand.get(n-1);
+	}
+	
 	 /**
      * Accessor for the player's name
      * @returnplayer's name
