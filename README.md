@@ -22,7 +22,7 @@ To be able to play this game a **Java JDK 8 System** is required. <a href  = "ht
 ### Terminal
 1) Open the computer's terminal </br>
 2) Locate the repository you downloaded inside the terminal </br>
-> Terminal: cd Download\BlackJack-master </br>
+> Terminal: cd Download\BlackJack-05-23-master </br>
 3) Compile: javac Launcher.java </br>
 4) Run: java Launcher </br>
 
