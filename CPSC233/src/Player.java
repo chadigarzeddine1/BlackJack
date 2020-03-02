@@ -1,13 +1,15 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javafx.scene.Scene;
+
 public class Player {
 	private String name;
 	private ArrayList<Card> hand;
 	private boolean isStanding;
 	private int balance;
 	private int stake;
-	
+	private Scene scene;
 	
 	 /**
      * Creates a new Player with a blank name, an empty Hand, a given account balance of 500, and a stake of 0
@@ -117,6 +119,10 @@ public class Player {
      */
 	public String getName() {
 		return this.name;
+	}
+	
+	public Scene getScene() {
+		return this.scene;
 	}
 	
 	

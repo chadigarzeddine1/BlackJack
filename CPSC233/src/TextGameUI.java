@@ -9,7 +9,7 @@ public class TextGameUI implements GameUI {
 		input = new Scanner(System.in);
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		TextGameUI ui = new TextGameUI();
 		GameSystem sys = new GameSystem(ui);
 		sys.start();

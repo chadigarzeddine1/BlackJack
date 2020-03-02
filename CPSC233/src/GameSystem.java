@@ -20,10 +20,10 @@ public class GameSystem {
 	}
 	
 	//Asks user for number of players and then adds that many players to the players list plus the dealer player
-	public void start() {
-		
+	public void start() throws Exception {
+		//uiHandler.start(uiHandler.getStage());
 		this.players = uiHandler.setPlayers();
-		
+
 		boolean playAnotherRound = true;
 
 		while (playAnotherRound) {
@@ -176,5 +176,8 @@ public class GameSystem {
 			p.setIsStanding(true);
 		}
 		uiHandler.notifyNowPlayerTurn(p);
+	}
+	public ArrayList<Player> getPlayers(){
+		return players;
 	}
 }

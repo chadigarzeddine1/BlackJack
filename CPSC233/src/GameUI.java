@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 
+import javafx.stage.Stage;
+
 public interface GameUI {
 	ArrayList<Player> setPlayers();
 	int getAndShowPlayerBet(Player player);
@@ -10,7 +12,14 @@ public interface GameUI {
 	void notifyBroke(Player player);
 	void notifyBusted(Player player);
 	boolean playAnotherRound();
+
 	
+	//Stage getStage() ;
+
+	
+	//void start(Stage primaryStage) ;
+		
 	
 	
 }
+
