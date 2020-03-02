@@ -14,12 +14,5 @@ public interface GameUI {
 	boolean playAnotherRound();
 
 	
-	//Stage getStage() ;
-
-	
-	//void start(Stage primaryStage) ;
-		
-	
-	
 }
 

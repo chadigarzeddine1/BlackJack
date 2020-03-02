@@ -20,7 +20,7 @@ public class GameSystem {
 	}
 	
 	//Asks user for number of players and then adds that many players to the players list plus the dealer player
-	public void start() throws Exception {
+	public void start() {
 		//uiHandler.start(uiHandler.getStage());
 		this.players = uiHandler.setPlayers();
 
