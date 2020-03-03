@@ -96,7 +96,7 @@ public class GraphicalGameUI extends Application implements GameUI {
 		sys = new GameSystem(ui);
 		gui.start(primaryStage);
 		//String a = input.nextLine();
-		sys.start();
+		//sys.start();
 		ui.input.close();
 	}
 }	
