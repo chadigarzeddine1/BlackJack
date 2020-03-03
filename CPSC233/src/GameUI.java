@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import javafx.stage.Stage;
 
 public interface GameUI {
-	ArrayList<Player> setPlayers();
+	ArrayList<Player> setPlayers() throws Exception;
 	int getAndShowPlayerBet(Player player);
 	void notifyNowPlayerTurn(Player player);
 	PLAYERMOVE getPlayerMove(Player player);
