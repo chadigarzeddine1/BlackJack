@@ -1,8 +1,11 @@
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -11,10 +14,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class ControlerBase {
+public class ControlerBase implements Initializable{
 	Stage primaryStage;
-//	GraphicalGameUI ui = new GraphicalGameUI();
-//	GUI gui = new GUI(ui);
+
+	public ArrayList<Player> players = new ArrayList<Player>();
+	private Player dealer;
+	private Deck deck;
+	
     @FXML
     void hitClick(ActionEvent event) {
 
@@ -28,17 +34,7 @@ public class ControlerBase {
     public void setPrimaryStage(Stage stage) {
   	  this.primaryStage = stage;
   	}
-  public Stage getStage() {
-  	return primaryStage;
-  }
-  
-  public void changeScene(String fxml) throws Exception{
-      Parent pane = FXMLLoader.load(
-             getClass().getResource(fxml));
 
-     Scene scene = new Scene( pane );
-     primaryStage.setScene(scene);
-  }
   @FXML
   private Button bet;
 
@@ -76,36 +72,11 @@ public class ControlerBase {
 
   private String numplayer;
 
-  private boolean playerset = false;
-  @FXML
- // void hitClick(ActionEvent event) throws Exception {
-//  	 Parent pane = FXMLLoader.load(
-//               getClass().getResource("Projectlayout.fxml"));
-//
-//       Scene scene = new Scene( pane );
-//       Stage window =(Stage)((Node)event.getSource()).getScene().getWindow();
-//       window.setScene(scene);
-//       window.show();
-  	//System.out.print("yes");
-  //}
- 
-  public Button getEnter() {
-  	return enter;
-  }
-  @FXML
  
 
 
-  public String getNumplayers()  {
 
-  	return numplayer;
-
-  	}
-  public boolean getPlayerSet()  {
-
-  	return playerset;
-
-  	}
+  
 
 @FXML
 private TextField numplay;
@@ -116,15 +87,38 @@ private Button enter;
 
 @FXML
 void enterClick(ActionEvent event) throws Exception {
-	  Parent pane = FXMLLoader.load(
-          getClass().getResource("ProjectBet.fxml"));
-
+	FXMLLoader loader = new FXMLLoader();
+	loader.setLocation(getClass().getResource("ProjectBet.fxml"));
+	  Parent pane = loader.load();
+	
   Scene scene = new Scene( pane );
+  
+  ConBet controller = loader.getController();
+  numplayer = numplay.getText();
+  players = setPlayers(numplayer);
+  controller.setPlayers(players,deck,dealer);
   Stage window =(Stage)((Node)event.getSource()).getScene().getWindow();
   window.setScene(scene);
   numplayer = numplay.getText();
-  
+  players = setPlayers(numplayer);
+}
+public ArrayList<Player> setPlayers(String numPlayers) throws Exception {
+	ArrayList<Player> players = new ArrayList<Player>();
+
+	int num = Integer.parseInt(numPlayers);
+	for (int i = 0; i < num; i++) {
+		Player p = new Player("Player " + (i + 1));
+		players.add(p);
+	}
+	return players;
 }
 
+@Override
+public void initialize(URL arg0, ResourceBundle arg1) {
+	// TODO Auto-generated method stub
+	this.deck = new Deck();
+	deck.shuffle();
+	this.dealer = new Player("Dave the Dealer");
+}
     
 }
