@@ -252,44 +252,44 @@ public void start(ArrayList<Player> p,Deck d,Player deal) {
 				}
 				else if (suit == "S") {
 					if(c.getValue() == "K") {
-						return new Image("Card Deck/Hearts/K of Spades.png");
+						return new Image("Card Deck/Spades/K of Spades.png");
 					}
 					else if(c.getValue() == "Q") {
-						return new Image("Card Deck/Hearts/Q of Spades.png");
+						return new Image("Card Deck/Spades/Q of Spades.png");
 					}
 					else if(c.getValue() == "J") {
-						return new Image("Card Deck/Hearts/J of Spades.png");
+						return new Image("Card Deck/Spades/J of Spades.png");
 					}
 					else if(c.getValue() == "10") {
-						return new Image("Card Deck/Hearts/10 of Spades.png");
+						return new Image("Card Deck/Spades/10 of Spades.png");
 					}
 				}
 				else if (suit == "C") {
 					if(c.getValue() == "K") {
-						return new Image("Card Deck/Hearts/K of clubs.png");
+						return new Image("Card Deck/clubs/K of clubs.png");
 					}
 					else if(c.getValue() == "Q") {
-						return new Image("Card Deck/Hearts/Q of clubs.png");
+						return new Image("Card Deck/clubs/Q of clubs.png");
 					}
 					else if(c.getValue() == "J") {
-						return new Image("Card Deck/Hearts/J of clubs.png");
+						return new Image("Card Deck/clubs/J of clubs.png");
 					}
 					else if(c.getValue() == "10") {
-						return new Image("Card Deck/Hearts/10 of clubs.png");
+						return new Image("Card Deck/clubs/10 of clubs.png");
 					}
 				}
 				else if (suit == "D") {
 					if(c.getValue() == "K") {
-						return new Image("Card Deck/Hearts/K of diamonds.png");
+						return new Image("Card Deck/diamonds/K of diamonds.png");
 					}
 					else if(c.getValue() == "Q") {
-						return new Image("Card Deck/Hearts/Q of diamonds.png");
+						return new Image("Card Deck/diamonds/Q of diamonds.png");
 					}
 					else if(c.getValue() == "J") {
-						return new Image("Card Deck/Hearts/J of diamonds.png");
+						return new Image("Card Deck/diamonds/J of diamonds.png");
 					}
 					else if(c.getValue() == "10") {
-						return new Image("Card Deck/Hearts/10 of diamonds.png");
+						return new Image("Card Deck/diamonds/10 of diamonds.png");
 					}
 				}
 				
