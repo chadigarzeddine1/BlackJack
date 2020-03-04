@@ -5,7 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="761.0" prefWidth="1095.0" style="-fx-background-color: green;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ControlerPlayerNum">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="761.0" prefWidth="1095.0" style="-fx-background-color: green;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ControlerBase">
    <children>
       <Button fx:id="hit" layoutX="791.0" layoutY="521.0" mnemonicParsing="false" onAction="#hitClick" prefHeight="89.0" prefWidth="228.0" text="Hit" />
       <Button fx:id="stand" layoutX="791.0" layoutY="647.0" mnemonicParsing="false" onAction="#standClick" prefHeight="89.0" prefWidth="228.0" text="Stand" />
@@ -14,7 +14,7 @@
             <Image url="@Card%20Deck/Back%20of%20cards.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="199.0" fitWidth="134.0" layoutX="569.0" layoutY="521.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="187.0" fitWidth="146.0" layoutX="549.0" layoutY="520.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Card%20Deck/Back%20of%20cards.png" />
          </image>
@@ -29,9 +29,9 @@
             <Image url="@Card%20Deck/Back%20of%20cards.png" />
          </image>
       </ImageView>
-      <Button fx:id="enter" layoutX="475.0" layoutY="438.0" mnemonicParsing="false" onAction="#enterClick" prefHeight="51.0" prefWidth="137.0" text="Enter" />
-      <TextField fx:id="numplay" layoutX="394.0" layoutY="366.0" />
-      <Label layoutX="343.0" layoutY="266.0" prefHeight="51.0" prefWidth="395.0" style="-fx-background-color: white;" text=" Enter the Number of Players to start" />
+      <Button fx:id="enter" layoutX="479.0" layoutY="389.0" mnemonicParsing="false" onAction="#enterClick" prefHeight="51.0" prefWidth="137.0" text="Enter" />
+      <TextField fx:id="numplay" layoutX="469.0" layoutY="334.0" />
+      <Label layoutX="446.0" layoutY="276.0" prefHeight="34.0" prefWidth="203.0" style="-fx-background-color: white;" text="  Enter the Number of Players to Start" />
       <ImageView fitHeight="186.0" fitWidth="146.0" layoutX="549.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Card%20Deck/Back%20of%20cards.png" />

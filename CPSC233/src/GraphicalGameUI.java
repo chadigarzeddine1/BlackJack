@@ -45,10 +45,9 @@ public class GraphicalGameUI extends Application implements GameUI {
 
 	
 	public ArrayList<Player> setPlayers() throws Exception {
-		System.out.print("yes");
-		String numPlayers;
+		String numPlayers = "1";
 		ArrayList<Player> players = new ArrayList<Player>();
-			numPlayers = gui.setPlayers();
+
 		int num = Integer.parseInt(numPlayers);
 		for (int i = 0; i < num; i++) {
 			Player p = new Player("Player " + (i + 1));

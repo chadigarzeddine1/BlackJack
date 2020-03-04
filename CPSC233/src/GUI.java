@@ -12,15 +12,15 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class GUI {
-	private ControlerPlayerNum c = new ControlerPlayerNum();
+//	private ControlerBase cBase = new ControlerBase();
+//	private ConBet cBet = new ConBet();
 	public Stage primaryStage;
- 
 
-    public ControlerPlayerNum getConPlay() {
-    	return c;
-    }
-    public String setPlayers() throws Exception  {
-    	return c.getNumplayers();
+//    public ControlerBase getConPlay() {
+//    	return c;
+//    }
+    public void setPlayers(ArrayList<Player> p) throws Exception  {
+    	players = p;
     }
 
  
@@ -47,7 +47,7 @@ public class GUI {
     
     //Game logic
 
-	private ArrayList<Player> players = new ArrayList<Player>();
+	public ArrayList<Player> players = new ArrayList<Player>();
 	private Player dealer;
 	private Deck deck;
 	protected GameUI uiHandler;
@@ -59,17 +59,31 @@ public class GUI {
 		this.uiHandler = handler;
 	}
 	
+	public ArrayList<Player> setPlayers(String numPlayers) throws Exception {
+		ArrayList<Player> players = new ArrayList<Player>();
+
+		int num = Integer.parseInt(numPlayers);
+		for (int i = 0; i < num; i++) {
+			Player p = new Player("Player " + (i + 1));
+			players.add(p);
+		}
+		return players;
+	}
+	public void bet(){
+//		gui.setPlayers(gui.setPlayers(numplayer));
+//		
+//		  curbal.setText("500");
+//		  curplay.setText("Current Player:" + gui.getPlayers().get(0).getName());
+//		  if (gui.getPlayers().size()== 1) {
+//			  nexplay.setText("Next Player: N/A");
+//		  }
+//		  else {
+//			  nexplay.setText("Next Player: " + gui.getPlayers().get(1).getName());
+//		  }
+	}
 	//Asks user for number of players and then adds that many players to the players list plus the dealer player
 	public void start() throws Exception {
-		c.getEnter().setOnAction(new EventHandler<ActionEvent>()
-		   {
-		   	@Override
-		   	public void handle(ActionEvent event)
-		   	{
-		   		c.enterClick();
-		   	}
-		   }
-		  );
+		
 
 		this.players = uiHandler.setPlayers();
 		System.out.print(players);
