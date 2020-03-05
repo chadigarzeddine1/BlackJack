@@ -112,6 +112,9 @@ public class Player {
 	public Card getHand(int n) {
 		return hand.get(n-1);
 	}
+	public ArrayList<Card> getHand() {
+		return hand;
+	}
 	
 	 /**
      * Accessor for the player's name
