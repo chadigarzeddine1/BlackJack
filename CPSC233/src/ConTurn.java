@@ -13,7 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 	public class ConTurn implements Initializable {
-		
+		GUI gui;
 		Player curplayer;
 		int curplaynum;
 		ArrayList<Player> players;

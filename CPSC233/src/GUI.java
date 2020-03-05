@@ -5,58 +5,49 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class GUI {
-//	private ControlerBase cBase = new ControlerBase();
-//	private ConBet cBet = new ConBet();
-	public Stage primaryStage;
 
-//    public ControlerBase getConPlay() {
-//    	return c;
-//    }
-    public void setPlayers(ArrayList<Player> p) throws Exception  {
-    	players = p;
-    }
-
- 
-    public void setPrimaryStage(Stage stage) {
-    	  this.primaryStage = stage;
-    	}
-    public Stage getStage() {
-    	return primaryStage;
-    }
-    
-    public void changeScene(String fxml) throws Exception{
-        Parent pane = FXMLLoader.load(
-               getClass().getResource(fxml));
-
-       Scene scene = new Scene( pane );
-       primaryStage.setScene(scene);
-    }
-    public void start(Stage primaryStage) throws Exception {
-    	AnchorPane root = (AnchorPane) FXMLLoader.load(GraphicalGameUI.class.getResource("ProjectEnterPlay.fxml"));
-    	primaryStage.setTitle("Black Jack");
-		primaryStage.setScene(new Scene(root));
-		primaryStage.show();
-    }
-    
+   
     //Game logic
 
 	public ArrayList<Player> players = new ArrayList<Player>();
 	private Player dealer;
 	private Deck deck;
-	protected GameUI uiHandler;
+	int curplaynum;
+	Player curplayer;
+	Label nexplay;
+	Label curbal;
+	Label curplay;
 	
-	public GUI(GameUI handler) {
+	public GUI() {
 		this.deck = new Deck();
 		deck.shuffle();
 		this.dealer = new Player("Dave the Dealer");
-		this.uiHandler = handler;
+	}
+	
+	public void enterClick(ActionEvent event,TextField numplay,String numplayer) throws Exception {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("ProjectBet.fxml"));
+		  Parent pane = loader.load();
+		
+	  Scene scene = new Scene( pane );
+	  
+	  ConBet controller = loader.getController();
+	  numplayer = numplay.getText();
+	  players = setPlayers(numplayer);
+	  controller.setPlayers(this);
+	  Stage window =(Stage)((Node)event.getSource()).getScene().getWindow();
+	  window.setScene(scene);
+	  numplayer = numplay.getText();
+	  players = setPlayers(numplayer);
 	}
 	
 	public ArrayList<Player> setPlayers(String numPlayers) throws Exception {
@@ -69,6 +60,61 @@ public class GUI {
 		}
 		return players;
 	}
+	
+	
+	public void betStart(Label nexplay,Label curplay,Label curbal) {
+		this.nexplay = nexplay;
+		this.curbal = curbal;
+		this.curplay = curplay;
+    	curbal.setText(""+players.get(0).getBalance());
+		  curplay.setText("Current Player:" + players.get(0).getName());
+		  curplayer = players.get(0);
+		  curplaynum = 0;
+		  if (players.size()== 1) {
+			  nexplay.setText("Next Player: N/A");
+		  }
+		  else {
+			  nexplay.setText("Next Player: " + players.get(1).getName());
+		  }
+    }
+	
+	
+	
+	public void betClick(ActionEvent event,TextField betamount) throws Exception {
+			curplayer.bet(Integer.parseInt(betamount.getText()));
+			betamount.setText("");
+		if (players.size()== curplaynum+1){
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getResource("ProjectTurn.fxml"));
+			  Parent pane = loader.load();
+			
+		  Scene scene = new Scene( pane );
+		  
+		  ConTurn controller = loader.getController();
+		  controller.start(players, deck, dealer);
+		  Stage window =(Stage)((Node)event.getSource()).getScene().getWindow();
+		  window.setScene(scene);
+		}
+		else {
+			curplaynum = curplaynum+1;
+			nextPlayer(curplaynum);
+		}
+	}
+	
+	
+	 public void nextPlayer(int num) {
+		   	curbal.setText(""+players.get(num).getBalance());
+
+			  curplay.setText("Current Player:" + players.get(num).getName());
+			  curplayer = players.get(num);
+			  if (players.size()== num+1) {
+				  nexplay.setText("Next Player: "+ players.get(0).getName());
+			  }
+			  else {
+				  nexplay.setText("Next Player: " + players.get(num+1).getName());
+			  }
+			  
+	   }
 	public void bet(){
 //		gui.setPlayers(gui.setPlayers(numplayer));
 //		
@@ -85,60 +131,60 @@ public class GUI {
 	public void start() throws Exception {
 		
 
-		this.players = uiHandler.setPlayers();
-		System.out.print(players);
-		boolean playAnotherRound = true;
-
-		while (playAnotherRound) {
-
-			// all players bet
-			for (Player p : players) {
-				p.bet(uiHandler.getAndShowPlayerBet(p));
-			}
-
-			deal();
-
-			// cycle through plays
-			for (Player p : players) {
-				uiHandler.notifyNowPlayerTurn(p);
-
-				while (!p.getIsStanding() && p.sum() < 21) {
-					// tell them what they have
-					PLAYERMOVE move = uiHandler.getPlayerMove(p);
-					this.doPlayerMove(move, p);
-				}
-
-				if (p.getBusted()) {
-					uiHandler.notifyBusted(p);
-				}
-			}
-
-			uiHandler.notifyNowPlayerTurn(dealer);
-
-			while (!dealer.getIsStanding() && dealer.sum() < 21) {
-				// tell them what they have
-				this.doPlayerMove(this.dealerDecide(dealer), dealer);
-			}
-
-			if (dealer.getBusted()) {
-				uiHandler.notifyBusted(dealer);
-			}
-
-			rewardWinner(); 
-			ArrayList<Player> playersToRemove = new ArrayList<Player>();
-			
-			uiHandler.displayBalances(players);
-			
-			for (Player p : players) {
-				if (p.getBalance() <= 0) {
-					uiHandler.notifyBroke(p);
-					playersToRemove.add(p);
-				}
-			}
-			players.removeAll(playersToRemove);
-
-			playAnotherRound = uiHandler.playAnotherRound() && !players.isEmpty();
-		}
+//		this.players = uiHandler.setPlayers();
+//		System.out.print(players);
+//		boolean playAnotherRound = true;
+//
+//		while (playAnotherRound) {
+//
+//			// all players bet
+//			for (Player p : players) {
+//				p.bet(uiHandler.getAndShowPlayerBet(p));
+//			}
+//
+//			deal();
+//
+//			// cycle through plays
+//			for (Player p : players) {
+//				uiHandler.notifyNowPlayerTurn(p);
+//
+//				while (!p.getIsStanding() && p.sum() < 21) {
+//					// tell them what they have
+//					PLAYERMOVE move = uiHandler.getPlayerMove(p);
+//					this.doPlayerMove(move, p);
+//				}
+//
+//				if (p.getBusted()) {
+//					uiHandler.notifyBusted(p);
+//				}
+//			}
+//
+//			uiHandler.notifyNowPlayerTurn(dealer);
+//
+//			while (!dealer.getIsStanding() && dealer.sum() < 21) {
+//				// tell them what they have
+//				this.doPlayerMove(this.dealerDecide(dealer), dealer);
+//			}
+//
+//			if (dealer.getBusted()) {
+//				uiHandler.notifyBusted(dealer);
+//			}
+//
+//			rewardWinner(); 
+//			ArrayList<Player> playersToRemove = new ArrayList<Player>();
+//			
+//			uiHandler.displayBalances(players);
+//			
+//			for (Player p : players) {
+//				if (p.getBalance() <= 0) {
+//					uiHandler.notifyBroke(p);
+//					playersToRemove.add(p);
+//				}
+//			}
+//			players.removeAll(playersToRemove);
+//
+//			playAnotherRound = uiHandler.playAnotherRound() && !players.isEmpty();
+//		}
 	}
 
 	//takes each player and deals them 2 cards
@@ -238,7 +284,7 @@ public class GUI {
 		case STAND:
 			p.setIsStanding(true);
 		}
-		uiHandler.notifyNowPlayerTurn(p);
+//		uiHandler.notifyNowPlayerTurn(p);
 	}
 	public ArrayList<Player> getPlayers(){
 		return players;

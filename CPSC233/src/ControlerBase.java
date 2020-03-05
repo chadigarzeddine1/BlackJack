@@ -15,11 +15,9 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class ControlerBase implements Initializable{
-	Stage primaryStage;
 
-	public ArrayList<Player> players = new ArrayList<Player>();
-	private Player dealer;
-	private Deck deck;
+	GUI gui;
+	
 	
     @FXML
     void hitClick(ActionEvent event) {
@@ -30,10 +28,6 @@ public class ControlerBase implements Initializable{
     void standClick(ActionEvent event) {
 
     }
-
-    public void setPrimaryStage(Stage stage) {
-  	  this.primaryStage = stage;
-  	}
 
   @FXML
   private Button bet;
@@ -87,38 +81,15 @@ private Button enter;
 
 @FXML
 void enterClick(ActionEvent event) throws Exception {
-	FXMLLoader loader = new FXMLLoader();
-	loader.setLocation(getClass().getResource("ProjectBet.fxml"));
-	  Parent pane = loader.load();
-	
-  Scene scene = new Scene( pane );
-  
-  ConBet controller = loader.getController();
-  numplayer = numplay.getText();
-  players = setPlayers(numplayer);
-  controller.setPlayers(players,deck,dealer);
-  Stage window =(Stage)((Node)event.getSource()).getScene().getWindow();
-  window.setScene(scene);
-  numplayer = numplay.getText();
-  players = setPlayers(numplayer);
-}
-public ArrayList<Player> setPlayers(String numPlayers) throws Exception {
-	ArrayList<Player> players = new ArrayList<Player>();
 
-	int num = Integer.parseInt(numPlayers);
-	for (int i = 0; i < num; i++) {
-		Player p = new Player("Player " + (i + 1));
-		players.add(p);
-	}
-	return players;
+	gui.enterClick(event, numplay, numplayer);
+}
+
+public void start(GUI gui) {
+	this.gui = gui;
 }
 
 @Override
 public void initialize(URL arg0, ResourceBundle arg1) {
-	// TODO Auto-generated method stub
-	this.deck = new Deck();
-	deck.shuffle();
-	this.dealer = new Player("Dave the Dealer");
-}
-    
+} 
 }

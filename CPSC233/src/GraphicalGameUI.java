@@ -27,14 +27,8 @@ import javafx.stage.Stage;
 
 public class GraphicalGameUI extends Application implements GameUI {
 	
-	private GraphicalGameUI ui ;
-	private GUI gui = new GUI(ui);
-	private Scanner input;
-	
-	
-
 	public GraphicalGameUI() {
-		input = new Scanner(System.in);
+
 	}
 	public static void main(String[] args) {
 		launch(args);
@@ -43,7 +37,6 @@ public class GraphicalGameUI extends Application implements GameUI {
 		
 	}
 
-	
 	public ArrayList<Player> setPlayers() throws Exception {
 		String numPlayers = "1";
 		ArrayList<Player> players = new ArrayList<Player>();
@@ -87,15 +80,24 @@ public class GraphicalGameUI extends Application implements GameUI {
 	public boolean playAnotherRound() {
 		return false;
 	}
-	GameSystem sys;
+	public void begin(Stage primaryStage,GUI gui) throws Exception {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("ProjectEnterPlay.fxml"));
+		  Parent pane = loader.load();
+		
+	  Scene scene = new Scene( pane );
+	  
+	  ControlerBase controller = loader.getController();
+	   controller.start(gui);
+    	primaryStage.setTitle("Black Jack");
+		primaryStage.setScene(scene);
+		primaryStage.show();
+    }
 	
 
 	public void start(Stage primaryStage) throws Exception{
-		ui = new GraphicalGameUI();
-		sys = new GameSystem(ui);
-		gui.start(primaryStage);
-		//String a = input.nextLine();
-		//sys.start();
-		ui.input.close();
+		GUI gui = new GUI();
+		begin(primaryStage,gui);
+		
 	}
 }	
