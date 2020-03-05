@@ -231,7 +231,7 @@ public class GUI {
 		 if (players.indexOf(curplayer) == players.size() || allPlayersStand() == true) {
 			 dealerTurn();
 		 }
-		 else nextPlayer(curplayer+1);
+		 else nextPlayer(curplaynum+1);
 	 }
 	 
 	 public Image getcard(Player p,int n) {
