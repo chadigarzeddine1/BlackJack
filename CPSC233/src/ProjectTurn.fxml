@@ -74,27 +74,27 @@
             <Font size="16.0" />
          </font>
       </Button>
-      <Label fx:id="bustLab" layoutX="-178.0" layoutY="-127.0" prefHeight="42.0" prefWidth="314.0" style="-fx-background-color: white;" text="Player : _________ has busted, click okay for next player">
+      <Label fx:id="bustLab" layoutX="-178.0" layoutY="-127.0" prefHeight="42.0" prefWidth="295.0" style="-fx-background-color: white;" text="Player : _________ has busted, click okay for next player">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <ImageView fx:id="p5" fitHeight="190.0" fitWidth="150.0" layoutX="-328.0" layoutY="239.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="Card Deck\Back of cards.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="p4" fitHeight="190.0" fitWidth="150.0" layoutX="-163.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="Card Deck\Back of cards.png" />
-         </image>
-      </ImageView>
       <ImageView fx:id="p3" fitHeight="190.0" fitWidth="150.0" layoutX="-163.0" layoutY="239.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="Card Deck\Back of cards.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="d5" fitHeight="190.0" fitWidth="150.0" layoutX="-163.0" layoutY="444.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="p4" fitHeight="190.0" fitWidth="150.0" layoutX="-238.0" layoutY="140.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="Card Deck\Back of cards.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="p5" fitHeight="190.0" fitWidth="150.0" layoutX="-323.0" layoutY="232.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="Card Deck\Back of cards.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="d3" fitHeight="190.0" fitWidth="150.0" layoutX="-323.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="Card Deck\Back of cards.png" />
          </image>
@@ -104,7 +104,7 @@
             <Image url="Card Deck\Back of cards.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="d3" fitHeight="190.0" fitWidth="150.0" layoutX="-323.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="d5" fitHeight="190.0" fitWidth="150.0" layoutX="-163.0" layoutY="444.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="Card Deck\Back of cards.png" />
          </image>

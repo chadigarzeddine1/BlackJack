@@ -74,13 +74,13 @@ import javafx.scene.image.ImageView;
 	    @FXML
 	    Button bustButton;
 	    
-	    void bustClick(ActionEvent event) {
-	   
+	    void bustClick(ActionEvent event) throws Exception {
+	    	//gui.bustClick(event);
 	    }
 
 	    @FXML
 	    void hitClick(ActionEvent event) {
-	    	gui.hitClick(bustButton,bustLab);
+	    	gui.hitClick(event,bustButton,bustLab);
 
 	    }
 
@@ -98,7 +98,8 @@ public void start(GUI gui) {
 	   
 	    
 		@Override
-		public void initialize(URL arg0, ResourceBundle arg1) {			
+		public void initialize(URL arg0, ResourceBundle arg1) {	
+			bustButton.setVisible(false);
 		}
 
 		

@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.SubScene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -96,7 +97,33 @@ public class GUI {
 			  nexplay.setText("Next Player: " + players.get(1).getName());
 		  }
     }
+	public void bustClick(ActionEvent event) throws Exception {
+//		if (curplaynum == players.size()) {
+//			dealerTurn();
+//		}
+//		else {
+//			curplaynum = curplaynum +1;
+//			curplayer = players.get(curplaynum);
+//			nextPlayerTurn(event);
+//		}
+	}
 	
+	public void dealerTurn() {
+		
+	}
+	
+	public void nextPlayerTurn(ActionEvent event) throws Exception {
+//		FXMLLoader loader = new FXMLLoader();
+//		loader.setLocation(getClass().getResource("Projectlayout.fxml"));
+//		  Parent pane = loader.load();
+//		
+//	  Scene scene = new Scene( pane );
+//	  
+//	  ConTurn controller = loader.getController();
+//	  controller.start(this);
+//	  Stage window =(Stage)((Node)event.getSource()).getScene().getWindow();
+//	  window.setScene(scene);
+	}
 	
 	
 	public void betClick(ActionEvent event,TextField betamount) throws Exception {
@@ -172,7 +199,7 @@ public class GUI {
 			  }
 	 }
 	 
-	 public void hitClick(Button bustButton,Label bustLab) {
+	 public void hitClick(ActionEvent event,Button bustButton,Label bustLab) {
 		 this.bustButton = bustButton;
 		 this.bustLab = bustLab;
 		 if (curplayer.sum() == 21) {
@@ -182,11 +209,20 @@ public class GUI {
 			 hit(curplayer);
 		 }
 		 else{
+			 bustButton.setVisible(true);
 			 bustButton.setLayoutX(524);
 			 bustButton.setLayoutY(387);
 			 bustLab.setLayoutX(409);
 			 bustLab.setLayoutY(320);
+			 bustLab.setText(curplayer.getName()+" has busted, Click Okay to progress");
 		 }
+	 }
+	 public void bust(Button bustButton,Label bustLab) { 
+		 bustButton.setLayoutX(524);
+		 bustButton.setLayoutY(387);
+		 bustLab.setLayoutX(409);
+		 bustLab.setLayoutY(320);
+		 bustLab.setText(curplayer.getName()+" has busted, Click Okay to progress");
 	 }
 	 
 	 public Image getcard(Player p,int n) {
@@ -490,7 +526,6 @@ public class GUI {
 			p.addCardToHand(c);
 			int x = p.getHand().size();
 			sump.setText(p.sum()+"");
-			System.out.print(x);
 			
 			if (p == dealer) {
 				placeCardsD(x);
@@ -498,10 +533,12 @@ public class GUI {
 			else 
 			placeCards(x,p);
 			if (p.getBusted() == true) {
-				bustButton.setLayoutX(524);
-				bustButton.setLayoutY(387);
-				bustLab.setLayoutX(409);
-				bustLab.setLayoutY(320);
+				bustButton.setVisible(true);
+				 bustButton.setLayoutX(524);
+				 bustButton.setLayoutY(387);
+				 bustLab.setLayoutX(409);
+				 bustLab.setLayoutY(320);
+				 bustLab.setText(curplayer.getName()+" has busted, Click Okay to progress");
 		}
 			
 	}
