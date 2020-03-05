@@ -225,6 +225,15 @@ public class GUI {
 		 bustLab.setText(curplayer.getName()+" has busted, Click Okay to progress");
 	 }
 	 
+	 public void standClick(Button standButton) 
+	 {
+		 curplayer.setIsStanding(true);
+		 if (players.indexOf(curplayer) == players.size() || allPlayersStand() == true) {
+			 dealerTurn();
+		 }
+		 else nextPlayer(curplayer+1);
+	 }
+	 
 	 public Image getcard(Player p,int n) {
 
 			if (n == 0) {

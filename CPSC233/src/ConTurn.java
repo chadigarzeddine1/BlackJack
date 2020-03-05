@@ -74,8 +74,13 @@ import javafx.scene.image.ImageView;
 	    @FXML
 	    Button bustButton;
 	    
+	    @FXML 
+	    Button standButton;
+	    
+
 	    void bustClick(ActionEvent event) throws Exception {
 	    	//gui.bustClick(event);
+	   
 	    }
 
 	    @FXML
@@ -86,7 +91,7 @@ import javafx.scene.image.ImageView;
 
 	    @FXML
 	    void standClick(ActionEvent event) {
-
+	    	gui.standClick(standButton);
 	    }
 
 public void start(GUI gui) {
