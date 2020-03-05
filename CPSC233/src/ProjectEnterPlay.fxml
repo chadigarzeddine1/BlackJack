@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
@@ -7,32 +8,44 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="761.0" prefWidth="1095.0" style="-fx-background-color: green;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ControlerBase">
    <children>
-      <Button fx:id="hit" layoutX="791.0" layoutY="521.0" mnemonicParsing="false" onAction="#hitClick" prefHeight="89.0" prefWidth="228.0" text="Hit" />
-      <Button fx:id="stand" layoutX="791.0" layoutY="647.0" mnemonicParsing="false" onAction="#standClick" prefHeight="89.0" prefWidth="228.0" text="Stand" />
-      <ImageView fitHeight="199.0" fitWidth="146.0" layoutX="363.0" layoutY="521.0" pickOnBounds="true" preserveRatio="true">
+      <Button fx:id="hit" layoutX="791.0" layoutY="521.0" mnemonicParsing="false" onAction="#hitClick" prefHeight="89.0" prefWidth="228.0" text="Hit">
+         <font>
+            <Font size="25.0" />
+         </font></Button>
+      <Button fx:id="stand" layoutX="791.0" layoutY="647.0" mnemonicParsing="false" onAction="#standClick" prefHeight="89.0" prefWidth="228.0" text="Stand">
+         <font>
+            <Font size="25.0" />
+         </font></Button>
+      <ImageView fitHeight="190.0" fitWidth="150.0" layoutX="379.0" layoutY="520.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Card%20Deck/Back%20of%20cards.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="187.0" fitWidth="146.0" layoutX="549.0" layoutY="520.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="190.0" fitWidth="150.0" layoutX="549.0" layoutY="520.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Card%20Deck/Back%20of%20cards.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="186.0" fitWidth="146.0" layoutX="359.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="190.0" fitWidth="150.0" layoutX="379.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Card%20Deck/Back%20of%20cards.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="179.0" fitWidth="154.0" layoutX="61.0" layoutY="276.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="190.0" fitWidth="150.0" layoutX="61.0" layoutY="276.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Card%20Deck/Back%20of%20cards.png" />
          </image>
       </ImageView>
-      <Button fx:id="enter" layoutX="479.0" layoutY="389.0" mnemonicParsing="false" onAction="#enterClick" prefHeight="51.0" prefWidth="137.0" text="Enter" />
-      <TextField fx:id="numplay" layoutX="469.0" layoutY="334.0" />
-      <Label layoutX="446.0" layoutY="276.0" prefHeight="34.0" prefWidth="203.0" style="-fx-background-color: white;" text="  Enter the Number of Players to Start" />
-      <ImageView fitHeight="186.0" fitWidth="146.0" layoutX="549.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
+      <Button fx:id="enter" layoutX="470.0" layoutY="392.0" mnemonicParsing="false" onAction="#enterClick" prefHeight="51.0" prefWidth="137.0" text="Enter">
+         <font>
+            <Font size="19.0" />
+         </font></Button>
+      <TextField fx:id="numplay" layoutX="464.0" layoutY="340.0" />
+      <Label layoutX="358.0" layoutY="270.0" prefHeight="51.0" prefWidth="372.0" style="-fx-background-color: white;" text="  Enter the Number of Players to Start">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font></Label>
+      <ImageView fitHeight="190.0" fitWidth="150.0" layoutX="549.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Card%20Deck/Back%20of%20cards.png" />
          </image>

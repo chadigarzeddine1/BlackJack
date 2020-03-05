@@ -71,6 +71,8 @@ public void start(ArrayList<Player> p,Deck d,Player deal) {
 	curplaynum = 0;
 	p1.setImage(getcard(curplayer,1));
 	p2.setImage(getcard(curplayer,2));
+	sump.setText(""+curplayer.sum());
+	sumd.setText(""+ (dealer.sum()- dealer.getHand(1).getNumber()));
 	d2.setImage(getcard(dealer,2));
 	curbal.setText(""+p.get(0).getBalance());
 	  curplay.setText("Current Player:" + p.get(0).getName());

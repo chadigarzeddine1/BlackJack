@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
@@ -7,38 +8,66 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="761.0" prefWidth="1095.0" style="-fx-background-color: green;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ConTurn">
    <children>
-      <Button fx:id="hit" layoutX="791.0" layoutY="521.0" mnemonicParsing="false" onAction="#hitClick" prefHeight="89.0" prefWidth="228.0" text="Hit" />
-      <Button fx:id="stand" layoutX="791.0" layoutY="647.0" mnemonicParsing="false" onAction="#standClick" prefHeight="89.0" prefWidth="228.0" text="Stand" />
-      <ImageView fx:id="p1" fitHeight="199.0" fitWidth="146.0" layoutX="363.0" layoutY="521.0" pickOnBounds="true" preserveRatio="true">
+      <Button fx:id="hit" layoutX="791.0" layoutY="521.0" mnemonicParsing="false" onAction="#hitClick" prefHeight="89.0" prefWidth="228.0" text="Hit">
+         <font>
+            <Font size="25.0" />
+         </font></Button>
+      <Button fx:id="stand" layoutX="791.0" layoutY="647.0" mnemonicParsing="false" onAction="#standClick" prefHeight="89.0" prefWidth="228.0" text="Stand">
+         <font>
+            <Font size="25.0" />
+         </font></Button>
+      <ImageView fx:id="p1" fitHeight="190.0" fitWidth="150.0" layoutX="363.0" layoutY="521.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="Card Deck\Back of cards.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="p2" fitHeight="179.0" fitWidth="146.0" layoutX="549.0" layoutY="520.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="p2" fitHeight="190.0" fitWidth="150.0" layoutX="549.0" layoutY="520.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="Card Deck\Back of cards.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="d1" fitHeight="186.0" fitWidth="146.0" layoutX="359.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="d1" fitHeight="190.0" fitWidth="150.0" layoutX="359.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="Card Deck\Back of cards.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="179.0" fitWidth="154.0" layoutX="61.0" layoutY="276.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="190.0" fitWidth="150.0" layoutX="61.0" layoutY="276.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="Card Deck\Back of cards.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="d2" fitHeight="186.0" fitWidth="146.0" layoutX="549.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="d2" fitHeight="190.0" fitWidth="150.0" layoutX="549.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="Card Deck\Back of cards.png" />
          </image>
       </ImageView>
-      <Label layoutX="67.0" layoutY="527.0" prefHeight="25.0" prefWidth="52.0" style="-fx-background-color: white;" text=" Balance" />
-      <Label fx:id="curbal" layoutX="79.0" layoutY="593.0" style="-fx-background-color: white;" text="##" />
-      <Label fx:id="curplay" layoutX="866.0" layoutY="307.0" style="-fx-background-color: white;" text="Current Player" />
-      <Label fx:id="nexplay" layoutX="866.0" layoutY="372.0" style="-fx-background-color: white;" text="Next Player " />
-      <Label fx:id="sumd" layoutX="549.0" layoutY="259.0" style="-fx-background-color: white;" text="##" />
-      <Label fx:id="sump" layoutX="548.0" layoutY="447.0" style="-fx-background-color: white;" text="##" />
+      <Label fx:id="sumd" layoutX="549.0" layoutY="259.0" prefHeight="25.0" prefWidth="36.0" style="-fx-background-color: white;" text="##">
+         <font>
+            <Font name="System Bold" size="23.0" />
+         </font></Label>
+      <Label fx:id="sump" layoutX="548.0" layoutY="447.0" prefHeight="33.0" prefWidth="36.0" style="-fx-background-color: white;" text="##">
+         <font>
+            <Font name="System Bold" size="23.0" />
+         </font></Label>
+      <Label layoutX="61.0" layoutY="521.0" prefHeight="30.0" prefWidth="85.0" style="-fx-background-color: white;" text=" Balance">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="curbal" layoutX="92.0" layoutY="583.0" style="-fx-background-color: white;" text="##">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="nexplay" layoutX="747.0" layoutY="221.0" style="-fx-background-color: white;" text="Next Player ">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="curplay" layoutX="747.0" layoutY="126.0" style="-fx-background-color: white;" text="Current Player">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
