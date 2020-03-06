@@ -306,7 +306,7 @@ public class GUI {
 	 public void standClick() 
 	 {
 		 curplayer.setIsStanding(true);
-		 if (players.indexOf(curplayer) == players.size() || allPlayersStand() == true) {
+		 if (players.indexOf(curplayer) == players.size()-1 || allPlayersStand() == true) {
 			 dealerTurn();
 		 }
 		 else {
