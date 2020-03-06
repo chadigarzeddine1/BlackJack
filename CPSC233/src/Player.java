@@ -9,11 +9,7 @@ public class Player {
 	private int balance;
 	private int stake;
 	private Scene scene;
-	private boolean isSplitted = false;
-	private String possesor;
-	private int weight = 0;
-	
-	 
+	private boolean isSplitted = false; 
 	
 	/**
      * Creates a new Player with a blank name, an empty Hand, a given account balance of 500, and a stake of 0
@@ -22,7 +18,6 @@ public class Player {
 	public Player(String name, String possesor) {
 		this.name = name;
 		hand = new ArrayList<Card>();
-		this.possesor = possesor;
 		isStanding = false;
 		balance = 500;
 		stake = 0;
@@ -52,7 +47,11 @@ public class Player {
      * @return true if the hand has pair with 2 first cards.
      */
 	public boolean isSplittable() {
-        return possesor.equalsIgnoreCase("player") && hand.size() == 2 && hand.get(0).getValue() == hand.get(1).getValue() && !isSplitted;
+		// possesor.equalsIgnoreCase("player") &&
+		if (hand.size() < 2) {
+			return false;
+		}
+        return hand.size() == 2 && hand.get(0).getValue() == hand.get(1).getValue() && !isSplitted;
     }
 	
 	
@@ -66,9 +65,10 @@ public class Player {
             return null;
         } else {
             Player split = new Player("split");
-            split.getHand();
-            setWeight(hand.get(0).getWeight());
+            split.addCardToHand(hand.get(1));
+            hand.remove(1);
             isSplitted = true;
+            
             return split;
         }
     }
@@ -173,6 +173,4 @@ public class Player {
 	public void setWeight(int weight) {
 		this.weight = weight;
 	}
-	
-
 }

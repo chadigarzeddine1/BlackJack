@@ -55,8 +55,7 @@ public class Card {
 		return value + suit;
 	}
 	
-	public int getWeight() {
-			
-			return 0;
-		}
+	public String getWeight() {
+		return this.value;
+	}
 }

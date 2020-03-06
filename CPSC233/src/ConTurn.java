@@ -4,6 +4,7 @@
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -113,8 +114,8 @@ import javafx.scene.image.ImageView;
 	    
 	    @FXML
 	    void exitClick(ActionEvent event) {
-	    	
-
+	    	Platform.exit();
+	    	System.exit(0);
 	    }
 
 	    @FXML

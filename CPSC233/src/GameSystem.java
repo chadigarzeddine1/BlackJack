@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 enum PLAYERMOVE {
 	HIT,
-	STAND
+	STAND,
 }
 
 public class GameSystem {

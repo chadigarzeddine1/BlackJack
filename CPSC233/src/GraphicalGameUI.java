@@ -31,10 +31,7 @@ public class GraphicalGameUI extends Application implements GameUI {
 
 	}
 	public static void main(String[] args) {
-		launch(args);
-	
-
-		
+		launch(args);		
 	}
 
 	public ArrayList<Player> setPlayers() throws Exception {

@@ -43,16 +43,8 @@ public class GUI {
 	Button exit;
 	Button endR;
 	
-	private ImageView p1;
-	private ImageView p2;
-	private ImageView p3;
-	private ImageView p4;
-	private ImageView p5;
-	private ImageView d1;
-	private ImageView d2;
-	private ImageView d3;
-	private ImageView d4;
-	private ImageView d5;
+	private ImageView p1, p2, p3, p4, p5;
+	private ImageView d1, d2, d3, d4, d5;
 	
 	public GUI() {
 		this.deck = new Deck();
@@ -117,7 +109,7 @@ public class GUI {
 		d1.setImage(getcard(dealer,1));
 		sumd.setText(dealer.sum()+"");
 		while (!dealer.getIsStanding()) {
-			
+			System.out.print("LOOPING");
 		if (dealer.sum() == 21) {
 			bustButton.setVisible(true);
 			 bustButton.setLayoutX(524);
@@ -125,9 +117,13 @@ public class GUI {
 			 bustLab.setLayoutX(409);
 			 bustLab.setLayoutY(320);
 			 bustLab.setText(dealer.getName()+" has got 21, Click Okay to progress");
+			 dealer.setIsStanding(true);
 		 }
 		 else if (dealer.getBusted() == false) {
-			doPlayerMove( dealerDecide(dealer),dealer);
+			doPlayerMove(dealerDecide(dealer),dealer);
+			if (dealer.sum() > 21) {
+				dealer.setIsStanding(true);
+			}
 		 }
 		sumd.setText(dealer.sum()+"");
 		}
