@@ -78,14 +78,42 @@ import javafx.scene.image.ImageView;
 	    Button standButton;
 	    
 	    @FXML
+	    Label endRInfo;
+	    
+	    @FXML 
+	    Button nextR;
+	    
+	    @FXML
+	    Button exit;
+	    
+	    @FXML
+	    Button endR;
+	    
+	    @FXML
 	    void bustClick(ActionEvent event) {
 	    	gui.bustClick();
 	   
+	    }
+	    
+	    @FXML
+	    void endRClick(ActionEvent event) {
+	    	gui.endRound();
+	    	endR.setVisible(false);
+	    }
+	    @FXML
+	    void nextRClick(ActionEvent event) throws Exception {
+	    	gui.nextRound(event);
 	    }
 
 	    @FXML
 	    void hitClick(ActionEvent event) {
 	    	gui.hitClick(event,bustButton,bustLab);
+
+	    }
+	    
+	    @FXML
+	    void exitClick(ActionEvent event) {
+	    	
 
 	    }
 
@@ -96,7 +124,10 @@ import javafx.scene.image.ImageView;
 
 public void start(GUI gui) {
 	bustButton.setVisible(false);
-	gui.turnStart(p1, p2,p3,p4,p5, d1, d2,d3,d4,d5, sump, sumd,curplay,nexplay,curbal);
+	nextR.setVisible(false);
+	endR.setVisible(false);
+	exit.setVisible(false);
+	gui.turnStart(p1, p2,p3,p4,p5, d1, d2,d3,d4,d5, sump, sumd,curplay,nexplay,curbal,endRInfo,nextR,exit,endR);
 	this.gui = gui;
 }
 

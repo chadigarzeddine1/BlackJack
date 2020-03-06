@@ -109,5 +109,25 @@
             <Image url="Card Deck\Back of cards.png" />
          </image>
       </ImageView>
+      <Label fx:id="endRInfo" layoutX="-409.0" layoutY="678.0" prefHeight="117.0" prefWidth="366.0" style="-fx-background-color: white;" text="End Round info : ">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Button fx:id="nextR" layoutX="146.0" layoutY="25.0" mnemonicParsing="false" onAction="#nextRClick" prefHeight="60.0" prefWidth="150.0" text="Next Round">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="exit" layoutX="42.0" layoutY="110.0" mnemonicParsing="false" onAction="#exitClick" prefHeight="60.0" prefWidth="150.0" text="Exit">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="endR" layoutX="41.0" layoutY="188.0" mnemonicParsing="false" onAction="#endRClick" prefHeight="60.0" prefWidth="150.0" text="End Round">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
