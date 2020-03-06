@@ -77,9 +77,9 @@ import javafx.scene.image.ImageView;
 	    @FXML 
 	    Button standButton;
 	    
-
-	    void bustClick(ActionEvent event) throws Exception {
-	    	//gui.bustClick(event);
+	    @FXML
+	    void bustClick(ActionEvent event) {
+	    	gui.bustClick();
 	   
 	    }
 
@@ -91,10 +91,11 @@ import javafx.scene.image.ImageView;
 
 	    @FXML
 	    void standClick(ActionEvent event) {
-	    	gui.standClick(standButton);
+	    	gui.standClick();
 	    }
 
 public void start(GUI gui) {
+	bustButton.setVisible(false);
 	gui.turnStart(p1, p2,p3,p4,p5, d1, d2,d3,d4,d5, sump, sumd,curplay,nexplay,curbal);
 	this.gui = gui;
 }
@@ -104,7 +105,6 @@ public void start(GUI gui) {
 	    
 		@Override
 		public void initialize(URL arg0, ResourceBundle arg1) {	
-			bustButton.setVisible(false);
 		}
 
 		

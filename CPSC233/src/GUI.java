@@ -97,32 +97,28 @@ public class GUI {
 			  nexplay.setText("Next Player: " + players.get(1).getName());
 		  }
     }
-	public void bustClick(ActionEvent event) throws Exception {
-//		if (curplaynum == players.size()) {
-//			dealerTurn();
-//		}
-//		else {
-//			curplaynum = curplaynum +1;
-//			curplayer = players.get(curplaynum);
-//			nextPlayerTurn(event);
-//		}
+	public void bustClick()  {
+		standClick();
+		 bustButton.setLayoutX(50);
+		 bustButton.setVisible(false);
+		 bustLab.setLayoutX(-300);
+
 	}
 	
 	public void dealerTurn() {
 		
 	}
 	
-	public void nextPlayerTurn(ActionEvent event) throws Exception {
-//		FXMLLoader loader = new FXMLLoader();
-//		loader.setLocation(getClass().getResource("Projectlayout.fxml"));
-//		  Parent pane = loader.load();
-//		
-//	  Scene scene = new Scene( pane );
-//	  
-//	  ConTurn controller = loader.getController();
-//	  controller.start(this);
-//	  Stage window =(Stage)((Node)event.getSource()).getScene().getWindow();
-//	  window.setScene(scene);
+	public void nextPlayerTurn()  {
+		p1.setLayoutX(363);
+		p2.setLayoutX(549);
+		p3.setLayoutX(-238);
+		p4.setLayoutX(-238);
+		p5.setLayoutX(-238);
+		p2.setImage(getcard(curplayer,2));
+		p1.setImage(getcard(curplayer,1));
+		sump.setText(curplayer.sum()+"");
+		
 	}
 	
 	
@@ -225,13 +221,18 @@ public class GUI {
 		 bustLab.setText(curplayer.getName()+" has busted, Click Okay to progress");
 	 }
 	 
-	 public void standClick(Button standButton) 
+	 public void standClick() 
 	 {
 		 curplayer.setIsStanding(true);
 		 if (players.indexOf(curplayer) == players.size() || allPlayersStand() == true) {
 			 dealerTurn();
 		 }
-		 else nextPlayer(curplaynum+1);
+		 else {
+			 nextPlayer(curplaynum+1);
+			 curplaynum+=1;
+			 curplayer = players.get(curplaynum);
+			 nextPlayerTurn();
+		 }
 	 }
 	 
 	 public Image getcard(Player p,int n) {

@@ -69,7 +69,7 @@
             <Font name="System Bold" size="25.0" />
          </font>
       </Label>
-      <Button fx:id="bustButton" layoutX="50.0" layoutY="34.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="85.0" text="Okay">
+      <Button fx:id="bustButton" layoutX="50.0" layoutY="34.0" mnemonicParsing="false" onAction="#bustClick" prefHeight="42.0" prefWidth="85.0" text="Okay">
          <font>
             <Font size="16.0" />
          </font>
