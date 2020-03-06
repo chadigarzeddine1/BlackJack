@@ -54,4 +54,9 @@ public class Card {
 	public String toString() {
 		return value + suit;
 	}
+	
+	public int getWeight() {
+			
+			return 0;
+		}
 }
