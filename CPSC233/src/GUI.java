@@ -133,14 +133,14 @@ public class GUI {
 	public void dealerTurn() {
 		curplay.setText("Current Player: Dealer");
 		d1.setImage(getcard(dealer,1));
-		sumd.setText(dealer.sum()+"");
+		sumd.setText("Sum: "+ dealer.sum()+"");
 		while (!dealer.getIsStanding()) {		
 			System.out.println(dealer.sum());
 		if (dealer.sum() == 21) {
 			dealer.setIsStanding(true);
-			bustButton.setVisible(true);
-			 bustButton.setLayoutX(524);
-			 bustButton.setLayoutY(387);
+			endR.setVisible(true);
+			 endR.setLayoutX(524);
+			 endR.setLayoutY(400);
 			 bustLab.setLayoutX(409);
 			 bustLab.setLayoutY(320);
 			 bustLab.setText(dealer.getName()+" has got 21, Click Okay to progress");
@@ -151,7 +151,7 @@ public class GUI {
 				dealer.setIsStanding(true);
 			}
 		 }
-		sumd.setText(dealer.sum()+"");
+		sumd.setText("Sum: "+ dealer.sum()+"");
 		}
 		if (dealer.getIsStanding());{
 			allowButton = false;
@@ -209,7 +209,7 @@ public class GUI {
 		p5.setLayoutX(-238);
 		p2.setImage(getcard(curplayer,2));
 		p1.setImage(getcard(curplayer,1));
-		sump.setText(curplayer.sum()+"");
+		sump.setText("Sum: "+ curplayer.sum()+"");
 		
 	}
 	
@@ -282,8 +282,8 @@ public class GUI {
 			this.curbal.setText(curplayer.getBalance()+"");
 			p1.setImage(getcard(curplayer,1));
 			p2.setImage(getcard(curplayer,2));
-			sump.setText(""+curplayer.sum());
-			sumd.setText(""+ (dealer.sum()- dealer.getHand(1).getNumber()));
+			sump.setText("Sum: " +curplayer.sum());
+			sumd.setText("Sum: "+ (dealer.sum()- dealer.getHand(1).getNumber()));
 			d2.setImage(getcard(dealer,2));
 			curbal.setText(""+players.get(0).getBalance());
 			  curplay.setText("Current Player:" + players.get(0).getName());
@@ -335,7 +335,7 @@ public class GUI {
 	 public void standClick() 	 {
 		 if (allowButton) {
 		 curplayer.setIsStanding(true);
-		 if (players.indexOf(curplayer) == players.size() || allPlayersStand() == true) {
+		 if (players.indexOf(curplayer)+1 == players.size() || allPlayersStand() == true) {
 			 dealerTurn();
 		 }
 		 else {
@@ -589,13 +589,13 @@ public class GUI {
 			Card c = deck.draw();
 			p.addCardToHand(c);
 			int x = p.getHand().size();
-			sump.setText(p.sum()+"");
-			
+
 			if (p == dealer) {
 				placeCardsD(x);
 			}
-			else 
-			placeCards(x,p);
+			else {
+			sump.setText("Sum: "+ p.sum()+"");
+			placeCards(x,p);}
 			if (p.getBusted() == true && p != dealer) {
 				allowButton = false;
 				bustButton.setVisible(true);
@@ -686,7 +686,7 @@ public class GUI {
 			d3.setLayoutY(48);
 			d4.setLayoutY(48);
 			d5.setLayoutY(48);
-		
+
 		}
 	}
 	//goes through all the players and returns the players with the best hand

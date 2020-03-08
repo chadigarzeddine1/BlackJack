@@ -41,11 +41,11 @@
             <Image url="Card Deck\Back of cards.png" />
          </image>
       </ImageView>
-      <Label fx:id="sumd" layoutX="549.0" layoutY="259.0" prefHeight="25.0" prefWidth="36.0" style="-fx-background-color: white;" text="##">
+      <Label fx:id="sumd" layoutX="549.0" layoutY="259.0" prefHeight="34.0" prefWidth="91.0" style="-fx-background-color: white;" text="##">
          <font>
             <Font name="System Bold" size="23.0" />
          </font></Label>
-      <Label fx:id="sump" layoutX="548.0" layoutY="447.0" prefHeight="33.0" prefWidth="36.0" style="-fx-background-color: white;" text="##">
+      <Label fx:id="sump" layoutX="548.0" layoutY="447.0" prefHeight="34.0" prefWidth="91.0" style="-fx-background-color: white;" text="##">
          <font>
             <Font name="System Bold" size="23.0" />
          </font></Label>
