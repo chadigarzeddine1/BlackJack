@@ -9,6 +9,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.SubScene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -88,13 +90,20 @@ public class GUI {
 		return players;
 	}
 	
+	public void nextPlayerAlert() {
+		Alert nextPlayer = new Alert(AlertType.INFORMATION);
+			nextPlayer.setTitle("Current Player");
+			nextPlayer.setHeaderText("It is now " + curplayer.getName()+ "\'s turn");
+			nextPlayer.showAndWait();
+			return;
+	}
 	
 	public void betStart(Label nexplay,Label curplay,Label curbal) {
 		this.nexplay = nexplay;
 		this.curbal = curbal;
 		this.curplay = curplay;
-    	curbal.setText(""+players.get(0).getBalance());
-		  curplay.setText("Current Player:" + players.get(0).getName());
+    	this.curbal.setText(""+players.get(0).getBalance());
+		  this.curplay.setText("Current Player:" + players.get(0).getName());
 		  curplayer = players.get(0);
 		  curplaynum = 0;
 		  if (players.size()== 1) {
@@ -116,9 +125,10 @@ public class GUI {
 		curplay.setText("Current Player: Dealer");
 		d1.setImage(getcard(dealer,1));
 		sumd.setText(dealer.sum()+"");
-		while (!dealer.getIsStanding()) {
-			
+		while (!dealer.getIsStanding()) {		
+			System.out.println(dealer.sum());
 		if (dealer.sum() == 21) {
+			dealer.setIsStanding(true);
 			bustButton.setVisible(true);
 			 bustButton.setLayoutX(524);
 			 bustButton.setLayoutY(387);
@@ -128,6 +138,9 @@ public class GUI {
 		 }
 		 else if (dealer.getBusted() == false) {
 			doPlayerMove( dealerDecide(dealer),dealer);
+			if (dealer.sum()>21) {
+				dealer.setIsStanding(true);
+			}
 		 }
 		sumd.setText(dealer.sum()+"");
 		}
@@ -227,7 +240,7 @@ public class GUI {
 			  else {
 				  nexplay.setText("Next Player: " + players.get(num+1).getName());
 			  }
-			  
+			  nextPlayerAlert();
 	   }
 	 
 	 
@@ -253,8 +266,9 @@ public class GUI {
 			this.curbal = curbal;
 			this.curplay = curplay;
 			curplayer = players.get(0);
+			nextPlayerAlert();
 			curplaynum = 0;
-			curbal.setText(curplayer.getBalance()+"");
+			this.curbal.setText(curplayer.getBalance()+"");
 			p1.setImage(getcard(curplayer,1));
 			p2.setImage(getcard(curplayer,2));
 			sump.setText(""+curplayer.sum());
