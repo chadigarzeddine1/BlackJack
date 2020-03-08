@@ -44,6 +44,7 @@ public class GUI {
 	Button nextR;
 	Button exit;
 	Button endR;
+	boolean allowButton = true;
 	
 	private ImageView p1;
 	private ImageView p2;
@@ -114,11 +115,19 @@ public class GUI {
 		  }
     }
 	public void bustClick()  {
-		standClick();
 		 bustButton.setLayoutX(50);
 		 bustButton.setVisible(false);
 		 bustLab.setLayoutX(-300);
-
+		 if (players.indexOf(curplayer)+1 == players.size() || allPlayersStand() == true) {
+			 dealerTurn();
+		 }
+		 else {
+			 nextPlayer(curplaynum+1);
+			 curplaynum+=1;
+			 curplayer = players.get(curplaynum);
+			 nextPlayerTurn();
+		 }
+		 allowButton = true;
 	}
 	
 	public void dealerTurn() {
@@ -145,6 +154,7 @@ public class GUI {
 		sumd.setText(dealer.sum()+"");
 		}
 		if (dealer.getIsStanding());{
+			allowButton = false;
 			endR.setVisible(true);
 			endR.setLayoutX(491);
 			endR.setLayoutY(338);
@@ -246,6 +256,7 @@ public class GUI {
 	 
 	 public void turnStart(ImageView p1,ImageView p2,ImageView p3,ImageView p4,ImageView p5,ImageView d1,ImageView d2,ImageView d3,ImageView d4,ImageView d5,Label sump,Label sumd,Label curplay,Label nexplay,Label curbal,Label endRInfo,Button nextR,Button exit,Button endR) {	 
 			deal();
+			allowButton = true;
 			this.endR = endR;
 			this.exit = exit;
 			this.nextR = nextR;
@@ -287,6 +298,7 @@ public class GUI {
 	 }
 	 
 	 public void hitClick(ActionEvent event,Button bustButton,Label bustLab) {
+		 if (allowButton) {
 		 this.bustButton = bustButton;
 		 this.bustLab = bustLab;
 		 if (curplayer.sum() == 21) {
@@ -307,6 +319,8 @@ public class GUI {
 			 bustLab.setLayoutX(409);
 			 bustLab.setLayoutY(320);
 			 bustLab.setText(curplayer.getName()+" has busted, Click Okay to progress");
+			 allowButton = false;
+		 }
 		 }
 	 }
 	 public void bust(Button bustButton,Label bustLab) { 
@@ -315,10 +329,11 @@ public class GUI {
 		 bustLab.setLayoutX(409);
 		 bustLab.setLayoutY(320);
 		 bustLab.setText(curplayer.getName()+" has busted, Click Okay to progress");
+	 
 	 }
 	 
-	 public void standClick() 
-	 {
+	 public void standClick() 	 {
+		 if (allowButton) {
 		 curplayer.setIsStanding(true);
 		 if (players.indexOf(curplayer) == players.size() || allPlayersStand() == true) {
 			 dealerTurn();
@@ -329,6 +344,7 @@ public class GUI {
 			 curplayer = players.get(curplaynum);
 			 nextPlayerTurn();
 		 }
+	 }
 	 }
 	 
 	 public Image getcard(Player p,int n) {
@@ -581,6 +597,7 @@ public class GUI {
 			else 
 			placeCards(x,p);
 			if (p.getBusted() == true && p != dealer) {
+				allowButton = false;
 				bustButton.setVisible(true);
 				 bustButton.setLayoutX(524);
 				 bustButton.setLayoutY(387);
