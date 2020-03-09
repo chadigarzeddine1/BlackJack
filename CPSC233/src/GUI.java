@@ -95,7 +95,7 @@ public class GUI {
 		this.nexplay = nexplay;
 		this.curbal = curbal;
 		this.curplay = curplay;
-    	
+    	curplaynum = 0;
     	curbal.setText(""+players.get(curplaynum).getBalance());
 		  curplay.setText("Current Player:" + players.get(curplaynum).getName());
 		  curplayer = players.get(curplaynum);
@@ -201,7 +201,7 @@ public class GUI {
 		p5.setLayoutX(-238);
 		p2.setImage(getcard(curplayer,2));
 		p1.setImage(getcard(curplayer,1));
-		sump.setText(curplayer.sum()+"");
+		sump.setText("Sum: "+curplayer.sum()+"");
 	}
 	
 	public void notifyBroke(Player p) {
