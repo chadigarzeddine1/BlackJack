@@ -15,18 +15,14 @@ public class Player {
      * Creates a new Player with a blank name, an empty Hand, a given account balance of 500, and a stake of 0
      * @param balance is the amount of money to start with
      */
-	public Player(String name, String possesor) {
+	public Player(String name) {
 		this.name = name;
 		hand = new ArrayList<Card>();
 		isStanding = false;
 		balance = 500;
 		stake = 0;
 	}
-	public Player(String Possesor) {
-		
-	}
-	//Sum of all the cards in your hand
-	//No Parameter
+
 	public int sum() {
 		int sum = 0;
 		for (Card card : hand) {

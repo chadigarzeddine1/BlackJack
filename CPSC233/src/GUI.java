@@ -67,6 +67,7 @@ public class GUI {
 	  window.setScene(scene);
 	  numplayer = numplay.getText();
 	  players = setPlayers(numplayer);
+	  curplaynum = 0;
 	}
 	
 	public ArrayList<Player> setPlayers(String numPlayers) throws Exception {
@@ -85,15 +86,14 @@ public class GUI {
 		this.nexplay = nexplay;
 		this.curbal = curbal;
 		this.curplay = curplay;
-    	curbal.setText(""+players.get(0).getBalance());
-		  curplay.setText("Current Player:" + players.get(0).getName());
-		  curplayer = players.get(0);
-		  curplaynum = 0;
+    	curbal.setText(""+players.get(curplaynum).getBalance());
+		  curplay.setText("Current Player:" + players.get(curplaynum).getName());
+		  curplayer = players.get(curplaynum);
 		  if (players.size()== 1) {
 			  nexplay.setText("Next Player: N/A");
 		  }
 		  else {
-			  nexplay.setText("Next Player: " + players.get(1).getName());
+			  nexplay.setText("Next Player: " + players.get(curplaynum +1).getName());
 		  }
     }
 	public void bustClick()  {
@@ -109,7 +109,6 @@ public class GUI {
 		d1.setImage(getcard(dealer,1));
 		sumd.setText(dealer.sum()+"");
 		while (!dealer.getIsStanding()) {
-			System.out.print("LOOPING");
 		if (dealer.sum() == 21) {
 			bustButton.setVisible(true);
 			 bustButton.setLayoutX(524);
@@ -144,7 +143,7 @@ public class GUI {
 			}
 		}
 		players.removeAll(playersToRemove);
-		appendText("The Richest Player is :"+ richestplayer(),endRInfo);
+		appendText("The Richest Player is :"+ richestplayer() + "\n",endRInfo);
 		showBalances();
 		nextR.setVisible(true);
 		exit.setVisible(true);
@@ -171,7 +170,7 @@ public class GUI {
 	
 	public void showBalances() {
 		for (Player p: players) {
-			appendText(p.getName()+"balance is: "+p.getBalance(),endRInfo);
+			appendText(p.getName()+"'s balance is: "+p.getBalance() + "\n",endRInfo);
 		}
 	}
 	public void nextPlayerTurn()  {
@@ -183,7 +182,6 @@ public class GUI {
 		p2.setImage(getcard(curplayer,2));
 		p1.setImage(getcard(curplayer,1));
 		sump.setText(curplayer.sum()+"");
-		
 	}
 	
 	public void notifyBroke(Player p) {
@@ -193,9 +191,12 @@ public class GUI {
 	public void betClick(ActionEvent event,TextField betamount) throws Exception {
 			curplayer.bet(Integer.parseInt(betamount.getText()));
 			betamount.setText("");
+			curbal.setText(""+players.get(curplaynum).getBalance());
 		if (players.size()== curplaynum+1){
+			curplaynum = 0;
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(getClass().getResource("ProjectTurn.fxml"));
+			curbal.setText(""+players.get(curplaynum).getBalance());
 			  Parent pane = loader.load();
 			
 		  Scene scene = new Scene( pane );
@@ -206,22 +207,22 @@ public class GUI {
 		  window.setScene(scene);
 		}
 		else {
-			curplaynum = curplaynum+1;
+			curplaynum += 1;
 			nextPlayer(curplaynum);
 		}
 	}
 	
 	
 	 public void nextPlayer(int num) {
-		   	curbal.setText(""+players.get(num).getBalance());
+		   	curbal.setText(""+players.get(curplaynum).getBalance());
 
-			  curplay.setText("Current Player:" + players.get(num).getName());
+			  curplay.setText("Current Player:" + players.get(curplaynum).getName());
 			  curplayer = players.get(num);
 			  if (players.size()== num+1) {
-				  nexplay.setText("Next Player: "+ players.get(0).getName());
+				  nexplay.setText("Next Player: "+ players.get(0).getName());	  
 			  }
 			  else {
-				  nexplay.setText("Next Player: " + players.get(num+1).getName());
+				  nexplay.setText("Next Player: " + players.get(curplaynum +1).getName());
 			  }
 			  
 	   }
@@ -248,23 +249,20 @@ public class GUI {
 			this.nexplay = nexplay;
 			this.curbal = curbal;
 			this.curplay = curplay;
-			curplayer = players.get(0);
-			curplaynum = 0;
+			curplayer = players.get(curplaynum);
 			curbal.setText(curplayer.getBalance()+"");
 			p1.setImage(getcard(curplayer,1));
 			p2.setImage(getcard(curplayer,2));
 			sump.setText(""+curplayer.sum());
 			sumd.setText(""+ (dealer.sum()- dealer.getHand(1).getNumber()));
 			d2.setImage(getcard(dealer,2));
-			curbal.setText(""+players.get(0).getBalance());
-			  curplay.setText("Current Player:" + players.get(0).getName());
-			  curplayer = players.get(0);
-			  curplaynum = 0;
+			curbal.setText(""+players.get(curplaynum).getBalance());
+			curplay.setText("Current Player:" + players.get(curplaynum).getName());
 			  if (players.size()== 1) {
 				  nexplay.setText("Next Player: N/A");
 			  }
 			  else {
-				  nexplay.setText("Next Player: " + players.get(1).getName());
+				  nexplay.setText("Next Player: " + players.get(curplaynum+1).getName());
 			  }
 	 }
 	 
@@ -272,6 +270,7 @@ public class GUI {
 		 this.bustButton = bustButton;
 		 this.bustLab = bustLab;
 		 if (curplayer.sum() == 21) {
+			 curplaynum += 1;
 			 bustButton.setVisible(true);
 			 bustButton.setLayoutX(524);
 			 bustButton.setLayoutY(387);
@@ -283,6 +282,7 @@ public class GUI {
 			 hit(curplayer);
 		 }
 		 else{
+			 curplaynum += 1;
 			 bustButton.setVisible(true);
 			 bustButton.setLayoutX(524);
 			 bustButton.setLayoutY(387);
@@ -301,14 +301,13 @@ public class GUI {
 	 
 	 public void standClick() 
 	 {
-		 curplayer.setIsStanding(true);
+		 players.get(curplaynum).setIsStanding(true);
 		 if (players.indexOf(curplayer) == players.size()-1 || allPlayersStand() == true) {
 			 dealerTurn();
 		 }
 		 else {
-			 nextPlayer(curplaynum+1);
 			 curplaynum+=1;
-			 curplayer = players.get(curplaynum);
+			 nextPlayer(curplaynum);
 			 nextPlayerTurn();
 		 }
 	 }
