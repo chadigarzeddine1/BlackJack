@@ -77,7 +77,6 @@ public class GUI {
 	  Stage window =(Stage)((Node)event.getSource()).getScene().getWindow();
 	  window.setScene(scene);
 	  numplayer = numplay.getText();
-	  players = setPlayers(numplayer);
 	}
 	
 	public ArrayList<Player> setPlayers(String numPlayers) throws Exception {
@@ -220,7 +219,7 @@ public class GUI {
 	public void betClick(ActionEvent event,TextField betamount) throws Exception {
 			curplayer.bet(Integer.parseInt(betamount.getText()));
 			betamount.setText("");
-		if (players.size()== curplaynum+1){
+		if (players.size()== curplaynum+1){	
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(getClass().getResource("ProjectTurn.fxml"));
 			  Parent pane = loader.load();
@@ -228,6 +227,7 @@ public class GUI {
 		  Scene scene = new Scene( pane );
 		  
 		  ConTurn controller = loader.getController();
+
 		  controller.start(this);
 		  Stage window =(Stage)((Node)event.getSource()).getScene().getWindow();
 		  window.setScene(scene);
@@ -285,7 +285,7 @@ public class GUI {
 			sump.setText("Sum: " +curplayer.sum());
 			sumd.setText("Sum: "+ (dealer.sum()- dealer.getHand(1).getNumber()));
 			d2.setImage(getcard(dealer,2));
-			curbal.setText(""+players.get(0).getBalance());
+			curbal.setText(""+curplayer.getBalance());
 			  curplay.setText("Current Player:" + players.get(0).getName());
 			  curplayer = players.get(0);
 			  curplaynum = 0;
