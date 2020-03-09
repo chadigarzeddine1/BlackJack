@@ -46,16 +46,8 @@ public class GUI {
 	Button endR;
 	boolean allowButton = true;
 	
-	private ImageView p1;
-	private ImageView p2;
-	private ImageView p3;
-	private ImageView p4;
-	private ImageView p5;
-	private ImageView d1;
-	private ImageView d2;
-	private ImageView d3;
-	private ImageView d4;
-	private ImageView d5;
+	private ImageView p1, p2, p3, p4, p5;
+	private ImageView d1, d2, d3, d4, d5;
 	
 	public GUI() {
 		this.deck = new Deck();
@@ -102,15 +94,15 @@ public class GUI {
 		this.nexplay = nexplay;
 		this.curbal = curbal;
 		this.curplay = curplay;
-    	this.curbal.setText(""+players.get(0).getBalance());
-		  this.curplay.setText("Current Player:" + players.get(0).getName());
-		  curplayer = players.get(0);
-		  curplaynum = 0;
+    	
+    	curbal.setText(""+players.get(curplaynum).getBalance());
+		  curplay.setText("Current Player:" + players.get(curplaynum).getName());
+		  curplayer = players.get(curplaynum);
 		  if (players.size()== 1) {
 			  nexplay.setText("Next Player: N/A");
 		  }
 		  else {
-			  nexplay.setText("Next Player: " + players.get(1).getName());
+			  nexplay.setText("Next Player: " + players.get(curplaynum +1).getName());
 		  }
     }
 	public void bustClick()  {
@@ -133,8 +125,7 @@ public class GUI {
 		curplay.setText("Current Player: Dealer");
 		d1.setImage(getcard(dealer,1));
 		sumd.setText("Sum: "+ dealer.sum()+"");
-		while (!dealer.getIsStanding()) {		
-			System.out.println(dealer.sum());
+		while (!dealer.getIsStanding()) {	
 		if (dealer.sum() == 21) {
 			dealer.setIsStanding(true);
 			endR.setVisible(true);
@@ -143,6 +134,7 @@ public class GUI {
 			 bustLab.setLayoutX(409);
 			 bustLab.setLayoutY(320);
 			 bustLab.setText(dealer.getName()+" has got 21, Click Okay to progress");
+			 
 		 }
 		 else if (dealer.getBusted() == false) {
 			doPlayerMove( dealerDecide(dealer),dealer);
@@ -170,7 +162,7 @@ public class GUI {
 			}
 		}
 		players.removeAll(playersToRemove);
-		appendText("The Richest Player is :"+ richestplayer(),endRInfo);
+		appendText("The Richest Player is : "+ richestplayer() + "\n",endRInfo);
 		showBalances();
 		nextR.setVisible(true);
 		exit.setVisible(true);
@@ -197,7 +189,7 @@ public class GUI {
 	
 	public void showBalances() {
 		for (Player p: players) {
-			appendText(p.getName()+"balance is: "+p.getBalance(),endRInfo);
+			appendText(p.getName()+"'s balance is: "+p.getBalance() + "\n",endRInfo);
 		}
 	}
 	public void nextPlayerTurn()  {
@@ -208,8 +200,7 @@ public class GUI {
 		p5.setLayoutX(-238);
 		p2.setImage(getcard(curplayer,2));
 		p1.setImage(getcard(curplayer,1));
-		sump.setText("Sum: "+ curplayer.sum()+"");
-		
+		sump.setText(curplayer.sum()+"");
 	}
 	
 	public void notifyBroke(Player p) {
@@ -219,36 +210,37 @@ public class GUI {
 	public void betClick(ActionEvent event,TextField betamount) throws Exception {
 			curplayer.bet(Integer.parseInt(betamount.getText()));
 			betamount.setText("");
-		if (players.size()== curplaynum+1){	
+			curbal.setText(""+players.get(curplaynum).getBalance());
+		if (players.size()== curplaynum+1){
+			curplaynum = 0;
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(getClass().getResource("ProjectTurn.fxml"));
+			curbal.setText(""+players.get(curplaynum).getBalance());
 			  Parent pane = loader.load();
 			
 		  Scene scene = new Scene( pane );
 		  
 		  ConTurn controller = loader.getController();
-
 		  controller.start(this);
 		  Stage window =(Stage)((Node)event.getSource()).getScene().getWindow();
 		  window.setScene(scene);
 		}
 		else {
-			curplaynum = curplaynum+1;
+			curplaynum += 1;
 			nextPlayer(curplaynum);
 		}
 	}
 	
 	
 	 public void nextPlayer(int num) {
-		   	curbal.setText(""+players.get(num).getBalance());
-
-			  curplay.setText("Current Player:" + players.get(num).getName());
+		   	curbal.setText(""+players.get(curplaynum).getBalance());
+			  curplay.setText("Current Player:" + players.get(curplaynum).getName());
 			  curplayer = players.get(num);
 			  if (players.size()== num+1) {
 				  nexplay.setText("Next Player: "+ players.get(0).getName());
 			  }
 			  else {
-				  nexplay.setText("Next Player: " + players.get(num+1).getName());
+				  nexplay.setText("Next Player: " + players.get(curplaynum +1).getName());
 			  }
 			  nextPlayerAlert();
 	   }
@@ -285,15 +277,15 @@ public class GUI {
 			sump.setText("Sum: " +curplayer.sum());
 			sumd.setText("Sum: "+ (dealer.sum()- dealer.getHand(1).getNumber()));
 			d2.setImage(getcard(dealer,2));
-			curbal.setText(""+curplayer.getBalance());
-			  curplay.setText("Current Player:" + players.get(0).getName());
 			  curplayer = players.get(0);
 			  curplaynum = 0;
+			curbal.setText(""+players.get(curplaynum).getBalance());
+			curplay.setText("Current Player:" + players.get(curplaynum).getName());
 			  if (players.size()== 1) {
 				  nexplay.setText("Next Player: N/A");
 			  }
 			  else {
-				  nexplay.setText("Next Player: " + players.get(1).getName());
+				  nexplay.setText("Next Player: " + players.get(curplaynum+1).getName());
 			  }
 	 }
 	 
@@ -302,6 +294,7 @@ public class GUI {
 		 this.bustButton = bustButton;
 		 this.bustLab = bustLab;
 		 if (curplayer.sum() == 21) {
+			 curplaynum += 1;
 			 bustButton.setVisible(true);
 			 bustButton.setLayoutX(524);
 			 bustButton.setLayoutY(387);
@@ -313,6 +306,7 @@ public class GUI {
 			 hit(curplayer);
 		 }
 		 else{
+			 curplaynum += 1;
 			 bustButton.setVisible(true);
 			 bustButton.setLayoutX(524);
 			 bustButton.setLayoutY(387);
@@ -334,14 +328,13 @@ public class GUI {
 	 
 	 public void standClick() 	 {
 		 if (allowButton) {
-		 curplayer.setIsStanding(true);
-		 if (players.indexOf(curplayer)+1 == players.size() || allPlayersStand() == true) {
+		 players.get(curplaynum).setIsStanding(true);
+		 if (players.indexOf(curplayer) == players.size()-1 || allPlayersStand() == true) {
 			 dealerTurn();
 		 }
 		 else {
-			 nextPlayer(curplaynum+1);
 			 curplaynum+=1;
-			 curplayer = players.get(curplaynum);
+			 nextPlayer(curplaynum);
 			 nextPlayerTurn();
 		 }
 	 }
@@ -694,9 +687,9 @@ public class GUI {
 		endRInfo.setLayoutX(356);
 		endRInfo.setLayoutY(310);
 		for(Player p:players) {
-			if ( ( p.sum() > dealer.sum() && !p.getBusted() ) || ( dealer.getBusted() && !p.getBusted() ) ) {
+			if ( (p.sum() > dealer.sum() && !p.getBusted() ) || ( dealer.getBusted() && !p.getBusted() ) ) {
 				p.win();
-				appendText("\n"+p.getName() + " beat the dealer this round. \n",endRInfo);
+				appendText(p.getName() + " beat the dealer this round. \n",endRInfo);
 			} else if (p.sum() == dealer.sum()) {
 				appendText(p.getName() + " tied with the dealer. \n",endRInfo);
 				p.push();

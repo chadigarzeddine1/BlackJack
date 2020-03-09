@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import javafx.scene.Scene;
-
 public class Player {
 	private String name;
 	private ArrayList<Card> hand;
@@ -10,8 +9,9 @@ public class Player {
 	private int balance;
 	private int stake;
 	private Scene scene;
+	private boolean isSplitted = false; 
 	
-	 /**
+	/**
      * Creates a new Player with a blank name, an empty Hand, a given account balance of 500, and a stake of 0
      * @param balance is the amount of money to start with
      */
@@ -22,8 +22,7 @@ public class Player {
 		balance = 500;
 		stake = 0;
 	}
-	//Sum of all the cards in your hand
-	//No Parameter
+
 	public int sum() {
 		int sum = 0;
 		for (Card card : hand) {
@@ -38,6 +37,37 @@ public class Player {
 		}
 		return sum;
 	}
+	
+	/**In most versions of Blackjack, when you are dealt a pair (two of the same card), you have the option to split them into two new hands.
+     * Method checks that the owner of the Hand is player and it has not been split before (no re-splitting allowed) and the both of the hands cards have the same value
+     * @return true if the hand has pair with 2 first cards.
+     */
+	public boolean isSplittable() {
+		// possesor.equalsIgnoreCase("player") &&
+		if (hand.size() < 2) {
+			return false;
+		}
+        return hand.size() == 2 && hand.get(0).getValue() == hand.get(1).getValue() && !isSplitted;
+    }
+	
+	
+	/**
+     * Creates a new hand using one card from the orginal hand.
+     * If Hand is not splittable, returns null
+     * @return Split hand
+     */
+	public Player split() {
+        if (!isSplittable()) {
+            return null;
+        } else {
+            Player split = new Player("split");
+            split.addCardToHand(hand.get(1));
+            hand.remove(1);
+            isSplitted = true;
+            
+            return split;
+        }
+    }
 	//add a card to your hand
 	//Parameter: 
 	//	Card - that you want to add
