@@ -29,7 +29,7 @@ public class Player {
 			sum += card.getNumber();
 		}
 		
-		if (sum >= 21) {
+		if (sum > 21) {
 			sum = 0;
 			for (Card card : hand) {
 				sum += card.getNumberWithAceAs1();

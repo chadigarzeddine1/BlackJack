@@ -126,9 +126,11 @@ public class GUI {
 	public void dealerTurn() {
 		curplay.setText("Current Player: Dealer");
 		d1.setImage(getcard(dealer,1));
+		boolean moveEndR = true;
 		sumd.setText("Sum: "+ dealer.sum()+"");
 		while (!dealer.getIsStanding()) {	
 		if (dealer.sum() == 21) {
+			moveEndR = false;
 			dealer.setIsStanding(true);
 			endR.setVisible(true);
 			 endR.setLayoutX(524);
@@ -148,9 +150,10 @@ public class GUI {
 		}
 		if (dealer.getIsStanding());{
 			allowButton = false;
+			if(moveEndR) {
 			endR.setVisible(true);
 			endR.setLayoutX(491);
-			endR.setLayoutY(338);
+			endR.setLayoutY(338);}
 		}
 	}
 	
@@ -562,7 +565,8 @@ public class GUI {
 			p.addCardToHand(c1);
 			p.addCardToHand(c2);
 		}
-
+//		Card c1 = new Card("A","C");
+//		Card c2 = new Card("K","H");
 		Card c1 = deck.draw();
 		Card c2 = deck.draw();
 		this.dealer.resetPlayerForRound();
