@@ -49,6 +49,7 @@ public class GUI {
 	private ImageView p1, p2, p3, p4, p5;
 	private ImageView d1, d2, d3, d4, d5;
 	
+	
 	public GUI() {
 		this.deck = new Deck();
 		deck.shuffle();
