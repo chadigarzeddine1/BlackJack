@@ -143,7 +143,7 @@ public class GUI {
 			}
 		}
 		players.removeAll(playersToRemove);
-		appendText("The Richest Player is :"+ richestplayer() + "\n",endRInfo);
+		appendText("The Richest Player is : "+ richestplayer() + "\n",endRInfo);
 		showBalances();
 		nextR.setVisible(true);
 		exit.setVisible(true);
@@ -215,11 +215,10 @@ public class GUI {
 	
 	 public void nextPlayer(int num) {
 		   	curbal.setText(""+players.get(curplaynum).getBalance());
-
 			  curplay.setText("Current Player:" + players.get(curplaynum).getName());
 			  curplayer = players.get(num);
 			  if (players.size()== num+1) {
-				  nexplay.setText("Next Player: "+ players.get(0).getName());	  
+				  nexplay.setText("Next Player: ");	  
 			  }
 			  else {
 				  nexplay.setText("Next Player: " + players.get(curplaynum +1).getName());
@@ -658,9 +657,9 @@ public class GUI {
 		endRInfo.setLayoutX(356);
 		endRInfo.setLayoutY(310);
 		for(Player p:players) {
-			if ( ( p.sum() > dealer.sum() && !p.getBusted() ) || ( dealer.getBusted() && !p.getBusted() ) ) {
+			if ( (p.sum() > dealer.sum() && !p.getBusted() ) || ( dealer.getBusted() && !p.getBusted() ) ) {
 				p.win();
-				appendText("\n"+p.getName() + " beat the dealer this round. \n",endRInfo);
+				appendText(p.getName() + " beat the dealer this round. \n",endRInfo);
 			} else if (p.sum() == dealer.sum()) {
 				appendText(p.getName() + " tied with the dealer. \n",endRInfo);
 				p.push();
