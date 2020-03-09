@@ -95,6 +95,7 @@ public class GUI {
 		this.nexplay = nexplay;
 		this.curbal = curbal;
 		this.curplay = curplay;
+		this.deck = new Deck();
     	curplaynum = 0;
     	curbal.setText(""+players.get(curplaynum).getBalance());
 		  curplay.setText("Current Player:" + players.get(curplaynum).getName());
@@ -131,7 +132,7 @@ public class GUI {
 			dealer.setIsStanding(true);
 			endR.setVisible(true);
 			 endR.setLayoutX(524);
-			 endR.setLayoutY(400);
+			 endR.setLayoutY(381);
 			 bustLab.setLayoutX(409);
 			 bustLab.setLayoutY(320);
 			 bustLab.setText(dealer.getName()+" has got 21, Click Okay to progress");
@@ -247,9 +248,10 @@ public class GUI {
 	   }
 	 
 	 
-	 public void turnStart(ImageView p1,ImageView p2,ImageView p3,ImageView p4,ImageView p5,ImageView d1,ImageView d2,ImageView d3,ImageView d4,ImageView d5,Label sump,Label sumd,Label curplay,Label nexplay,Label curbal,Label endRInfo,Button nextR,Button exit,Button endR) {	 
+	 public void turnStart(ImageView p1,ImageView p2,ImageView p3,ImageView p4,ImageView p5,ImageView d1,ImageView d2,ImageView d3,ImageView d4,ImageView d5,Label sump,Label sumd,Label curplay,Label nexplay,Label curbal,Label endRInfo,Button nextR,Button exit,Button endR,Label bustLab) {	 
 			deal();
 			allowButton = true;
+			this.bustLab = bustLab;
 			this.endR = endR;
 			this.exit = exit;
 			this.nextR = nextR;

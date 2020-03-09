@@ -128,7 +128,7 @@ public void start(GUI gui) {
 	nextR.setVisible(false);
 	endR.setVisible(false);
 	exit.setVisible(false);
-	gui.turnStart(p1, p2,p3,p4,p5, d1, d2,d3,d4,d5, sump, sumd,curplay,nexplay,curbal,endRInfo,nextR,exit,endR);
+	gui.turnStart(p1, p2,p3,p4,p5, d1, d2,d3,d4,d5, sump, sumd,curplay,nexplay,curbal,endRInfo,nextR,exit,endR,bustLab);
 	this.gui = gui;
 }
 
