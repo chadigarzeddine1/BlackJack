@@ -66,9 +66,8 @@ public class GUI {
 	  Stage window =(Stage)((Node)event.getSource()).getScene().getWindow();
 	  window.setScene(scene);
 	  numplayer = numplay.getText();
-	  players = setPlayers(numplayer);
 	  curplaynum = 0;
-	}
+	}	
 	
 	public ArrayList<Player> setPlayers(String numPlayers) throws Exception {
 		ArrayList<Player> players = new ArrayList<Player>();
