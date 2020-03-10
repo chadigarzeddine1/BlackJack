@@ -352,7 +352,7 @@ public class GUIMainController {
 	public Image getcard(Player p,int n) {
 
 		if (n == 0) {
-			return  new Image("Card Deck/Back of cards.png");
+			return  new Image("/view/cardimgs/Back of cards.png");
 		}
 		Card  c = p.getHand(n);
 		String suit = c.getSuit();
@@ -361,192 +361,192 @@ public class GUIMainController {
 
 		case 1:
 			if (suit == "H") {
-				return new Image("Card Deck/Hearts/Ace of Hearts.png");
+				return new Image("/view/cardimgs/Hearts/Ace of Hearts.png");
 			}
 			else if (suit == "S") {
-				return new Image("Card Deck/Spades/Ace of Spades.png");
+				return new Image("/view/cardimgs/Spades/Ace of Spades.png");
 			}
 			else if (suit == "C") {
-				return new Image("Card Deck/Clubs/Ace of clubs.png");
+				return new Image("/view/cardimgs/Clubs/Ace of clubs.png");
 			}
 			else if (suit == "D") {
-				return new Image("Card Deck/diamonds/Ace of diamonds.png");
+				return new Image("/view/cardimgs/diamonds/Ace of diamonds.png");
 			}
 		case 2:
 			if (suit == "H") {
-				return new Image("Card Deck/Hearts/2 of Hearts.png");
+				return new Image("/view/cardimgs/Hearts/2 of Hearts.png");
 			}
 			else if (suit == "S") {
-				return new Image("Card Deck/Spades/2 of Spades.png");
+				return new Image("/view/cardimgs/Spades/2 of Spades.png");
 			}
 			else if (suit == "C") {
-				return new Image("Card Deck/Clubs/2 of clubs.png");
+				return new Image("/view/cardimgs/Clubs/2 of clubs.png");
 			}
 			else if (suit == "D") {
-				return new Image("Card Deck/diamonds/2 of diamonds.png");
+				return new Image("/view/cardimgs/diamonds/2 of diamonds.png");
 			}
 
 		case 3:
 			if (suit == "H") {
-				return new Image("Card Deck/Hearts/3 of Hearts.png");
+				return new Image("/view/cardimgs/Hearts/3 of Hearts.png");
 			}
 			else if (suit == "S") {
-				return new Image("Card Deck/Spades/3 of Spades.png");
+				return new Image("/view/cardimgs/Spades/3 of Spades.png");
 			}
 			else if (suit == "C") {
-				return new Image("Card Deck/Clubs/3 of clubs.png");
+				return new Image("/view/cardimgs/Clubs/3 of clubs.png");
 			}
 			else if (suit == "D") {
-				return new Image("Card Deck/diamonds/3 of diamonds.png");
+				return new Image("/view/cardimgs/diamonds/3 of diamonds.png");
 			}
 		case 4:
 			if (suit == "H") {
-				return new Image("Card Deck/Hearts/4 of Hearts.png");
+				return new Image("/view/cardimgs/Hearts/4 of Hearts.png");
 			}
 			else if (suit == "S") {
-				return new Image("Card Deck/Spades/4 of Spades.png");
+				return new Image("/view/cardimgs/Spades/4 of Spades.png");
 			}
 			else if (suit == "C") {
-				return new Image("Card Deck/Clubs/4 of clubs.png");
+				return new Image("/view/cardimgs/Clubs/4 of clubs.png");
 			}
 			else if (suit == "D") {
-				return new Image("Card Deck/diamonds/4 of diamonds.png");
+				return new Image("/view/cardimgs/diamonds/4 of diamonds.png");
 			}
 		case 5:
 			if (suit == "H") {
-				return new Image("Card Deck/Hearts/5 of Hearts.png");
+				return new Image("/view/cardimgs/Hearts/5 of Hearts.png");
 			}
 			else if (suit == "S") {
-				return new Image("Card Deck/Spades/5 of Spades.png");
+				return new Image("/view/cardimgs/Spades/5 of Spades.png");
 			}
 			else if (suit == "C") {
-				return new Image("Card Deck/Clubs/5 of clubs.png");
+				return new Image("/view/cardimgs/Clubs/5 of clubs.png");
 			}
 			else if (suit == "D") {
-				return new Image("Card Deck/diamonds/5 of diamonds.png");
+				return new Image("/view/cardimgs/diamonds/5 of diamonds.png");
 			}
 		case 6:
 			if (suit == "H") {
-				return new Image("Card Deck/Hearts/6 of Hearts.png");
+				return new Image("/view/cardimgs/Hearts/6 of Hearts.png");
 			}
 			else if (suit == "S") {
-				return new Image("Card Deck/Spades/6 of Spades.png");
+				return new Image("/view/cardimgs/Spades/6 of Spades.png");
 			}
 			else if (suit == "C") {
-				return new Image("Card Deck/Clubs/6 of clubs.png");
+				return new Image("/view/cardimgs/Clubs/6 of clubs.png");
 			}
 			else if (suit == "D") {
-				return new Image("Card Deck/diamonds/6 of diamonds.png");
+				return new Image("/view/cardimgs/diamonds/6 of diamonds.png");
 			}
 		case 7:
 			if (suit == "H") {
-				return new Image("Card Deck/Hearts/7 of Hearts.png");
+				return new Image("/view/cardimgs/Hearts/7 of Hearts.png");
 			}
 			else if (suit == "S") {
-				return new Image("Card Deck/Spades/7 of Spades.png");
+				return new Image("/view/cardimgs/Spades/7 of Spades.png");
 			}
 			else if (suit == "C") {
-				return new Image("Card Deck/Clubs/7 of clubs.png");
+				return new Image("/view/cardimgs/Clubs/7 of clubs.png");
 			}
 			else if (suit == "D") {
-				return new Image("Card Deck/diamonds/7 of diamonds.png");
+				return new Image("/view/cardimgs/diamonds/7 of diamonds.png");
 			}
 		case 8:
 			if (suit == "H") {
-				return new Image("Card Deck/Hearts/8 of Hearts.png");
+				return new Image("/view/cardimgs/Hearts/8 of Hearts.png");
 			}
 			else if (suit == "S") {
-				return new Image("Card Deck/Spades/8 of Spades.png");
+				return new Image("/view/cardimgs/Spades/8 of Spades.png");
 			}
 			else if (suit == "C") {
-				return new Image("Card Deck/Clubs/8 of clubs.png");
+				return new Image("/view/cardimgs/Clubs/8 of clubs.png");
 			}
 			else if (suit == "D") {
-				return new Image("Card Deck/diamonds/8 of diamonds.png");
+				return new Image("/view/cardimgs/diamonds/8 of diamonds.png");
 			}
 		case 9:
 			if (suit == "H") {
-				return new Image("Card Deck/Hearts/9 of Hearts.png");
+				return new Image("/view/cardimgs/Hearts/9 of Hearts.png");
 			}
 			else if (suit == "S") {
-				return new Image("Card Deck/Spades/9 of Spades.png");
+				return new Image("/view/cardimgs/Spades/9 of Spades.png");
 			}
 			else if (suit == "C") {
-				return new Image("Card Deck/Clubs/9 of clubs.png");
+				return new Image("/view/cardimgs/Clubs/9 of clubs.png");
 			}
 			else if (suit == "D") {
-				return new Image("Card Deck/diamonds/9 of diamonds.png");
+				return new Image("/view/cardimgs/diamonds/9 of diamonds.png");
 			}
 		case 10:
 			if (suit == "H") {
 				if(c.getValue() == "K") {
-					return new Image("Card Deck/Hearts/K of Hearts.png");
+					return new Image("/view/cardimgs/Hearts/K of Hearts.png");
 				}
 				else if(c.getValue() == "Q") {
-					return new Image("Card Deck/Hearts/Q of Hearts.png");
+					return new Image("/view/cardimgs/Hearts/Q of Hearts.png");
 				}
 				else if(c.getValue() == "J") {
-					return new Image("Card Deck/Hearts/J of Hearts.png");
+					return new Image("/view/cardimgs/Hearts/J of Hearts.png");
 				}
 				else if(c.getValue() == "10") {
-					return new Image("Card Deck/Hearts/10 of Hearts.png");
+					return new Image("/view/cardimgs/Hearts/10 of Hearts.png");
 				}
 			}
 			else if (suit == "S") {
 				if(c.getValue() == "K") {
-					return new Image("Card Deck/Spades/K of Spades.png");
+					return new Image("/view/cardimgs/Spades/K of Spades.png");
 				}
 				else if(c.getValue() == "Q") {
-					return new Image("Card Deck/Spades/Q of Spades.png");
+					return new Image("/view/cardimgs/Spades/Q of Spades.png");
 				}
 				else if(c.getValue() == "J") {
-					return new Image("Card Deck/Spades/J of Spades.png");
+					return new Image("/view/cardimgs/Spades/J of Spades.png");
 				}
 				else if(c.getValue() == "10") {
-					return new Image("Card Deck/Spades/10 of Spades.png");
+					return new Image("/view/cardimgs/Spades/10 of Spades.png");
 				}
 			}
 			else if (suit == "C") {
 				if(c.getValue() == "K") {
-					return new Image("Card Deck/clubs/K of clubs.png");
+					return new Image("/view/cardimgs/clubs/K of clubs.png");
 				}
 				else if(c.getValue() == "Q") {
-					return new Image("Card Deck/clubs/Q of clubs.png");
+					return new Image("/view/cardimgs/clubs/Q of clubs.png");
 				}
 				else if(c.getValue() == "J") {
-					return new Image("Card Deck/clubs/J of clubs.png");
+					return new Image("/view/cardimgs/clubs/J of clubs.png");
 				}
 				else if(c.getValue() == "10") {
-					return new Image("Card Deck/clubs/10 of clubs.png");
+					return new Image("/view/cardimgs/clubs/10 of clubs.png");
 				}
 			}
 			else if (suit == "D") {
 				if(c.getValue() == "K") {
-					return new Image("Card Deck/diamonds/K of diamonds.png");
+					return new Image("/view/cardimgs/diamonds/K of diamonds.png");
 				}
 				else if(c.getValue() == "Q") {
-					return new Image("Card Deck/diamonds/Q of diamonds.png");
+					return new Image("/view/cardimgs/diamonds/Q of diamonds.png");
 				}
 				else if(c.getValue() == "J") {
-					return new Image("Card Deck/diamonds/J of diamonds.png");
+					return new Image("/view/cardimgs/diamonds/J of diamonds.png");
 				}
 				else if(c.getValue() == "10") {
-					return new Image("Card Deck/diamonds/10 of diamonds.png");
+					return new Image("/view/cardimgs/diamonds/10 of diamonds.png");
 				}
 			}
 
 		case 11:
 			if (suit == "H") {
-				return new Image("Card Deck/Hearts/Ace of Hearts.png");
+				return new Image("/view/cardimgs/Hearts/Ace of Hearts.png");
 			}
 			else if (suit == "S") {
-				return new Image("Card Deck/Spades/Ace of Spades.png");
+				return new Image("/view/cardimgs/Spades/Ace of Spades.png");
 			}
 			else if (suit == "C") {
-				return new Image("Card Deck/Clubs/Ace of clubs.png");
+				return new Image("/view/cardimgs/Clubs/Ace of clubs.png");
 			}
 			else if (suit == "D") {
-				return new Image("Card Deck/diamonds/Ace of diamonds.png");
+				return new Image("/view/cardimgs/diamonds/Ace of diamonds.png");
 			}
 
 

@@ -18,27 +18,27 @@
          </font></Button>
       <ImageView fx:id="p1" fitHeight="190.0" fitWidth="150.0" layoutX="363.0" layoutY="521.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="Card Deck\Back of cards.png" />
+            <Image url="@cardimgs/Back of cards.png" />
          </image>
       </ImageView>
       <ImageView fx:id="p2" fitHeight="190.0" fitWidth="150.0" layoutX="549.0" layoutY="520.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="Card Deck\Back of cards.png" />
+            <Image url="@cardimgs/Back of cards.png" />
          </image>
       </ImageView>
       <ImageView fx:id="d1" fitHeight="190.0" fitWidth="150.0" layoutX="359.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="Card Deck\Back of cards.png" />
+            <Image url="@cardimgs/Back of cards.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="190.0" fitWidth="150.0" layoutX="61.0" layoutY="276.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="Card Deck\Back of cards.png" />
+            <Image url="@cardimgs/Back of cards.png" />
          </image>
       </ImageView>
       <ImageView fx:id="d2" fitHeight="190.0" fitWidth="150.0" layoutX="549.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="Card Deck\Back of cards.png" />
+            <Image url="@cardimgs/Back of cards.png" />
          </image>
       </ImageView>
       <Label fx:id="sumd" layoutX="549.0" layoutY="259.0" prefHeight="34.0" prefWidth="91.0" style="-fx-background-color: white;" text="##">
@@ -81,32 +81,32 @@
       </Label>
       <ImageView fx:id="p3" fitHeight="190.0" fitWidth="150.0" layoutX="-163.0" layoutY="239.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="Card Deck\Back of cards.png" />
+            <Image url="@cardimgs/Back of cards.png" />
          </image>
       </ImageView>
       <ImageView fx:id="p4" fitHeight="190.0" fitWidth="150.0" layoutX="-238.0" layoutY="140.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="Card Deck\Back of cards.png" />
+            <Image url="@cardimgs/Back of cards.png" />
          </image>
       </ImageView>
       <ImageView fx:id="p5" fitHeight="190.0" fitWidth="150.0" layoutX="-323.0" layoutY="232.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="Card Deck\Back of cards.png" />
+            <Image url="@cardimgs/Back of cards.png" />
          </image>
       </ImageView>
       <ImageView fx:id="d3" fitHeight="190.0" fitWidth="150.0" layoutX="-323.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="Card Deck\Back of cards.png" />
+            <Image url="@cardimgs/Back of cards.png" />
          </image>
       </ImageView>
       <ImageView fx:id="d4" fitHeight="190.0" fitWidth="150.0" layoutX="-323.0" layoutY="444.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="Card Deck\Back of cards.png" />
+            <Image url="@cardimgs/Back of cards.png" />
          </image>
       </ImageView>
       <ImageView fx:id="d5" fitHeight="190.0" fitWidth="150.0" layoutX="-163.0" layoutY="444.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="Card Deck\Back of cards.png" />
+            <Image url="@cardimgs/Back of cards.png" />
          </image>
       </ImageView>
       <Label fx:id="endRInfo" layoutX="-409.0" layoutY="678.0" prefHeight="117.0" prefWidth="366.0" style="-fx-background-color: white;" text="End Round info : ">
