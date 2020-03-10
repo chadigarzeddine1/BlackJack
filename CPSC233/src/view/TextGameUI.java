@@ -1,5 +1,9 @@
+package view;
 import java.util.ArrayList;
 import java.util.Scanner;
+import model.*;
+import model.Player;
+import controller.GameUI;
 
 public class TextGameUI implements GameUI {
 	

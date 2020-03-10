@@ -1,3 +1,4 @@
+package view;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -24,6 +25,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
+import controller.ControlerBase;
+import controller.GUIMainController;
+import controller.GameUI;
+import model.PLAYERMOVE;
+import model.Player;
 
 public class GraphicalGameUI extends Application implements GameUI {
 	
@@ -80,9 +86,10 @@ public class GraphicalGameUI extends Application implements GameUI {
 	public boolean playAnotherRound() {
 		return false;
 	}
-	public void begin(Stage primaryStage,GUI gui) throws Exception {
+	
+	public void begin(Stage primaryStage,GUIMainController gui) throws Exception {
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("ProjectEnterPlay.fxml"));
+		loader.setLocation(getClass().getResource("/view/ProjectEnterPlay.fxml"));
 		  Parent pane = loader.load();
 		
 	  Scene scene = new Scene( pane );
@@ -96,7 +103,7 @@ public class GraphicalGameUI extends Application implements GameUI {
 	
 
 	public void start(Stage primaryStage) throws Exception{
-		GUI gui = new GUI();
+		GUIMainController gui = new GUIMainController();
 		begin(primaryStage,gui);
 		
 	}

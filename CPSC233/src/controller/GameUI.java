@@ -1,6 +1,8 @@
+package controller;
 import java.util.ArrayList;
 
 import javafx.stage.Stage;
+import model.*;
 
 public interface GameUI {
 	ArrayList<Player> setPlayers() throws Exception;
@@ -12,7 +14,6 @@ public interface GameUI {
 	void notifyBroke(Player player);
 	void notifyBusted(Player player);
 	boolean playAnotherRound();
-
 	
 }
 

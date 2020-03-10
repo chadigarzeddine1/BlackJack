@@ -1,9 +1,6 @@
+package model;
 import java.util.ArrayList;
-
-enum PLAYERMOVE {
-	HIT,
-	STAND
-}
+import controller.GameUI;
 
 public class GameSystem {
 

@@ -1,3 +1,4 @@
+package model;
 
 public class Card {
 	//Setting instance variables
