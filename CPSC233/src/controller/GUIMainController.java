@@ -1,15 +1,11 @@
 package controller;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.SubScene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -17,25 +13,15 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import model.*;
 
-enum PLAYERMOVES {
-	HIT,
-	STAND
-}
 public class GUIMainController {
 
+	private Model model;
 
-	//Game logic
-
-	public ArrayList<Player> players = new ArrayList<Player>();
-	private Player dealer;
-	private Deck deck;
-	int curplaynum;
-	Player curplayer;
+	// Interface Elements
 	Label nexplay;
 	Label curbal;
 	Label curplay;
@@ -47,15 +33,14 @@ public class GUIMainController {
 	Button nextR;
 	Button exit;
 	Button endR;
+	
 	boolean allowButton = true;
 
 	private ImageView p1, p2, p3, p4, p5;
 	private ImageView d1, d2, d3, d4, d5;
 	
 	public GUIMainController() {
-		this.deck = new Deck();
-		deck.shuffle();
-		this.dealer = new Player("Dave the Dealer");
+		this.model = new Model();
 	}
 
 	public void enterClick(ActionEvent event,TextField numplay,String numplayer) throws Exception {
@@ -67,66 +52,42 @@ public class GUIMainController {
 
 		ConBet controller = loader.getController();
 		numplayer = numplay.getText();
-		players = setPlayers(numplayer);
+		model.setPlayers(Integer.parseInt(numplayer));
 		controller.setPlayers(this);
 		Stage window =(Stage)((Node)event.getSource()).getScene().getWindow();
 		window.setScene(scene);
 		numplayer = numplay.getText();
-		curplaynum = 0;
-	}
-
-	public ArrayList<Player> setPlayers(String numPlayers) throws Exception {
-		ArrayList<Player> players = new ArrayList<Player>();
-
-		int num = Integer.parseInt(numPlayers);
-		for (int i = 0; i < num; i++) {
-			Player p = new Player("Player " + (i + 1));
-			players.add(p);
-		}
-		return players;
-	}
-
-	public void nextPlayerAlert() {
-		Alert nextPlayer = new Alert(AlertType.INFORMATION);
-		nextPlayer.setTitle("Current Player");
-		nextPlayer.setHeaderText("It is now " + curplayer.getName()+ "\'s turn");
-		nextPlayer.showAndWait();
-		return;
 	}
 
 	public void betStart(Label nexplay,Label curplay,Label curbal) {
 		this.nexplay = nexplay;
 		this.curbal = curbal;
 		this.curplay = curplay;
-		this.deck = new Deck();
-		curplaynum = 0;
-		curbal.setText(""+players.get(curplaynum).getBalance());
-		curplay.setText("Current Player:" + players.get(curplaynum).getName());
-		curplayer = players.get(curplaynum);
-		if (players.size()== 1) {
-			nexplay.setText("Next Player: N/A");
-		}
-		else {
-			nexplay.setText("Next Player: " + players.get(curplaynum +1).getName());
-		}
+		curbal.setText("" + model.getCurrentPlayer().getBalance());
+		curplay.setText("Current Player" + model.getCurrentPlayer().getName());
+		nexplay.setText("Next Player: " + model.nextPlayerName());
 	}
+	
+	public void updatePlayerLabels() {
+		curbal.setText("" + model.getCurrentPlayer().getBalance());
+		curplay.setText("Current Player: " + model.getCurrentPlayer().getName());
+		nexplay.setText("Next Player: " + model.nextPlayerName());
+	}
+	
 	public void bustClick()  {
 		bustButton.setLayoutX(50);
 		bustButton.setVisible(false);
 		bustLab.setLayoutX(-300);
-		if (players.indexOf(curplayer)+1 == players.size() || allPlayersStand() == true) {
+		if (model.allPlayersStand()) {
 			dealerTurn();
-		}
-		else {
-			nextPlayer(curplaynum+1);
-			curplaynum+=1;
-			curplayer = players.get(curplaynum);
+		} else {
 			nextPlayerTurn();
 		}
 		allowButton = true;
 	}
 
 	public void dealerTurn() {
+		Player dealer = model.getDealer();
 		curplay.setText("Current Player: Dealer");
 		d1.setImage(getcard(dealer,1));
 		boolean moveEndR = true;
@@ -144,7 +105,7 @@ public class GUIMainController {
 
 			}
 			else if (dealer.getBusted() == false) {
-				doPlayerMove( dealerDecide(dealer),dealer);
+				doPlayerMove(model.dealerDecide());
 				if (dealer.sum()>21) {
 					dealer.setIsStanding(true);
 				}
@@ -158,20 +119,16 @@ public class GUIMainController {
 				endR.setLayoutX(491);
 				endR.setLayoutY(338);}
 		}
+		model.endTurn();
 	}
 
 	public void endRound() {
-		rewardWinner();
-		ArrayList<Player> playersToRemove = new ArrayList<Player>();
-		for (Player p : players) {
-			if (p.getBalance() <= 0) {
-				notifyBroke(p);
-				playersToRemove.add(p);
-			}
-		}
-		players.removeAll(playersToRemove);
-		appendText("The Richest Player is : "+ richestplayer() + "\n",endRInfo);
-		showBalances();
+		
+		endRInfo.setLayoutX(356);
+		endRInfo.setLayoutY(310);
+		
+		endRInfo.setText(model.getResults());
+		
 		nextR.setVisible(true);
 		exit.setVisible(true);
 		nextR.setLayoutX(766);
@@ -185,77 +142,58 @@ public class GUIMainController {
 		Parent pane = loader.load();
 
 		Scene scene = new Scene( pane );
-		for (Player p:players) {
-			p.resetPlayerForRound();
-		}
-		dealer.resetPlayerForRound();
+		model.newRound();
 		ConBet controller = loader.getController();
 		controller.setPlayers(this);
 		Stage window =(Stage)((Node)event.getSource()).getScene().getWindow();
 		window.setScene(scene);
 	}
 
-	public void showBalances() {
-		for (Player p: players) {
-			appendText(p.getName()+"'s balance is: "+p.getBalance() + "\n",endRInfo);
-		}
-	}
 	public void nextPlayerTurn()  {
+		if (p1 != null) {
 		p1.setLayoutX(363);
 		p2.setLayoutX(549);
 		p3.setLayoutX(-238);
 		p4.setLayoutX(-238);
 		p5.setLayoutX(-238);
-		p2.setImage(getcard(curplayer,2));
-		p1.setImage(getcard(curplayer,1));
-		sump.setText("Sum: "+curplayer.sum()+"");
-	}
-
-	public void notifyBroke(Player p) {
-		appendText(p.getName() + " is broke af and has been ejected from this game. \n" ,endRInfo);
+		p2.setImage(getcard(model.getCurrentPlayer(),2));
+		p1.setImage(getcard(model.getCurrentPlayer(),1));
+		sump.setText("Sum: "+ model.getCurrentPlayer().sum()+"");
+		}
+		
+		updatePlayerLabels();
+		if (!model.getCurrentPlayer().equals(model.getDealer())) {
+			Alert nextPlayer = new Alert(AlertType.INFORMATION);
+			nextPlayer.setTitle("Current Player");
+			nextPlayer.setHeaderText("It is now " + model.getCurrentPlayer().getName()+ "\'s turn");
+			nextPlayer.showAndWait();
+		}
 	}
 
 	public void betClick(ActionEvent event,TextField betamount) throws Exception {
-		curplayer.bet(Integer.parseInt(betamount.getText()));
+		model.getCurrentPlayer().bet(Integer.parseInt(betamount.getText()));
 		betamount.setText("");
-		curbal.setText(""+players.get(curplaynum).getBalance());
-		if (players.size()== curplaynum+1){
-			curplaynum = 0;
+		curbal.setText(""+model.getCurrentPlayer().getBalance());
+		model.endTurn();
+		if (model.isDealersTurn()){
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(getClass().getResource("/view/ProjectTurn.fxml"));
-			curbal.setText(""+players.get(curplaynum).getBalance());
+			curbal.setText(""+model.getCurrentPlayer().getBalance());
+			
 			Parent pane = loader.load();
-
 			Scene scene = new Scene( pane );
-
 			ConTurn controller = loader.getController();
 			controller.start(this);
 			Stage window =(Stage)((Node)event.getSource()).getScene().getWindow();
 			window.setScene(scene);
+			model.endTurn();
 		}
-		else {
-			curplaynum += 1;
-			nextPlayer(curplaynum);
-		}
-	}
-
-
-	public void nextPlayer(int num) {
-		curbal.setText(""+players.get(curplaynum).getBalance());
-		curplay.setText("Current Player:" + players.get(curplaynum).getName());
-		curplayer = players.get(num);
-		if (players.size()== num+1) {
-			nexplay.setText("Next Player: "+ players.get(0).getName());
-		}
-		else {
-			nexplay.setText("Next Player: " + players.get(curplaynum +1).getName());
-		}
-		nextPlayerAlert();
+		nextPlayerTurn();
 	}
 
 
 	public void turnStart(ImageView p1,ImageView p2,ImageView p3,ImageView p4,ImageView p5,ImageView d1,ImageView d2,ImageView d3,ImageView d4,ImageView d5,Label sump,Label sumd,Label curplay,Label nexplay,Label curbal,Label endRInfo,Button nextR,Button exit,Button endR,Label bustLab) {	 
-		deal();
+		model.deal();
 		allowButton = true;
 		this.bustLab = bustLab;
 		this.endR = endR;
@@ -277,74 +215,67 @@ public class GUIMainController {
 		this.nexplay = nexplay;
 		this.curbal = curbal;
 		this.curplay = curplay;
-		curplayer = players.get(0);
-		nextPlayerAlert();
-		curplaynum = 0;
-		this.curbal.setText(curplayer.getBalance()+"");
-		p1.setImage(getcard(curplayer,1));
-		p2.setImage(getcard(curplayer,2));
-		sump.setText("Sum: " +curplayer.sum());
+		
+		nextPlayerTurn();
+		Player dealer = model.getDealer();
+		Player player = model.getCurrentPlayer();
+		curbal.setText(player.getBalance()+"");
+		p1.setImage(getcard(player,1));
+		p2.setImage(getcard(player,2));
+		sump.setText("Sum: " + player.sum());
 		sumd.setText("Sum: "+ (dealer.sum()- dealer.getHand(1).getNumber()));
 		d2.setImage(getcard(dealer,2));
-		curplayer = players.get(0);
-		curplaynum = 0;
-		curbal.setText(""+players.get(curplaynum).getBalance());
-		curplay.setText("Current Player:" + players.get(curplaynum).getName());
-		if (players.size()== 1) {
-			nexplay.setText("Next Player: N/A");
-		}
-		else {
-			nexplay.setText("Next Player: " + players.get(curplaynum+1).getName());
-		}
 	}
 
 	public void hitClick(ActionEvent event,Button bustButton,Label bustLab) {
 		if (allowButton) {
 			this.bustButton = bustButton;
 			this.bustLab = bustLab;
-			if (curplayer.sum() == 21) {
-				curplaynum += 1;
+			if (model.getCurrentPlayer().sum() == 21) {
 				bustButton.setVisible(true);
 				bustButton.setLayoutX(524);
 				bustButton.setLayoutY(387);
 				bustLab.setLayoutX(409);
 				bustLab.setLayoutY(320);
-				bustLab.setText(curplayer.getName()+" got 21, Click Okay to progress");
+				bustLab.setText(model.getCurrentPlayer().getName()+" got 21, Click Okay to progress");
+				model.endTurn();
 			}
-			else if (curplayer.getBusted() == false) {
-				hit(curplayer);
+			else if (model.getCurrentPlayer().getBusted() == false) {
+				System.out.println("Hitting " + model.getCurrentPlayer().getName());
+				hitCurrentPlayer();
 			}
 			else{
-				curplaynum += 1;
 				bustButton.setVisible(true);
 				bustButton.setLayoutX(524);
 				bustButton.setLayoutY(387);
 				bustLab.setLayoutX(409);
 				bustLab.setLayoutY(320);
-				bustLab.setText(curplayer.getName()+" has busted, Click Okay to progress");
+				bustLab.setText(model.getCurrentPlayer().getName()+" has busted, Click Okay to progress");
 				allowButton = false;
+				model.endTurn();
 			}
 		}
 	}
+	
 	public void bust(Button bustButton,Label bustLab) { 
 		bustButton.setLayoutX(524);
 		bustButton.setLayoutY(387);
 		bustLab.setLayoutX(409);
 		bustLab.setLayoutY(320);
-		bustLab.setText(curplayer.getName()+" has busted, Click Okay to progress");
+		bustLab.setText(model.getCurrentPlayer().getName()+" has busted, Click Okay to progress");
 
 	}
 
-	public void standClick() 	 {
+	public void standClick() {
+		model.endTurn();
+		nextPlayerTurn();
 		if (allowButton) {
-			players.get(curplaynum).setIsStanding(true);
-			if (players.indexOf(curplayer) == players.size()-1 || allPlayersStand() == true) {
+			model.getCurrentPlayer().setIsStanding(true);
+			if (model.allPlayersStand() == true) {
 				dealerTurn();
 			}
 			else {
-				curplaynum+=1;
-				nextPlayer(curplaynum);
-				nextPlayerTurn();
+				
 			}
 		}
 	}
@@ -355,265 +286,41 @@ public class GUIMainController {
 			return  new Image("/view/cardimgs/Back of cards.png");
 		}
 		Card  c = p.getHand(n);
-		String suit = c.getSuit();
-		switch (c.getNumber()) {
-
-
-		case 1:
-			if (suit == "H") {
-				return new Image("/view/cardimgs/Hearts/Ace of Hearts.png");
-			}
-			else if (suit == "S") {
-				return new Image("/view/cardimgs/Spades/Ace of Spades.png");
-			}
-			else if (suit == "C") {
-				return new Image("/view/cardimgs/Clubs/Ace of clubs.png");
-			}
-			else if (suit == "D") {
-				return new Image("/view/cardimgs/diamonds/Ace of diamonds.png");
-			}
-		case 2:
-			if (suit == "H") {
-				return new Image("/view/cardimgs/Hearts/2 of Hearts.png");
-			}
-			else if (suit == "S") {
-				return new Image("/view/cardimgs/Spades/2 of Spades.png");
-			}
-			else if (suit == "C") {
-				return new Image("/view/cardimgs/Clubs/2 of clubs.png");
-			}
-			else if (suit == "D") {
-				return new Image("/view/cardimgs/diamonds/2 of diamonds.png");
-			}
-
-		case 3:
-			if (suit == "H") {
-				return new Image("/view/cardimgs/Hearts/3 of Hearts.png");
-			}
-			else if (suit == "S") {
-				return new Image("/view/cardimgs/Spades/3 of Spades.png");
-			}
-			else if (suit == "C") {
-				return new Image("/view/cardimgs/Clubs/3 of clubs.png");
-			}
-			else if (suit == "D") {
-				return new Image("/view/cardimgs/diamonds/3 of diamonds.png");
-			}
-		case 4:
-			if (suit == "H") {
-				return new Image("/view/cardimgs/Hearts/4 of Hearts.png");
-			}
-			else if (suit == "S") {
-				return new Image("/view/cardimgs/Spades/4 of Spades.png");
-			}
-			else if (suit == "C") {
-				return new Image("/view/cardimgs/Clubs/4 of clubs.png");
-			}
-			else if (suit == "D") {
-				return new Image("/view/cardimgs/diamonds/4 of diamonds.png");
-			}
-		case 5:
-			if (suit == "H") {
-				return new Image("/view/cardimgs/Hearts/5 of Hearts.png");
-			}
-			else if (suit == "S") {
-				return new Image("/view/cardimgs/Spades/5 of Spades.png");
-			}
-			else if (suit == "C") {
-				return new Image("/view/cardimgs/Clubs/5 of clubs.png");
-			}
-			else if (suit == "D") {
-				return new Image("/view/cardimgs/diamonds/5 of diamonds.png");
-			}
-		case 6:
-			if (suit == "H") {
-				return new Image("/view/cardimgs/Hearts/6 of Hearts.png");
-			}
-			else if (suit == "S") {
-				return new Image("/view/cardimgs/Spades/6 of Spades.png");
-			}
-			else if (suit == "C") {
-				return new Image("/view/cardimgs/Clubs/6 of clubs.png");
-			}
-			else if (suit == "D") {
-				return new Image("/view/cardimgs/diamonds/6 of diamonds.png");
-			}
-		case 7:
-			if (suit == "H") {
-				return new Image("/view/cardimgs/Hearts/7 of Hearts.png");
-			}
-			else if (suit == "S") {
-				return new Image("/view/cardimgs/Spades/7 of Spades.png");
-			}
-			else if (suit == "C") {
-				return new Image("/view/cardimgs/Clubs/7 of clubs.png");
-			}
-			else if (suit == "D") {
-				return new Image("/view/cardimgs/diamonds/7 of diamonds.png");
-			}
-		case 8:
-			if (suit == "H") {
-				return new Image("/view/cardimgs/Hearts/8 of Hearts.png");
-			}
-			else if (suit == "S") {
-				return new Image("/view/cardimgs/Spades/8 of Spades.png");
-			}
-			else if (suit == "C") {
-				return new Image("/view/cardimgs/Clubs/8 of clubs.png");
-			}
-			else if (suit == "D") {
-				return new Image("/view/cardimgs/diamonds/8 of diamonds.png");
-			}
-		case 9:
-			if (suit == "H") {
-				return new Image("/view/cardimgs/Hearts/9 of Hearts.png");
-			}
-			else if (suit == "S") {
-				return new Image("/view/cardimgs/Spades/9 of Spades.png");
-			}
-			else if (suit == "C") {
-				return new Image("/view/cardimgs/Clubs/9 of clubs.png");
-			}
-			else if (suit == "D") {
-				return new Image("/view/cardimgs/diamonds/9 of diamonds.png");
-			}
-		case 10:
-			if (suit == "H") {
-				if(c.getValue() == "K") {
-					return new Image("/view/cardimgs/Hearts/K of Hearts.png");
-				}
-				else if(c.getValue() == "Q") {
-					return new Image("/view/cardimgs/Hearts/Q of Hearts.png");
-				}
-				else if(c.getValue() == "J") {
-					return new Image("/view/cardimgs/Hearts/J of Hearts.png");
-				}
-				else if(c.getValue() == "10") {
-					return new Image("/view/cardimgs/Hearts/10 of Hearts.png");
-				}
-			}
-			else if (suit == "S") {
-				if(c.getValue() == "K") {
-					return new Image("/view/cardimgs/Spades/K of Spades.png");
-				}
-				else if(c.getValue() == "Q") {
-					return new Image("/view/cardimgs/Spades/Q of Spades.png");
-				}
-				else if(c.getValue() == "J") {
-					return new Image("/view/cardimgs/Spades/J of Spades.png");
-				}
-				else if(c.getValue() == "10") {
-					return new Image("/view/cardimgs/Spades/10 of Spades.png");
-				}
-			}
-			else if (suit == "C") {
-				if(c.getValue() == "K") {
-					return new Image("/view/cardimgs/clubs/K of clubs.png");
-				}
-				else if(c.getValue() == "Q") {
-					return new Image("/view/cardimgs/clubs/Q of clubs.png");
-				}
-				else if(c.getValue() == "J") {
-					return new Image("/view/cardimgs/clubs/J of clubs.png");
-				}
-				else if(c.getValue() == "10") {
-					return new Image("/view/cardimgs/clubs/10 of clubs.png");
-				}
-			}
-			else if (suit == "D") {
-				if(c.getValue() == "K") {
-					return new Image("/view/cardimgs/diamonds/K of diamonds.png");
-				}
-				else if(c.getValue() == "Q") {
-					return new Image("/view/cardimgs/diamonds/Q of diamonds.png");
-				}
-				else if(c.getValue() == "J") {
-					return new Image("/view/cardimgs/diamonds/J of diamonds.png");
-				}
-				else if(c.getValue() == "10") {
-					return new Image("/view/cardimgs/diamonds/10 of diamonds.png");
-				}
-			}
-
-		case 11:
-			if (suit == "H") {
-				return new Image("/view/cardimgs/Hearts/Ace of Hearts.png");
-			}
-			else if (suit == "S") {
-				return new Image("/view/cardimgs/Spades/Ace of Spades.png");
-			}
-			else if (suit == "C") {
-				return new Image("/view/cardimgs/Clubs/Ace of clubs.png");
-			}
-			else if (suit == "D") {
-				return new Image("/view/cardimgs/diamonds/Ace of diamonds.png");
-			}
-
-
-
-
-		}
-		return new Image("Card.jpg");
-	}
-
-
-
-	//takes each player and deals them 2 cards
-	protected void deal() {
-
-		for (Player p :players) {
-			p.resetPlayerForRound();
-			Card c1 = deck.draw();
-			Card c2 = deck.draw();
-			p.addCardToHand(c1);
-			p.addCardToHand(c2);
-		}
-		//		Card c1 = new Card("A","C");
-		//		Card c2 = new Card("K","H");
-		Card c1 = deck.draw();
-		Card c2 = deck.draw();
-		this.dealer.resetPlayerForRound();
-		this.dealer.addCardToHand(c1);
-		this.dealer.addCardToHand(c2);
-	}
-
-	protected void addPlayers(String[] names) {
-
-		int i = 0;
-		for (String name: names) {
-			i++;
-			Player p = new Player("Player " + i + ": " + name);
-			players.add(p);
-		}
+		System.out.println(c.imagePath());
+		return new Image(c.imagePath());
 	}
 
 	// if the player is not standing will be dealt another card
-	protected void hit(Player p) {
-		Card c = deck.draw();
-		p.addCardToHand(c);
-		int x = p.getHand().size();
-
-		if (p == dealer) {
+	private void hitCurrentPlayer() {
+		
+		model.hitCurrentPlayer();
+		int x = model.getCurrentPlayer().getHand().size();
+		
+		if (model.getCurrentPlayer().equals(model.getDealer())) {
 			placeCardsD(x);
+		} else {
+			sump.setText("Sum: "+ model.getCurrentPlayer().sum()+"");
+			placeCards(x,model.getCurrentPlayer());
 		}
-		else {
-			sump.setText("Sum: "+ p.sum()+"");
-			placeCards(x,p);}
-		if (p.getBusted() == true && p != dealer) {
-			allowButton = false;
+		
+		if (model.getCurrentPlayer().getBusted() == true && !model.getCurrentPlayer().equals(model.getDealer())) {
+			//allowButton = false;
 			bustButton.setVisible(true);
 			bustButton.setLayoutX(524);
 			bustButton.setLayoutY(387);
 			bustLab.setLayoutX(409);
 			bustLab.setLayoutY(320);
-			bustLab.setText(curplayer.getName()+" has busted, Click Okay to progress");
+			bustLab.setText(model.getCurrentPlayer().getName()+" has busted, Click Okay to progress");
 		}
 
 	}
 
 	public void placeCards(int x,Player p) {
-
-
+		
+		System.out.println("Distributing cards for " + p.getName());
+		System.out.println(p.hand());
+		System.out.println(p.sum());
+				
 		if (x== 3) {
 			p1.setLayoutX(266);
 			p2.setLayoutX(448);
@@ -652,14 +359,13 @@ public class GUIMainController {
 		}
 	}
 
-
 	public void placeCardsD(int x) {
 
 		if (x == 3) {
 			d1.setLayoutX(263);
 			d2.setLayoutX(423);
 			d3.setLayoutX(588);
-			d3.setImage(getcard(dealer,3));
+			d3.setImage(getcard(model.getDealer(),3));
 			d1.setLayoutY(48);
 			d2.setLayoutY(48);
 			d3.setLayoutY(48);}
@@ -668,8 +374,8 @@ public class GUIMainController {
 			d2.setLayoutX(254);
 			d3.setLayoutX(416);
 			d4.setLayoutX(585);
-			d3.setImage(getcard(dealer,3));
-			d4.setImage(getcard(dealer,4));
+			d3.setImage(getcard(model.getDealer(),3));
+			d4.setImage(getcard(model.getDealer(),4));
 			d1.setLayoutY(48);
 			d2.setLayoutY(48);
 			d3.setLayoutY(48);
@@ -681,9 +387,9 @@ public class GUIMainController {
 			d3.setLayoutX(417);
 			d4.setLayoutX(513);
 			d5.setLayoutX(584);
-			d3.setImage(getcard(dealer,3));
-			d4.setImage(getcard(dealer,4));
-			d5.setImage(getcard(dealer,5));
+			d3.setImage(getcard(model.getDealer(),3));
+			d4.setImage(getcard(model.getDealer(),4));
+			d5.setImage(getcard(model.getDealer(),5));
 			d1.setLayoutY(48);
 			d2.setLayoutY(48);
 			d3.setLayoutY(48);
@@ -692,74 +398,15 @@ public class GUIMainController {
 
 		}
 	}
-	//goes through all the players and returns the players with the best hand
-	protected void rewardWinner() {
-		endRInfo.setLayoutX(356);
-		endRInfo.setLayoutY(310);
-		for(Player p:players) {
-			if ( (p.sum() > dealer.sum() && !p.getBusted() ) || ( dealer.getBusted() && !p.getBusted() ) ) {
-				p.win();
-				appendText(p.getName() + " beat the dealer this round. \n",endRInfo);
-			} else if (p.sum() == dealer.sum()) {
-				appendText(p.getName() + " tied with the dealer. \n",endRInfo);
-				p.push();
-			} else {
-				p.lose();
-				appendText(p.getName() + " was crushed by the dealer. \n",endRInfo);
-			}
-		}
-	}
+	
 
-
-	public void appendText(String newText,Label x) {
-		x.setText(x.getText() + newText);
-	}
-
-
-	//goes through each player in the game and checks if there isStanding variable is true or not.
-	protected boolean allPlayersStand() {
-		for (Player p : players) {
-			if (p.getIsStanding() == false) {
-				return false;
-			}
-		}
-		return true;
-	}
-
-
-	public String richestplayer() {
-		int highestBal = 0;
-		String nameOfPlayer = "Nobody";
-		for (Player p : players) {
-			if (p.getBalance() > highestBal) {
-				highestBal = p.getBalance();
-				nameOfPlayer = p.getName();
-			}
-		}
-		return nameOfPlayer;
-	}
-
-	public PLAYERMOVES dealerDecide(Player player) {
-		if (player.sum() > 16) {
-			return PLAYERMOVES.STAND;
-		}
-		else {
-			return PLAYERMOVES.HIT;
-		}	
-	}
-
-	public void doPlayerMove(PLAYERMOVES move, Player p) {
+	public void doPlayerMove(PLAYERMOVE move) {
 		switch (move) {
 		case HIT:
-			hit(p);
+			hitCurrentPlayer();
 			break;
 		case STAND:
-			p.setIsStanding(true);
+			model.getCurrentPlayer().setIsStanding(true);
 		}
 	}
-	public ArrayList<Player> getPlayers(){
-		return players;
-	}
-
-
 }

@@ -2,34 +2,92 @@ package view;
 import java.util.ArrayList;
 import java.util.Scanner;
 import model.*;
-import model.Player;
-import controller.GameUI;
 
-public class TextGameUI implements GameUI {
+public class TextGameUI {
 	
 	private Scanner input;
+	private Model model;
 	
 	public TextGameUI() {
 		input = new Scanner(System.in);
+		model = new Model();
 	}
 	
 	public static void main(String[] args) throws Exception {
 		TextGameUI ui = new TextGameUI();
-		GameSystem sys = new GameSystem(ui);
-		sys.start();
+		ui.start();
 		ui.input.close();
 	}
 	
-	public ArrayList<Player> setPlayers() {
-		System.out.println("Enter number of players:");
-		ArrayList<Player> players = new ArrayList<Player>();
-		String numPlayers = input.nextLine();
-		int num = Integer.parseInt(numPlayers);
-		for (int i = 0; i < num; i++) {
-			Player p = new Player("Player " + (i + 1));
-			players.add(p);
+	public void start() {
+		
+		System.out.println("Please enter the number of players:");
+		int numPlayers = Integer.parseInt(input.nextLine());
+		model.setPlayers(numPlayers);
+		System.out.println("Starting game with " + numPlayers + " players.");
+		
+		boolean playAnotherRound = true;
+
+		while (playAnotherRound) {
+			
+			model.deal();
+
+			// all players bet
+			for (Player p : model.getAllPlayers()) {
+				p.bet(getAndShowPlayerBet(p));
+			}
+
+
+			// cycle through plays
+			for (Player p : model.getAllPlayers()) {
+				notifyNowPlayerTurn(p);
+
+				while (!p.getIsStanding() && p.sum() < 21) {
+					// tell them what they have
+					PLAYERMOVE move = getPlayerMove(p);
+						switch (move) {
+						case HIT:
+							model.hitPlayer(p);
+							break;
+						case STAND:
+							p.setIsStanding(true);
+						}
+						System.out.println(p.hand());
+						System.out.println("Sum: " + p.sum());
+				}
+
+				if (p.getBusted()) {
+					notifyBusted(p);
+				}
+				model.endTurn();
+			}
+
+			notifyNowPlayerTurn(model.getDealer());
+
+			while (!model.getDealer().getIsStanding() && model.getDealer().sum() < 21) {
+				// tell them what they have
+				PLAYERMOVE move = model.dealerDecide();
+				switch (move) {
+				case HIT:
+					model.hitDealer();
+					System.out.println(model.getDealer().hand());
+					System.out.println("Sum: " + model.getDealer().sum());
+					break;
+				case STAND:
+					model.getDealer().setIsStanding(true);
+				}
+			}
+
+			if (model.getDealer().getBusted()) {
+				notifyBusted(model.getDealer());
+			}
+
+			System.out.println(model.getResults());
+			model.newRound();
+
+			playAnotherRound = playAnotherRound();
 		}
-		return players;
+		
 	}
 	
 	public int getAndShowPlayerBet(Player player) {
@@ -52,7 +110,7 @@ public class TextGameUI implements GameUI {
 		System.out.print("Hit or Stand: ");
 		String option = input.next();
 		
-		if (option.equals("Hit")) {
+		if (option.equalsIgnoreCase("Hit")) {
 			return PLAYERMOVE.HIT;
 		}
 		else {

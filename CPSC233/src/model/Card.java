@@ -55,4 +55,18 @@ public class Card {
 	public String toString() {
 		return value + suit;
 	}
+	public String imagePath() {
+		switch (suit) {
+		case "H":
+			return "/view/cardimgs/Hearts/" + value + " of Hearts.png";
+		case "D":
+			return "/view/cardimgs/Diamonds/" + value + " of Diamonds.png";
+		case "C":
+			return "/view/cardimgs/Clubs/" + value + " of Clubs.png";
+		case "S":
+			return "/view/cardimgs/Spades/" + value + " of Spades.png";
+		default:
+			return "/view/cardimgs/Back of cards.png";
+		}
+	}
 }

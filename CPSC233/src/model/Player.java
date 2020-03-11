@@ -149,7 +149,7 @@ public class Player {
 	
 	 /**
      * Accessor for the player's name
-     * @returnplayer's name
+     * @return player's name
      */
 	public String getName() {
 		return this.name;
@@ -163,6 +163,10 @@ public class Player {
 	public void resetPlayerForRound() {
 		this.isStanding = false;
 		this.hand = new ArrayList<Card>();
+	}
+	
+	public boolean equals(Player anotherPlayer) {
+		return getName().equalsIgnoreCase(anotherPlayer.getName());
 	}
 	
 }

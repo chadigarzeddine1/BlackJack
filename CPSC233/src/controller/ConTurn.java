@@ -2,7 +2,6 @@ package controller;
 
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javafx.application.Platform;
@@ -11,7 +10,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class ConTurn implements Initializable {
@@ -94,7 +92,6 @@ public class ConTurn implements Initializable {
 	@FXML
 	void bustClick(ActionEvent event) {
 		gui.bustClick();
-
 	}
 
 	@FXML
