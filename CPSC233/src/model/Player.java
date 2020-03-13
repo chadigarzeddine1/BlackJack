@@ -20,16 +20,32 @@ public class Player {
 	public Player(String name) {
 		this.name = name;
 		hand = new ArrayList<Card>();
+		splitHand = new ArrayList<Card>();
 		isStanding = false;
 		balance = 500;
 		stake = 0;
-		splitStanding = false;
+		splitStanding = true;
 		isSplitted = false;
 	}
 
 	public int sum() {
 		int sum = 0;
 		for (Card card : hand) {
+			sum += card.getNumber();
+		}
+		
+		if (sum > 21) {
+			sum = 0;
+			for (Card card : hand) {
+				sum += card.getNumberWithAceAs1();
+			}
+		}
+		return sum;
+	}
+	
+	public int splitSum() {
+		int sum = 0;
+		for (Card card : splitHand) {
 			sum += card.getNumber();
 		}
 		
@@ -56,16 +72,21 @@ public class Player {
 	
 	
 	/**
-     * Creates a new hand using one card from the orginal hand.
+     * Creates a new hand using one card from the original hand.
      * If Hand is not splittable, returns null
      * @return Split hand
      */
 	public void split() {
+		if (this.isSplittable()) {
+			balance -= stake;
+			stake += stake;
             splitHand.add(hand.get(1));
             hand.remove(1);
             isSplitted = true;
-
-        }
+            splitStanding = false;
+		}
+    }
+	
 	//add a card to your hand
 	//Parameter: 
 	//	Card - that you want to add
@@ -73,6 +94,9 @@ public class Player {
 		hand.add(card);
 	}
 	
+	public void addCardToSplit(Card card) {
+		splitHand.add(card);
+	}
 	//The player decides on the amount they want to bet and the money gets added to the pot
 	//The player balance decrease based on the amount used to bet
 	//Returns:
@@ -130,6 +154,10 @@ public class Player {
         return sum() > 21;
 	}
 	
+	public boolean getSplitBusted() {
+		return splitSum() >21;
+	}
+	
 	public String hand() {
 		String hand = "";
 		for (Card card: this.hand) {
@@ -142,6 +170,14 @@ public class Player {
 		return hand.get(n-1);
 	}
 	public ArrayList<Card> getHand() {
+		return hand;
+	}
+	
+	public String splitHand() {
+		String hand = "";
+		for (Card card: this.splitHand) {
+			hand += card.toString() + ", ";
+		}
 		return hand;
 	}
 	

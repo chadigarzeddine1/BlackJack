@@ -154,6 +154,11 @@ public final class Model {
 		getCurrentPlayer().addCardToHand(c);
 	}
 	
+	public void hitCurrentSplitPlayer() {
+		Card c = deck.draw();
+		getCurrentPlayer().addCardToSplit(c);
+	}
+	
 	public ArrayList<Player> getAllPlayers() {
 		return players;
 	}

@@ -57,10 +57,26 @@ public class TextGameUI {
 						System.out.println(p.hand());
 						System.out.println("Sum: " + p.sum());
 				}
-
+				
 				if (p.getBusted()) {
 					notifyBusted(p);
 				}
+				System.out.println(p.splitHand());
+				if (!p.getSplitStanding()) {
+					while (p.splitSum() < 21) {
+						PLAYERMOVE move = getPlayerMove(p);
+						switch (move) {
+						case HIT:
+							model.hitCurrentSplitPlayer();
+							break;
+						case STAND:
+							p.setSplitStanding(true);
+						}
+						System.out.println(p.splitHand());
+						System.out.println("Sum: " + p.splitHand());
+					}
+				}
+				
 				model.endTurn();
 			}
 
@@ -120,6 +136,8 @@ public class TextGameUI {
 		if (option.equalsIgnoreCase("Hit")) {
 			return PLAYERMOVE.HIT;
 		}
+		else if (option.equalsIgnoreCase("Split"))
+			return PLAYERMOVE.SPLIT;
 		else {
 			return PLAYERMOVE.STAND;
 		}
