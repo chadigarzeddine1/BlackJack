@@ -192,29 +192,29 @@ public class GUIMainController {
 	}
 
 
-	public void turnStart(ImageView p1,ImageView p2,ImageView p3,ImageView p4,ImageView p5,ImageView d1,ImageView d2,ImageView d3,ImageView d4,ImageView d5,Label sump,Label sumd,Label curplay,Label nexplay,Label curbal,Label endRInfo,Button nextR,Button exit,Button endR,Label bustLab) {	 
+	public void turnStart(ConTurn c) {	 
 		model.deal();
 		allowButton = true;
-		this.bustLab = bustLab;
-		this.endR = endR;
-		this.exit = exit;
-		this.nextR = nextR;
-		this.endRInfo = endRInfo;
-		this.sump = sump;
-		this.sumd = sumd;
-		this.p1 = p1;
-		this.p2 = p2;
-		this.p3 = p3;
-		this.p4 = p4;
-		this.p5 = p5;
-		this.d1 = d1;
-		this.d2 = d2;
-		this.d3 = d3;
-		this.d4 = d4;
-		this.d5 = d5;
-		this.nexplay = nexplay;
-		this.curbal = curbal;
-		this.curplay = curplay;
+		this.bustLab = c.getBustLab();
+		this.endR = c.getEndR();
+		this.exit = c.getExit();
+		this.nextR = c.getNextR();
+		this.endRInfo = c.getEndRInfo();
+		this.sump = c.getSump();
+		this.sumd = c.getSumd();
+		this.p1 = c.getP1();
+		this.p2 = c.getP2();
+		this.p3 = c.getP3();
+		this.p4 = c.getP4();
+		this.p5 = c.getP5();
+		this.d1 = c.getD1();
+		this.d2 = c.getD2();
+		this.d3 = c.getD3();
+		this.d4 = c.getD4();
+		this.d5 = c.getD5();
+		this.nexplay = c.getNexplay();
+		this.curbal = c.getCurbal();
+		this.curplay = c.getCurplay();
 		
 		nextPlayerTurn();
 		Player dealer = model.getDealer();
