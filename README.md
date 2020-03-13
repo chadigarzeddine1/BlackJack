@@ -14,8 +14,8 @@ Working Java JDK 8 System, <a href  = "https://www.oracle.com/technetwork/java/j
 <h4>Terminal</h4>
 5) Look for the java file BlackJack-05-23-master</br>
 6) Open computer's terminal</br>
-7) Compile: javac GUIMainController.java</br>
-8) Run: java GUIMainController</br>
+7) Compile: javac GraphicalGameUI.java</br>
+8) Run: java GraphicalGameUI</br>
 
 <h4>Eclipse</h4>
 5) Create a new java project and import the files from 'Downloads' folder</br>
