@@ -1,5 +1,4 @@
 package controller;
-import java.util.ArrayList;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -78,6 +77,7 @@ public class GUIMainController {
 		bustButton.setLayoutX(50);
 		bustButton.setVisible(false);
 		bustLab.setLayoutX(-300);
+		model.endTurn();
 		if (model.allPlayersStand()) {
 			dealerTurn();
 		} else {
@@ -88,11 +88,12 @@ public class GUIMainController {
 
 	public void dealerTurn() {
 		Player dealer = model.getDealer();
-		curplay.setText("Current Player: Dealer");
 		d1.setImage(getcard(dealer,1));
 		boolean moveEndR = true;
-		sumd.setText("Sum: "+ dealer.sum()+"");
-		while (!dealer.getIsStanding()) {	
+		sumd.setText("Sum: "+ dealer.sum());
+		
+		
+		while (!dealer.getIsStanding()) {
 			if (dealer.sum() == 21) {
 				moveEndR = false;
 				dealer.setIsStanding(true);
@@ -103,8 +104,7 @@ public class GUIMainController {
 				bustLab.setLayoutY(320);
 				bustLab.setText(dealer.getName()+" has got 21, Click Okay to progress");
 
-			}
-			else if (dealer.getBusted() == false) {
+			} else if (dealer.getBusted() == false) {
 				doPlayerMove(model.dealerDecide());
 				if (dealer.sum()>21) {
 					dealer.setIsStanding(true);
@@ -150,17 +150,17 @@ public class GUIMainController {
 	}
 
 	public void nextPlayerTurn()  {
-		if (p1 != null) {
-		p1.setLayoutX(363);
-		p2.setLayoutX(549);
-		p3.setLayoutX(-238);
-		p4.setLayoutX(-238);
-		p5.setLayoutX(-238);
-		p2.setImage(getcard(model.getCurrentPlayer(),2));
-		p1.setImage(getcard(model.getCurrentPlayer(),1));
-		sump.setText("Sum: "+ model.getCurrentPlayer().sum()+"");
+		if (p1 != null && model.getCurrentPlayer().getHand().size() > 0 && !model.isDealersTurn()) {
+			p1.setLayoutX(363);
+			p2.setLayoutX(549);
+			p3.setLayoutX(-238);
+			p4.setLayoutX(-238);
+			p5.setLayoutX(-238);
+			p2.setImage(getcard(model.getCurrentPlayer(),2));
+			p1.setImage(getcard(model.getCurrentPlayer(),1));
+			sump.setText("Sum: "+ model.getCurrentPlayer().sum()+"");
 		}
-		
+
 		updatePlayerLabels();
 		if (!model.getCurrentPlayer().equals(model.getDealer())) {
 			Alert nextPlayer = new Alert(AlertType.INFORMATION);
@@ -238,10 +238,10 @@ public class GUIMainController {
 				bustLab.setLayoutX(409);
 				bustLab.setLayoutY(320);
 				bustLab.setText(model.getCurrentPlayer().getName()+" got 21, Click Okay to progress");
+				model.getCurrentPlayer().setIsStanding(true);
 				model.endTurn();
 			}
 			else if (model.getCurrentPlayer().getBusted() == false) {
-				System.out.println("Hitting " + model.getCurrentPlayer().getName());
 				hitCurrentPlayer();
 			}
 			else{
@@ -252,11 +252,15 @@ public class GUIMainController {
 				bustLab.setLayoutY(320);
 				bustLab.setText(model.getCurrentPlayer().getName()+" has busted, Click Okay to progress");
 				allowButton = false;
+				model.getCurrentPlayer().setIsStanding(true);
 				model.endTurn();
 			}
 		}
+		
 	}
 	
+	
+	/*
 	public void bust(Button bustButton,Label bustLab) { 
 		bustButton.setLayoutX(524);
 		bustButton.setLayoutY(387);
@@ -264,18 +268,16 @@ public class GUIMainController {
 		bustLab.setLayoutY(320);
 		bustLab.setText(model.getCurrentPlayer().getName()+" has busted, Click Okay to progress");
 
-	}
+	}*/
 
 	public void standClick() {
+		model.getCurrentPlayer().setIsStanding(true);
+		
 		model.endTurn();
 		nextPlayerTurn();
-		if (allowButton) {
-			model.getCurrentPlayer().setIsStanding(true);
+		if (allowButton) {	
 			if (model.allPlayersStand() == true) {
 				dealerTurn();
-			}
-			else {
-				
 			}
 		}
 	}
@@ -286,7 +288,6 @@ public class GUIMainController {
 			return  new Image("/view/cardimgs/Back of cards.png");
 		}
 		Card  c = p.getHand(n);
-		System.out.println(c.imagePath());
 		return new Image(c.imagePath());
 	}
 
@@ -296,7 +297,7 @@ public class GUIMainController {
 		model.hitCurrentPlayer();
 		int x = model.getCurrentPlayer().getHand().size();
 		
-		if (model.getCurrentPlayer().equals(model.getDealer())) {
+		if (model.isDealersTurn()) {
 			placeCardsD(x);
 		} else {
 			sump.setText("Sum: "+ model.getCurrentPlayer().sum()+"");
@@ -304,22 +305,19 @@ public class GUIMainController {
 		}
 		
 		if (model.getCurrentPlayer().getBusted() == true && !model.getCurrentPlayer().equals(model.getDealer())) {
-			//allowButton = false;
+			allowButton = false;
 			bustButton.setVisible(true);
 			bustButton.setLayoutX(524);
 			bustButton.setLayoutY(387);
 			bustLab.setLayoutX(409);
 			bustLab.setLayoutY(320);
 			bustLab.setText(model.getCurrentPlayer().getName()+" has busted, Click Okay to progress");
+			model.getCurrentPlayer().setIsStanding(true);
 		}
 
 	}
 
 	public void placeCards(int x,Player p) {
-		
-		System.out.println("Distributing cards for " + p.getName());
-		System.out.println(p.hand());
-		System.out.println(p.sum());
 				
 		if (x== 3) {
 			p1.setLayoutX(266);

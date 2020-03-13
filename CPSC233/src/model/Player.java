@@ -119,6 +119,7 @@ public class Player {
 	}
 	
 	public void setIsStanding(boolean standing) {
+		System.out.println(getName() + " is standing: " + standing);
 		this.isStanding = standing;
 	}
 	

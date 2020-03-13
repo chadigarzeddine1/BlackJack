@@ -35,7 +35,7 @@ public final class Model {
 	}
 
 	public void endTurn() {
-		getCurrentPlayer().setIsStanding(true);
+		//getCurrentPlayer().setIsStanding(true);
 		currentPlayerIndex += 1;
 		if (currentPlayerIndex == players.size() + 1) {
 			currentPlayerIndex = 0;
