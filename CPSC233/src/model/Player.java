@@ -6,12 +6,13 @@ import javafx.scene.Scene;
 public class Player {
 	private String name;
 	private ArrayList<Card> hand;
+	private ArrayList<Card> splitHand;
 	private boolean isStanding;
 	private int balance;
 	private int stake;
 	private Scene scene;
-	private boolean isSplitted = false; 
-	
+	private boolean isSplitted; 
+	private boolean splitStanding;
 	/**
      * Creates a new Player with a blank name, an empty Hand, a given account balance of 500, and a stake of 0
      * @param balance is the amount of money to start with
@@ -22,6 +23,8 @@ public class Player {
 		isStanding = false;
 		balance = 500;
 		stake = 0;
+		splitStanding = false;
+		isSplitted = false;
 	}
 
 	public int sum() {
@@ -57,18 +60,12 @@ public class Player {
      * If Hand is not splittable, returns null
      * @return Split hand
      */
-	public Player split() {
-        if (!isSplittable()) {
-            return null;
-        } else {
-            Player split = new Player("split");
-            split.addCardToHand(hand.get(1));
+	public void split() {
+            splitHand.add(hand.get(1));
             hand.remove(1);
             isSplitted = true;
-            
-            return split;
+
         }
-    }
 	//add a card to your hand
 	//Parameter: 
 	//	Card - that you want to add
@@ -170,4 +167,11 @@ public class Player {
 		return getName().equalsIgnoreCase(anotherPlayer.getName());
 	}
 	
+	public boolean getSplitStanding () {
+		return splitStanding;
+	}
+	
+	public void setSplitStanding (boolean standing) {
+		splitStanding = standing;
+	}
 }

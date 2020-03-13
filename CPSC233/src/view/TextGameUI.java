@@ -51,6 +51,8 @@ public class TextGameUI {
 							break;
 						case STAND:
 							p.setIsStanding(true);
+						case SPLIT:
+							p.split();
 						}
 						System.out.println(p.hand());
 						System.out.println("Sum: " + p.sum());
@@ -107,7 +109,12 @@ public class TextGameUI {
 	}
 	
 	public PLAYERMOVE getPlayerMove(Player player) {
-		System.out.print("Hit or Stand: ");
+		if (player.isSplittable()) {
+			System.out.print("Hit or Stand or Split: ");
+		}
+		else {
+			System.out.print("Hit or Stand: ");
+		}
 		String option = input.next();
 		
 		if (option.equalsIgnoreCase("Hit")) {
