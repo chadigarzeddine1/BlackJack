@@ -126,15 +126,96 @@ public class ConTurn implements Initializable {
 		nextR.setVisible(false);
 		endR.setVisible(false);
 		exit.setVisible(false);
-		gui.turnStart(p1, p2,p3,p4,p5, d1, d2,d3,d4,d5, sump, sumd,curplay,nexplay,curbal,endRInfo,nextR,exit,endR,bustLab);
+		gui.turnStart(this);
 		this.gui = gui;
 	}
 
+	
 
 
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {	
+	}
+
+	public ImageView getP1() {
+		return p1;
+	}
+
+	public ImageView getP2() {
+		return p2;
+	}
+
+	public ImageView getP3() {
+		return p3;
+	}
+
+	public ImageView getP4() {
+		return p4;
+	}
+
+	public ImageView getP5() {
+		return p5;
+	}
+
+	public ImageView getD1() {
+		return d1;
+	}
+
+	public ImageView getD2() {
+		return d2;
+	}
+
+	public ImageView getD3() {
+		return d3;
+	}
+
+	public ImageView getD4() {
+		return d4;
+	}
+
+	public ImageView getD5() {
+		return d5;
+	}
+
+	public Label getSump() {
+		return sump;
+	}
+
+	public Label getSumd() {
+		return sumd;
+	}
+
+	public Label getNexplay() {
+		return nexplay;
+	}
+
+	public Label getCurbal() {
+		return curbal;
+	}
+
+	public Label getCurplay() {
+		return curplay;
+	}
+
+	public Label getBustLab() {
+		return bustLab;
+	}
+
+	public Label getEndRInfo() {
+		return endRInfo;
+	}
+
+	public Button getNextR() {
+		return nextR;
+	}
+
+	public Button getExit() {
+		return exit;
+	}
+
+	public Button getEndR() {
+		return endR;
 	}
 
 

@@ -47,7 +47,7 @@ public class TextGameUI {
 					PLAYERMOVE move = getPlayerMove(p);
 						switch (move) {
 						case HIT:
-							model.hitPlayer(p);
+							model.hitCurrentPlayer();
 							break;
 						case STAND:
 							p.setIsStanding(true);
@@ -69,7 +69,7 @@ public class TextGameUI {
 				PLAYERMOVE move = model.dealerDecide();
 				switch (move) {
 				case HIT:
-					model.hitDealer();
+					model.hitCurrentPlayer();
 					System.out.println(model.getDealer().hand());
 					System.out.println("Sum: " + model.getDealer().sum());
 					break;
