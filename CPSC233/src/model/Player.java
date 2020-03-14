@@ -10,6 +10,7 @@ public class Player {
 	private boolean isStanding;
 	private int balance;
 	private int stake;
+	private int splitStake;
 	private Scene scene;
 	private boolean isSplitted; 
 	private boolean splitStanding;
@@ -24,6 +25,7 @@ public class Player {
 		isStanding = false;
 		balance = 500;
 		stake = 0;
+		splitStake = 0;
 		splitStanding = true;
 		isSplitted = false;
 	}
@@ -70,6 +72,9 @@ public class Player {
         return hand.size() == 2 && hand.get(0).getValue() == hand.get(1).getValue() && !isSplitted;
     }
 	
+	public boolean getIsSplitted() {
+		return isSplitted;
+	}
 	
 	/**
      * Creates a new hand using one card from the original hand.
@@ -77,14 +82,12 @@ public class Player {
      * @return Split hand
      */
 	public void split() {
-		if (this.isSplittable()) {
 			balance -= stake;
-			stake += stake;
+			splitStake += stake;
             splitHand.add(hand.get(1));
             hand.remove(1);
             isSplitted = true;
             splitStanding = false;
-		}
     }
 	
 	//add a card to your hand
@@ -111,6 +114,10 @@ public class Player {
 		balance += stake*2;
 		//stake = 0;
 	}
+	
+	public void splitWin() {
+		balance += splitStake * 2;
+	}
 	//The player loses the round so their stakes reset to zero
 	//Returns:
 	//	None
@@ -118,12 +125,16 @@ public class Player {
 		//stake = 0;
 	}
 	
+	
 	//The player ties with the dealer so they get their stake back
 	//Stake returns to zero
 	//Returns:
 	//	None
 	public void push() {
 		balance += stake;
+	}
+	public void splitPush() {
+		balance += splitStake;
 	}
 	
 	 /**
@@ -173,6 +184,10 @@ public class Player {
 		return hand;
 	}
 	
+	public ArrayList<Card> getSplitHand() {
+		return splitHand;
+	}
+	
 	public String splitHand() {
 		String hand = "";
 		for (Card card: this.splitHand) {
@@ -197,6 +212,8 @@ public class Player {
 	public void resetPlayerForRound() {
 		this.isStanding = false;
 		this.hand = new ArrayList<Card>();
+		this.splitHand = new ArrayList<Card>();
+		this.isSplitted = false;
 	}
 	
 	public boolean equals(Player anotherPlayer) {

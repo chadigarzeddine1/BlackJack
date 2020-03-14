@@ -94,16 +94,31 @@ public final class Model {
 
 		String results = "";
 
-		for(Player p:players) {
+		for(Player p :players) {
 			if ( (p.sum() > dealer.sum() && !p.getBusted() ) || ( dealer.getBusted() && !p.getBusted() ) ) {
 				p.win();
 				results += p.getName() + " beat the dealer this round. \n";
-			} else if (p.sum() == dealer.sum()) {
+				}
+			 else if (p.sum() == dealer.sum()) {
 				results += p.getName() + " tied with the dealer. \n";
 				p.push();
-			} else {
+				}
+			 else {
 				p.lose();
 				results += p.getName() + " was crushed by the dealer. \n";
+			}
+			if (p.getIsSplitted()) {
+				if (p.splitSum() >dealer.sum() && !p.getSplitBusted() || ( dealer.getBusted() && !p.getSplitBusted() )) {
+					p.splitWin();
+					results += p.getName() + " split hand also beat the dealer this round. \n";
+				}
+				else if (p.splitSum() == dealer.sum()) {
+					p.splitPush();
+					results += p.getName() + " split hand tied with the dealer. \n";
+				}
+				else {
+					results += p.getName() + " split hand lost to the dealer. \n";
+				}
 			}
 		}
 
@@ -133,7 +148,8 @@ public final class Model {
 
 	//takes each player and deals them 2 cards
 	public void deal() {
-
+		this.deck = new Deck();
+		currentPlayerIndex = 0;
 		for (Player p :players) {
 			p.resetPlayerForRound();
 			Card c1 = deck.draw();

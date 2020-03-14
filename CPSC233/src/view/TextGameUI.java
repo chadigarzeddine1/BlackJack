@@ -51,6 +51,7 @@ public class TextGameUI {
 							break;
 						case STAND:
 							p.setIsStanding(true);
+							break;
 						case SPLIT:
 							p.split();
 						}
@@ -61,9 +62,10 @@ public class TextGameUI {
 				if (p.getBusted()) {
 					notifyBusted(p);
 				}
-				System.out.println(p.splitHand());
-				if (!p.getSplitStanding()) {
-					while (p.splitSum() < 21) {
+				
+				if (!p.getSplitStanding() && p.getSplitHand() != null) {
+					notifyNowPlayerSplit(p);
+					while (p.splitSum() < 21 && !p.getSplitStanding()) {
 						PLAYERMOVE move = getPlayerMove(p);
 						switch (move) {
 						case HIT:
@@ -73,7 +75,7 @@ public class TextGameUI {
 							p.setSplitStanding(true);
 						}
 						System.out.println(p.splitHand());
-						System.out.println("Sum: " + p.splitHand());
+						System.out.println("Sum: " + p.splitSum());
 					}
 				}
 				
@@ -122,6 +124,15 @@ public class TextGameUI {
 		System.out.println("Your hand currently is:");
 		System.out.println(player.hand());
 		displaySum(player.sum());
+	}
+	
+	public void notifyNowPlayerSplit(Player player) {
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		System.out.println("It is now " + player.getName() + "'s split hand.");
+		System.out.println("Your hand currently is:");
+		System.out.println(player.splitHand());
+		displaySum(player.splitSum());
+		
 	}
 	
 	public PLAYERMOVE getPlayerMove(Player player) {
