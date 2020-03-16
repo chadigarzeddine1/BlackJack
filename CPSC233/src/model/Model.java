@@ -2,10 +2,9 @@ package model;
 
 import java.util.ArrayList;
 
-interface modelDelegate {
-
-}
-
+/**
+ * Centralized model for processing internal logic in both GUI and Text versions.
+ */
 public final class Model {
 
 	private Deck deck;
@@ -13,6 +12,9 @@ public final class Model {
 	private Player dealer;
 	private int currentPlayerIndex = 0;
 
+	/**
+	 * Creates a new model with a standard deck. Initalizes instance variables.
+	 */
 	public Model() {
 		this.deck = new Deck();
 		deck.shuffle();
@@ -27,13 +29,24 @@ public final class Model {
 		}
 	}
 
-	public Player getCurrentPlayer() {
+	/**
+	 * Player currently taking their turn.
+	 * @return the player who's turn it currently is. Returns dealer if it is the dealer's turn.
+	 */
+	private Player getCurrentPlayerObj() {
 		if (currentPlayerIndex == players.size()) {
 			return dealer;
 		}
 		return players.get(currentPlayerIndex);
 	}
+	
+	public Player getCurrentPlayer() {
+		return new Player(getCurrentPlayerObj());
+	}
 
+	/**
+	 * Ends the current player's turn by incrementing an internal counter.
+	 */
 	public void endTurn() {
 		//getCurrentPlayer().setIsStanding(true);
 		currentPlayerIndex += 1;
@@ -42,20 +55,32 @@ public final class Model {
 		}
 	}
 
+	/**
+	 * Interfaces will implement the dealer's turn differently from players'.
+	 * @return true if dealer's turn, false if player's turn.
+	 */
 	public boolean isDealersTurn() {
 		return currentPlayerIndex == players.size();
 	}
 
+	/**
+	 * Useful for giving advance notice of who's going next.
+	 * @return name of the next player
+	 */
 	public String nextPlayerName() {
 		if (currentPlayerIndex + 1 < players.size()) {
 			return players.get(currentPlayerIndex + 1).getName();
 		} else if (currentPlayerIndex == players.size()){
-			return getDealer().getName();
+			return dealer.getName();
 		} else {
 			return players.get(0).getName();
 		}
 	}
 
+	/**
+	 * If all players are standing, then all players are done and the dealer can take his turn.
+	 * @return true if all players have hit Stand. False if players remain.
+	 */
 	public boolean allPlayersStand() {
 		for (Player p : players) {
 			if (p.getIsStanding() == false) {
@@ -66,9 +91,13 @@ public final class Model {
 	}
 
 	public Player getDealer() {
-		return this.dealer;
+		return new Player(this.dealer);
 	}
-
+	
+	/**
+	 * If it is the dealer's turn, the model must decide what the dealer should do.
+	 * @return STAND if the dealer's sum is higher than 16, otherwise hit.
+	 */
 	public PLAYERMOVE dealerDecide() {
 		if (dealer.sum() > 16) {
 			return PLAYERMOVE.STAND;
@@ -78,18 +107,10 @@ public final class Model {
 		}	
 	}
 
-	public String richestplayer() {
-		int highestBal = 0;
-		String nameOfPlayer = "Nobody";
-		for (Player p : players) {
-			if (p.getBalance() > highestBal) {
-				highestBal = p.getBalance();
-				nameOfPlayer = p.getName();
-			}
-		}
-		return nameOfPlayer;
-	}
-
+	/**
+	 * Using data in the model, generate a results listing for the interface to print out.
+	 * @return the results, in string form.
+	 */
 	public String getResults() {
 
 		String results = "";
@@ -107,7 +128,7 @@ public final class Model {
 				p.lose();
 				results += p.getName() + " was crushed by the dealer. \n";
 			}
-			if (p.getIsSplitted()) {
+			if (p.isSplit()) {
 				if (p.splitSum() >dealer.sum() && !p.getSplitBusted() || ( dealer.getBusted() && !p.getSplitBusted() )) {
 					p.splitWin();
 					results += p.getName() + " split hand also beat the dealer this round. \n";
@@ -130,7 +151,17 @@ public final class Model {
 			}
 		}
 		players.removeAll(playersToRemove);
-		results += "The Richest Player is : "+ richestplayer() + "\n";
+		
+		int highestBal = 0;
+		String richestPlayer = "Nobody";
+		for (Player p : players) {
+			if (p.getBalance() > highestBal) {
+				highestBal = p.getBalance();
+				richestPlayer = p.getName();
+			}
+		}
+		
+		results += "The Richest Player is : "+ richestPlayer + "\n";
 
 		for (Player p: players) {
 			results += p.getName() + "'s balance is: "+p.getBalance() + "\n";
@@ -139,6 +170,9 @@ public final class Model {
 		return results;
 	}
 
+	/**
+	 * Resets all players' hands and stakes so they're ready for a new round.
+	 */
 	public void newRound() {
 		for (Player p:players) {
 			p.resetPlayerForRound();
@@ -146,7 +180,11 @@ public final class Model {
 		dealer.resetPlayerForRound();
 	}
 
-	//takes each player and deals them 2 cards
+	/**
+	 * Deals a new round. 
+	 * All players and dealer are reset for the new round.
+	 * Each player gets two cards. Dealer gets two cards.
+	 */
 	public void deal() {
 		this.deck = new Deck();
 		currentPlayerIndex = 0;
@@ -165,17 +203,39 @@ public final class Model {
 		this.dealer.addCardToHand(c2);
 	}
 	
+	/**
+	 * Deals the current player an additional card.
+	 */
 	public void hitCurrentPlayer() {
 		Card c = deck.draw();
-		getCurrentPlayer().addCardToHand(c);
+		getCurrentPlayerObj().addCardToHand(c);
 	}
 	
+	/**
+	 * Deals the current player an additional card to their split hand if there is one.
+	 */
 	public void hitCurrentSplitPlayer() {
 		Card c = deck.draw();
-		getCurrentPlayer().addCardToSplit(c);
+		getCurrentPlayerObj().addCardToSplit(c);
 	}
 	
+	public void setCurrentPlayerStanding(boolean isStanding) {
+		getCurrentPlayerObj().setIsStanding(isStanding);
+	}
+	
+	public void currentPlayerBet(int amount) {
+		getCurrentPlayerObj().bet(amount);
+	}
+	
+	/**
+	 * Returns an array of all players currently playing. Useful for looping in text-based implementations.
+	 * @return
+	 */
 	public ArrayList<Player> getAllPlayers() {
+		ArrayList<Player> players = new ArrayList<Player>();
+		for (Player p: this.players) {
+			players.add(new Player(p));
+		}
 		return players;
 	}
 }

@@ -1,8 +1,10 @@
 package view;
-import java.util.ArrayList;
 import java.util.Scanner;
 import model.*;
 
+/**
+ * Text Game Implementation
+ */
 public class TextGameUI {
 	
 	private Scanner input;
@@ -19,6 +21,16 @@ public class TextGameUI {
 		ui.input.close();
 	}
 	
+	/**
+	 * Fast helper method
+	 */
+	public Player p() {
+		return model.getCurrentPlayer();
+	}
+	
+	/**
+	 * Starts a new game
+	 */
 	public void start() {
 		
 		System.out.println("Please enter the number of players:");
@@ -34,48 +46,51 @@ public class TextGameUI {
 
 			// all players bet
 			for (Player p : model.getAllPlayers()) {
-				p.bet(getAndShowPlayerBet(p));
+				model.currentPlayerBet(getAndShowPlayerBet(p));
+				model.endTurn();
 			}
 
 
 			// cycle through plays
-			for (Player p : model.getAllPlayers()) {
-				notifyNowPlayerTurn(p);
+			for (int i = 0; i < model.getAllPlayers().size(); i++) {
+				notifyNowPlayerTurn(p());
 
-				while (!p.getIsStanding() && p.sum() < 21) {
+				while (!p().getIsStanding() && p().sum() < 21) {
 					// tell them what they have
-					PLAYERMOVE move = getPlayerMove(p);
+					PLAYERMOVE move = getPlayerMove(p());
 						switch (move) {
 						case HIT:
 							model.hitCurrentPlayer();
 							break;
 						case STAND:
-							p.setIsStanding(true);
+							model.setCurrentPlayerStanding(true);;
 							break;
 						case SPLIT:
-							p.split();
+							p().split();
 						}
-						System.out.println(p.hand());
-						System.out.println("Sum: " + p.sum());
+						System.out.println(p().hand());
+						System.out.println("Sum: " + p().sum());
 				}
 				
-				if (p.getBusted()) {
-					notifyBusted(p);
+				if (model.getCurrentPlayer().getBusted()) {
+					notifyBusted(model.getCurrentPlayer());
 				}
 				
-				if (!p.getSplitStanding() && p.getSplitHand() != null) {
-					notifyNowPlayerSplit(p);
-					while (p.splitSum() < 21 && !p.getSplitStanding()) {
-						PLAYERMOVE move = getPlayerMove(p);
+				if (!p().getSplitStanding() && p().getSplitHand() != null) {
+					notifyNowPlayerSplit(p());
+					while (p().splitSum() < 21 && !p().getSplitStanding()) {
+						PLAYERMOVE move = getPlayerMove(p());
 						switch (move) {
 						case HIT:
 							model.hitCurrentSplitPlayer();
 							break;
 						case STAND:
-							p.setSplitStanding(true);
+							p().setSplitStanding(true);
+						case SPLIT:
+							// TODO: - IMPLEMENT SPLIT
 						}
-						System.out.println(p.splitHand());
-						System.out.println("Sum: " + p.splitSum());
+						System.out.println(p().splitHand());
+						System.out.println("Sum: " + p().splitSum());
 					}
 				}
 				
@@ -84,7 +99,7 @@ public class TextGameUI {
 
 			notifyNowPlayerTurn(model.getDealer());
 
-			while (!model.getDealer().getIsStanding() && model.getDealer().sum() < 21) {
+			while (!p().getIsStanding() && p().sum() < 21) {
 				// tell them what they have
 				PLAYERMOVE move = model.dealerDecide();
 				switch (move) {
@@ -95,11 +110,13 @@ public class TextGameUI {
 					break;
 				case STAND:
 					model.getDealer().setIsStanding(true);
+				case SPLIT:
+					//TODO: - Implement Split
 				}
 			}
 
-			if (model.getDealer().getBusted()) {
-				notifyBusted(model.getDealer());
+			if (p().getBusted()) {
+				notifyBusted(p());
 			}
 
 			System.out.println(model.getResults());
@@ -110,7 +127,7 @@ public class TextGameUI {
 		
 	}
 	
-	public int getAndShowPlayerBet(Player player) {
+	private int getAndShowPlayerBet(Player player) {
 		System.out.println(player.getName() + ", please enter your bet: (current balance: " + player.getBalance() + " )");
 		String betStr = input.next();
 		int bet = Integer.parseInt(betStr);
@@ -118,7 +135,7 @@ public class TextGameUI {
 		return bet;
 	}
 	
-	public void notifyNowPlayerTurn(Player player) {
+	private void notifyNowPlayerTurn(Player player) {
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		System.out.println("It is now " + player.getName() + "'s turn");
 		System.out.println("Your hand currently is:");
@@ -126,7 +143,7 @@ public class TextGameUI {
 		displaySum(player.sum());
 	}
 	
-	public void notifyNowPlayerSplit(Player player) {
+	private void notifyNowPlayerSplit(Player player) {
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		System.out.println("It is now " + player.getName() + "'s split hand.");
 		System.out.println("Your hand currently is:");
@@ -135,7 +152,7 @@ public class TextGameUI {
 		
 	}
 	
-	public PLAYERMOVE getPlayerMove(Player player) {
+	private PLAYERMOVE getPlayerMove(Player player) {
 		if (player.isSplittable()) {
 			System.out.print("Hit or Stand or Split: ");
 		}
@@ -154,25 +171,15 @@ public class TextGameUI {
 		}
 	}
 	
-	public void displaySum(int sum) {
+	private void displaySum(int sum) {
 		System.out.println("The sum is: " + sum);
 	}
 	
-	public void notifyBusted(Player player) {
+	private void notifyBusted(Player player) {
 		System.out.println("You've busted!");
 	}
 	
-	public void displayBalances(ArrayList<Player> players) {
-		for (Player p : players) {
-			System.out.println("Balance of " + p.getName() + " is " + p.getBalance() + ".");
-		}
-	}
-	
-	public void notifyBroke(Player player) {
-		System.out.println(player.getName() + " is broke af and has been ejected from this game.");
-	}
-	
-	public boolean playAnotherRound() {
+	private boolean playAnotherRound() {
 		System.out.println("Play another round? Y/N");
 		String answer = input.next();
 		return answer.equalsIgnoreCase("Y");

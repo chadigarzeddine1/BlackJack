@@ -3,15 +3,17 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * Standard deck of 52 playing cards
+ */
 public class Deck {
 	private ArrayList<Card> cards;
 	
 	/**
-     * Constructs a Deck of 52 Cards by filling the cards ArrayList<Card>
+     * Constructs a new deck of 52 cards.
      */
 	public Deck() {
 		this.cards = new ArrayList<Card>();
-		//String[] suits = {"♥", "♦", "♣","♠"};
 		String[] suits = {"H", "D", "C","S"};
 		String[] labels = {"A","2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
 		for (String suit: suits) {
@@ -23,9 +25,12 @@ public class Deck {
 		
 	}
 	
-	// Implementing Fisher–Yates shuffle
-	// From https://stackoverflow.com/questions/1519736/random-shuffling-of-an-array
-	// Adjusted to use ArrayList<Card> instead of original int[].
+	/**
+	 * Shuffles playing cards within the deck.
+	 * Uses Fisher-Yates algorithm from:
+	 * https://stackoverflow.com/questions/1519736/random-shuffling-of-an-array
+	 * Modified to use ArrayList<Card> instead of int[].
+	 */
 	public void shuffle() {
 		ArrayList<Card> ar = this.cards;
 		// If running on Java 6 or older, use `new Random()` on RHS here
@@ -39,11 +44,14 @@ public class Deck {
 		}
 	}
 
-	
+	/**
+	 * Picks a random card, returns a copy, and removes it from the deck.
+	 * @return
+	 */
 	public Card draw() {
 		int random = (int )(Math.random() * cards.size());
 		Card returnCard = new Card(cards.get(random));
 		cards.remove(random);
-		return returnCard;
+		return new Card(returnCard);
 	}
 }

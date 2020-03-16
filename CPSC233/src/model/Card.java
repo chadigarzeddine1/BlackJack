@@ -1,29 +1,39 @@
 package model;
 
+/**
+ *  Standard Playing Card
+ */
 public class Card {
-	//Setting instance variables
+	
 	private String value;
 	private String suit;
 	
 	/**
-     * Creates a new Card object that has more potential than a blank Card object
-     * @param value  String value of a given Card
-     * @param suit String of the Card
+     * Creates a new playing card
+     * @param value The face value of the card: A,2,...,10,J,Q,K.
+     * @param suit  One of the four main suits: H, D, S, C.
      */
 	public Card(String value, String suit) {
 		this.value = value;
 		this.suit = suit;
 	}
 	
+	/**
+	 * Standard copy constructor
+	 * @param card Card to copy
+	 */
 	public Card(Card card) {
 		this.value = card.value;
 		this.suit = card.suit;
 	}
 	
 	/**
-     * Accessor for value
-     * @return value integer value of the Card
-     */
+	 * Calculates the value of the card
+	 * A = 1,
+	 * 2-10 = 2-10,
+	 * J, Q and K = 10.
+	 * @return Integer value of the card
+	 */
 	public int getNumber() {
 		if (this.value.equals("A")) {
 			return 11;
@@ -33,11 +43,14 @@ public class Card {
 			return Integer.parseInt(this.value);
 		}
 	}
-	
+
 	/**
-     * Accessor for value in case value of the card is an Ace
-     * @return value integer value of the Ace Card
-     */
+	 * Calculates the value of the card except ace is given value 11.
+	 * A = 11,
+	 * 2-10 = 2-10,
+	 * J, Q and K = 10.
+	 * @return Integer value of the card
+	 */
 	public int getNumberWithAceAs1() {
 		if (this.value.contentEquals("A")) {
 			return 1;
@@ -55,6 +68,11 @@ public class Card {
 	public String toString() {
 		return value + suit;
 	}
+	
+	/**
+	 * Returns path to the image file for the card.
+	 * @return file path
+	 */
 	public String imagePath() {
 		switch (suit) {
 		case "H":
