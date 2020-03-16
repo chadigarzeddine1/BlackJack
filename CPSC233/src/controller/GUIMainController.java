@@ -19,6 +19,7 @@ import model.*;
 public class GUIMainController {
 
 	private Model model;
+	private Animations anim = new Animations();
 
 	// Interface Elements
 	Label nexplay;
@@ -32,7 +33,8 @@ public class GUIMainController {
 	Button nextR;
 	Button exit;
 	Button endR;
-	
+    final int p1Startx = 363;
+    final int p2Startx = 549;
 	boolean allowButton = true;
 
 	private ImageView p1, p2, p3, p4, p5;
@@ -88,7 +90,7 @@ public class GUIMainController {
 
 	public void dealerTurn() {
 		Player dealer = model.getDealer();
-		d1.setImage(getcard(dealer,1));
+		anim.cardFlip(d1, dealer, 1, this);
 		boolean moveEndR = true;
 		sumd.setText("Sum: "+ dealer.sum());
 		
@@ -151,16 +153,16 @@ public class GUIMainController {
 
 	public void nextPlayerTurn()  {
 		if (p1 != null && model.getCurrentPlayer().getHand().size() > 0 && !model.isDealersTurn()) {
-			p1.setLayoutX(363);
-			p2.setLayoutX(549);
+			p1.setLayoutX(p1Startx);
+			p2.setLayoutX(p2Startx);
 			p3.setLayoutX(-238);
 			p4.setLayoutX(-238);
 			p5.setLayoutX(-238);
-			p2.setImage(getcard(model.getCurrentPlayer(),2));
-			p1.setImage(getcard(model.getCurrentPlayer(),1));
+			anim.cardFlip(p1,model.getCurrentPlayer(),1,this);
+
+			anim.cardFlip(p2,model.getCurrentPlayer(),2,this);
 			sump.setText("Sum: "+ model.getCurrentPlayer().sum()+"");
 		}
-
 		updatePlayerLabels();
 		if (!model.getCurrentPlayer().equals(model.getDealer())) {
 			Alert nextPlayer = new Alert(AlertType.INFORMATION);
@@ -186,8 +188,8 @@ public class GUIMainController {
 			controller.start(this);
 			Stage window =(Stage)((Node)event.getSource()).getScene().getWindow();
 			window.setScene(scene);
-			model.endTurn();
 		}
+
 		nextPlayerTurn();
 	}
 
@@ -220,11 +222,13 @@ public class GUIMainController {
 		Player dealer = model.getDealer();
 		Player player = model.getCurrentPlayer();
 		curbal.setText(player.getBalance()+"");
-		p1.setImage(getcard(player,1));
-		p2.setImage(getcard(player,2));
+		anim.cardFlip(p1,player,1,this);
+
+		anim.cardFlip(p2,player,2,this);
+
 		sump.setText("Sum: " + player.sum());
 		sumd.setText("Sum: "+ (dealer.sum()- dealer.getHand(1).getNumber()));
-		d2.setImage(getcard(dealer,2));
+		anim.cardFlip(d2, dealer, 2, this);
 	}
 
 	public void hitClick(ActionEvent event,Button bustButton,Label bustLab) {
@@ -271,11 +275,11 @@ public class GUIMainController {
 	}*/
 
 	public void standClick() {
+		if (allowButton) {	
 		model.getCurrentPlayer().setIsStanding(true);
 		
 		model.endTurn();
 		nextPlayerTurn();
-		if (allowButton) {	
 			if (model.allPlayersStand() == true) {
 				dealerTurn();
 			}
@@ -320,79 +324,59 @@ public class GUIMainController {
 	public void placeCards(int x,Player p) {
 				
 		if (x== 3) {
-			p1.setLayoutX(266);
-			p2.setLayoutX(448);
-			p3.setLayoutX(624);
-			p3.setImage(getcard(p,3));
-			p1.setLayoutY(518);
-			p2.setLayoutY(518);
-			p3.setLayoutY(518);
+			anim.cardMove(p1, p1Startx, 266);
+			anim.cardMove(p2, p2Startx, 448);
+			anim.cardDeal(p3, model.getCurrentPlayer(), 3, this, 624,518);
+			p3.setLayoutX(61);
+			p3.setLayoutY(276);
 		}
 		else if (4 == x) {
-			p1.setLayoutX(186);
-			p2.setLayoutX(349);
-			p3.setLayoutX(509);
-			p4.setLayoutX(665);
-			p3.setImage(getcard(p,3));
-			p4.setImage(getcard(p,4));
-			p1.setLayoutY(518);
-			p2.setLayoutY(518);
-			p3.setLayoutY(518);
-			p4.setLayoutY(518);
+			anim.cardMove(p1, p1Startx, 186);
+			anim.cardMove(p2, p2Startx, 349);
+			anim.cardMove(p3, 624, 509);
+			anim.cardDeal(p4, model.getCurrentPlayer(), 4, this, 665,518);
+			p4.setLayoutX(61);
+			p4.setLayoutY(276);			
 		}
 		else if(5 ==x) {
-			p1.setLayoutX(209);
-			p2.setLayoutX(316);
-			p3.setLayoutX(434);
-			p4.setLayoutX(535);
-			p5.setLayoutX(646);
-			p3.setImage(getcard(p,3));
-			p4.setImage(getcard(p,4));
-			p5.setImage(getcard(p,5));
-			p1.setLayoutY(518);
-			p2.setLayoutY(518);
-			p3.setLayoutY(518);
-			p4.setLayoutY(518);
-			p5.setLayoutY(518);
+			anim.cardMove(p1, p1Startx, 209);
+			anim.cardMove(p2, p2Startx, 316);
+			anim.cardMove(p3, 509, 434);
+			anim.cardMove(p4, 665, 535);
+
+			anim.cardDeal(p5, model.getCurrentPlayer(), 5, this, 646,518);
+			p5.setLayoutX(61);
+			p5.setLayoutY(276);			
 		}
 	}
 
 	public void placeCardsD(int x) {
 
 		if (x == 3) {
-			d1.setLayoutX(263);
-			d2.setLayoutX(423);
-			d3.setLayoutX(588);
-			d3.setImage(getcard(model.getDealer(),3));
-			d1.setLayoutY(48);
-			d2.setLayoutY(48);
-			d3.setLayoutY(48);}
+			anim.cardMove(d1, 359, 263);
+			anim.cardMove(d2, 549, 423);
+			anim.cardDeal(d3, model.getCurrentPlayer(), 3, this, 588,48);
+			d3.setLayoutX(61);
+			d3.setLayoutY(276);
+		}
 		else if(x ==4) {
-			d1.setLayoutX(93);
-			d2.setLayoutX(254);
-			d3.setLayoutX(416);
-			d4.setLayoutX(585);
-			d3.setImage(getcard(model.getDealer(),3));
-			d4.setImage(getcard(model.getDealer(),4));
-			d1.setLayoutY(48);
-			d2.setLayoutY(48);
-			d3.setLayoutY(48);
-			d4.setLayoutY(48);
+			anim.cardMove(d1, 359, 93);
+			anim.cardMove(d2, 549, 254);
+			anim.cardMove(d3, 416, 588);
+			anim.cardDeal(d4, model.getCurrentPlayer(), 4, this, 585,48);
+			d4.setLayoutX(61);
+			d4.setLayoutY(276);
+			
 		}
 		else if(x ==5) {
-			d1.setLayoutX(260);
-			d2.setLayoutX(335);
-			d3.setLayoutX(417);
-			d4.setLayoutX(513);
-			d5.setLayoutX(584);
-			d3.setImage(getcard(model.getDealer(),3));
-			d4.setImage(getcard(model.getDealer(),4));
-			d5.setImage(getcard(model.getDealer(),5));
-			d1.setLayoutY(48);
-			d2.setLayoutY(48);
-			d3.setLayoutY(48);
-			d4.setLayoutY(48);
-			d5.setLayoutY(48);
+			anim.cardMove(d1, 359, 260);
+			anim.cardMove(d2, 549, 335);
+			anim.cardMove(d3, 588, 417);
+			anim.cardMove(d4, 585, 513);
+			anim.cardDeal(d5, model.getCurrentPlayer(), 5, this, 584,48);
+			d5.setLayoutX(61);
+			d5.setLayoutY(276);
+			
 
 		}
 	}

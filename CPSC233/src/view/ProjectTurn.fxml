@@ -31,11 +31,6 @@
             <Image url="@cardimgs/Back of cards.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="190.0" fitWidth="150.0" layoutX="61.0" layoutY="276.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@cardimgs/Back of cards.png" />
-         </image>
-      </ImageView>
       <ImageView fx:id="d2" fitHeight="190.0" fitWidth="150.0" layoutX="549.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@cardimgs/Back of cards.png" />
@@ -79,32 +74,32 @@
             <Font size="13.0" />
          </font>
       </Label>
-      <ImageView fx:id="p3" fitHeight="190.0" fitWidth="150.0" layoutX="-163.0" layoutY="239.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="p3" fitHeight="190.0" fitWidth="150.0" layoutX="60.0" layoutY="276.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@cardimgs/Back of cards.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="p4" fitHeight="190.0" fitWidth="150.0" layoutX="-238.0" layoutY="140.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="p4" fitHeight="190.0" fitWidth="150.0" layoutX="60.0" layoutY="276.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@cardimgs/Back of cards.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="p5" fitHeight="190.0" fitWidth="150.0" layoutX="-323.0" layoutY="232.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="p5" fitHeight="190.0" fitWidth="150.0" layoutX="61.0" layoutY="276.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@cardimgs/Back of cards.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="d3" fitHeight="190.0" fitWidth="150.0" layoutX="-323.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="d3" fitHeight="190.0" fitWidth="150.0" layoutX="60.0" layoutY="276.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@cardimgs/Back of cards.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="d4" fitHeight="190.0" fitWidth="150.0" layoutX="-323.0" layoutY="444.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="d4" fitHeight="190.0" fitWidth="150.0" layoutX="61.0" layoutY="276.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@cardimgs/Back of cards.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="d5" fitHeight="190.0" fitWidth="150.0" layoutX="-163.0" layoutY="444.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="d5" fitHeight="190.0" fitWidth="150.0" layoutX="60.0" layoutY="276.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@cardimgs/Back of cards.png" />
          </image>
@@ -129,5 +124,10 @@
             <Font size="20.0" />
          </font>
       </Button>
+      <ImageView fitHeight="190.0" fitWidth="150.0" layoutX="61.0" layoutY="276.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@cardimgs/Back of cards.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
