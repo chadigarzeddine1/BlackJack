@@ -170,7 +170,7 @@ public class GUIMainController {
 		if (allowButton) {	
 		model.setCurrentPlayerStanding(true);
 		if (splitTurn) {
-			
+			splitPlayerTurn();
 		}
 		model.endTurn();
 		nextPlayerTurn();
@@ -187,7 +187,7 @@ public class GUIMainController {
 			player.split();
 			curbal.setText(player.getBalance()+"");
 			sump.setText("Sum: " + player.sum());
-			this.p2.setImage(null);
+			p2.setVisible(false);
 		}
 	}
 	
@@ -245,9 +245,28 @@ public class GUIMainController {
 			p4.setLayoutX(-238);
 			p5.setLayoutX(-238);
 			anim.cardFlip(p1,model.getCurrentPlayer(),1,this);
-
 			anim.cardFlip(p2,model.getCurrentPlayer(),2,this);
 			sump.setText("Sum: "+ model.getCurrentPlayer().sum()+"");
+		}
+		updatePlayerLabels();
+		if (!model.isDealersTurn()) {
+			Alert nextPlayer = new Alert(AlertType.INFORMATION);
+			nextPlayer.setTitle("Current Player");
+			nextPlayer.setHeaderText("It is now " + model.getCurrentPlayer().getName()+ "\'s turn");
+			nextPlayer.showAndWait();
+		}
+	}
+	
+	public void splitPlayerTurn() {
+		if (splitTurn) {
+			p1.setLayoutX(p1Startx);
+			p2.setLayoutX(p2Startx);
+			p3.setLayoutX(-238);
+			p4.setLayoutX(-238);
+			p5.setLayoutX(-238);
+			anim.cardFlip(p1,model.getCurrentPlayer(),1,this);
+			anim.cardFlip(p2,model.getCurrentPlayer(),2,this);
+			sump.setText("Sum: "+ model.getCurrentPlayer().splitSum()+"");
 		}
 		updatePlayerLabels();
 		if (!model.isDealersTurn()) {
@@ -344,6 +363,7 @@ public class GUIMainController {
 
 	public void hitClick(ActionEvent event,Button bustButton,Label bustLab) {
 		if (allowButton) {
+			p2.setVisible(true);
 			this.bustButton = bustButton;
 			this.bustLab = bustLab;
 			if (model.getCurrentPlayer().sum() == 21) {
