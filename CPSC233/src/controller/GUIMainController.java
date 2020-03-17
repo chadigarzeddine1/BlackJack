@@ -39,7 +39,7 @@ public class GUIMainController {
     final int p1Startx = 363;
     final int p2Startx = 549;
 	boolean allowButton = true;
-	boolean splitTurn = false;
+	boolean splitPlayed = true;
 
 	private ImageView p1, p2, p3, p4, p5;
 	private ImageView d1, d2, d3, d4, d5;
@@ -169,22 +169,28 @@ public class GUIMainController {
 	public void standClick() {
 		if (allowButton) {	
 		model.setCurrentPlayerStanding(true);
-		if (splitTurn) {
+		if (model.getCurrentPlayer().getSplitStanding() == false) {
 			splitPlayerTurn();
-		}
-		model.endTurn();
-		nextPlayerTurn();
-			if (model.allPlayersStand() == true) {
-				dealerTurn();
+		}	
+		else { 
+			model.endTurn(); 
+			nextPlayerTurn(); }
+
+
+		if (model.allPlayersStand() == true && model.allPlayerSplitStand() == true && splitPlayed) {
+			dealerTurn();
 			}
 		}
 	}
 	
 	public void splitClick() {
 		if (allowButton && model.getCurrentPlayer().isSplittable()) {
-			splitTurn = true;
+			splitPlayed = false;
 			Player player = model.getCurrentPlayer();
-			player.split();
+			System.out.println("Original: " + model.getCurrentPlayer().getHand());
+			model.currentPlayerSplit();
+			System.out.println("First Hand: " + model.getCurrentPlayer().getHand());
+			System.out.println("SplitHand: " + model.getCurrentPlayer().getSplitHand());
 			curbal.setText(player.getBalance()+"");
 			sump.setText("Sum: " + player.sum());
 			p2.setVisible(false);
@@ -199,14 +205,39 @@ public class GUIMainController {
 		model.hitCurrentPlayer();
 		int x = model.getCurrentPlayer().getHand().size();
 		
+		System.out.println("Original: " + model.getCurrentPlayer().getHand());
+		
 		if (model.isDealersTurn()) {
 			placeCardsD(x);
-		} else {
+		} 
+		else {
 			sump.setText("Sum: "+ model.getCurrentPlayer().sum()+"");
 			placeCards(x,model.getCurrentPlayer());
 		}
 		
 		if (model.getCurrentPlayer().getBusted() == true && !model.isDealersTurn()) {
+			allowButton = false;
+			bustButton.setVisible(true);
+			bustButton.setLayoutX(524);
+			bustButton.setLayoutY(387);
+			bustLab.setLayoutX(409);
+			bustLab.setLayoutY(320);
+			bustLab.setText(model.getCurrentPlayer().getName()+" has busted, Click Okay to progress");
+			model.setCurrentPlayerStanding(true);;
+		}
+	}
+	
+	private void hitCurrentSplitPlayer() {
+		
+		model.hitCurrentSplitPlayer();
+		int y = model.getCurrentPlayer().getSplitHand().size();
+		System.out.println("~~" + model.getCurrentPlayer().getSplitHand());
+		
+		sump.setText("Sum: "+ model.getCurrentPlayer().splitSum()+"");
+		placeCards(y,model.getCurrentPlayer());
+		
+		if (model.getCurrentPlayer().getSplitBusted() == true && !model.isDealersTurn()) {
+			splitPlayed = true;
 			allowButton = false;
 			bustButton.setVisible(true);
 			bustButton.setLayoutX(524);
@@ -239,6 +270,7 @@ public class GUIMainController {
 	 */
 	public void nextPlayerTurn()  {
 		if (p1 != null && model.getCurrentPlayer().getHand().size() > 0 && !model.isDealersTurn()) {
+			System.out.println("First hand ever: " + model.getCurrentPlayer().getHand());
 			p1.setLayoutX(p1Startx);
 			p2.setLayoutX(p2Startx);
 			p3.setLayoutX(-238);
@@ -258,23 +290,27 @@ public class GUIMainController {
 	}
 	
 	public void splitPlayerTurn() {
-		if (splitTurn) {
-			p1.setLayoutX(p1Startx);
-			p2.setLayoutX(p2Startx);
-			p3.setLayoutX(-238);
-			p4.setLayoutX(-238);
-			p5.setLayoutX(-238);
-			anim.cardFlip(p1,model.getCurrentPlayer(),1,this);
-			anim.cardFlip(p2,model.getCurrentPlayer(),2,this);
-			sump.setText("Sum: "+ model.getCurrentPlayer().splitSum()+"");
-		}
-		updatePlayerLabels();
-		if (!model.isDealersTurn()) {
-			Alert nextPlayer = new Alert(AlertType.INFORMATION);
-			nextPlayer.setTitle("Current Player");
-			nextPlayer.setHeaderText("It is now " + model.getCurrentPlayer().getName()+ "\'s turn");
-			nextPlayer.showAndWait();
-		}
+		model.setCurrentPlayerSplitStanding(true);
+		System.out.println(model.getCurrentPlayer().getSplitHand());
+		System.out.println(model.getCurrentPlayer().splitSum());
+		curplay.setText("Current Player: " + model.getCurrentPlayer().getName() + " Split's Turn");
+		p2.setVisible(true);
+		p1.setLayoutX(p1Startx);
+		p2.setLayoutX(p2Startx);
+		p2.setLayoutX(-238);
+		p3.setLayoutX(-238);
+		p4.setLayoutX(-238);
+		p5.setLayoutX(-238);
+		//anim.splitCardFlip(p1,model.getCurrentPlayer(),1,this);
+		//anim.splitCardFlip(p2,model.getCurrentPlayer(),2,this);
+		sump.setText("Sum: "+ model.getCurrentPlayer().splitSum()+"");
+		
+		/*
+		 * updatePlayerLabels(); if (!model.isDealersTurn()) { Alert nextPlayer = new
+		 * Alert(AlertType.INFORMATION); nextPlayer.setTitle("Current Player");
+		 * nextPlayer.setHeaderText("It is now " + model.getCurrentPlayer().getName()+
+		 * "\'s split turn"); nextPlayer.showAndWait(); }
+		 */
 	}
 	
 	/**
@@ -366,28 +402,33 @@ public class GUIMainController {
 			p2.setVisible(true);
 			this.bustButton = bustButton;
 			this.bustLab = bustLab;
-			if (model.getCurrentPlayer().sum() == 21) {
-				bustButton.setVisible(true);
-				bustButton.setLayoutX(524);
-				bustButton.setLayoutY(387);
-				bustLab.setLayoutX(409);
-				bustLab.setLayoutY(320);
-				bustLab.setText(model.getCurrentPlayer().getName()+" got 21, Click Okay to progress");
-				model.setCurrentPlayerStanding(true);model.endTurn();
+			if (model.getCurrentPlayer().getIsStanding() && splitPlayed == false) {
+				hitCurrentSplitPlayer();
 			}
-			else if (model.getCurrentPlayer().getBusted() == false) {
-				hitCurrentPlayer();
-			}
-			else{
-				bustButton.setVisible(true);
-				bustButton.setLayoutX(524);
-				bustButton.setLayoutY(387);
-				bustLab.setLayoutX(409);
-				bustLab.setLayoutY(320);
-				bustLab.setText(model.getCurrentPlayer().getName()+" has busted, Click Okay to progress");
-				allowButton = false;
-				model.setCurrentPlayerStanding(true);
-				model.endTurn();
+			else {
+				if (model.getCurrentPlayer().sum() == 21) {
+					bustButton.setVisible(true);
+					bustButton.setLayoutX(524);
+					bustButton.setLayoutY(387);
+					bustLab.setLayoutX(409);
+					bustLab.setLayoutY(320);
+					bustLab.setText(model.getCurrentPlayer().getName()+" got 21, Click Okay to progress");
+					model.setCurrentPlayerStanding(true);model.endTurn();
+				}
+				else if (model.getCurrentPlayer().getBusted() == false) {
+					hitCurrentPlayer();
+				}
+				else{
+					bustButton.setVisible(true);
+					bustButton.setLayoutX(524);
+					bustButton.setLayoutY(387);
+					bustLab.setLayoutX(409);
+					bustLab.setLayoutY(320);
+					bustLab.setText(model.getCurrentPlayer().getName()+" has busted, Click Okay to progress");
+					allowButton = false;
+					model.setCurrentPlayerStanding(true);
+					model.endTurn();
+				}
 			}
 		}
 		
@@ -408,6 +449,15 @@ public class GUIMainController {
 			return  new Image("/view/cardimgs/Back of cards.png");
 		}
 		Card  c = p.getHand(n);
+		return new Image(c.imagePath());
+	}
+	
+	public Image getSplitCard(Player p,int n) {
+
+		if (n == 0) {
+			return  new Image("/view/cardimgs/Back of cards.png");
+		}
+		Card  c = p.getSplitHand(n);
 		return new Image(c.imagePath());
 	}
 

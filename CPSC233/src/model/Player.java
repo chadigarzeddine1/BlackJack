@@ -258,7 +258,11 @@ public class Player {
 	public ArrayList<Card> getSplitHand() {
 		return splitHand;
 	}
-
+	
+	public Card getSplitHand(int n) {
+		return splitHand.get(n-1);
+	}	
+	
 	public String getName() {
 		return this.name;
 	}

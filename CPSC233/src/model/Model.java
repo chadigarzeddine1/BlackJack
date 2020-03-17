@@ -89,6 +89,15 @@ public final class Model {
 		return true;
 	}
 
+	public boolean allPlayerSplitStand() {
+		for (Player p : players) {
+			if (p.getSplitStanding() == false) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
 	public Player getDealer() {
 		return new Player(this.dealer);
 	}
@@ -223,8 +232,16 @@ public final class Model {
 		getCurrentPlayerObj().setIsStanding(isStanding);
 	}
 	
+	public void setCurrentPlayerSplitStanding(boolean isStanding) {
+		getCurrentPlayerObj().setSplitStanding(isStanding);
+	}
+	
 	public void currentPlayerBet(int amount) {
 		getCurrentPlayerObj().bet(amount);
+	}
+	
+	public void currentPlayerSplit() {
+		getCurrentPlayerObj().split();
 	}
 	
 	/**
