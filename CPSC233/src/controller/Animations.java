@@ -29,7 +29,7 @@ public class Animations {
 		back.setFromX(1.0);
 		back.setToX(0);
 		
-		Timeline t = new Timeline(new KeyFrame(Duration.millis(1.0),e ->c.setImage(con.getcard(p,n))));
+		Timeline t = new Timeline(new KeyFrame(Duration.millis(0.1),e ->c.setImage(con.getcard(p,n))));
 		ScaleTransition front = new ScaleTransition();
 		front.setDuration(Duration.millis(1000));
 		front.setCycleCount(1);
@@ -58,7 +58,7 @@ public class Animations {
 		TranslateTransition move = new TranslateTransition();
 		move.setDuration(Duration.millis(2000));
 		move.setCycleCount(1);
-		move.setFromX(sx-61);
+//		move.setFromX(sx-61);
 		move.setToX( ex-sx);
 		move.setNode(c);
 		move.play();
