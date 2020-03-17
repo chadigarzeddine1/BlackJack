@@ -78,10 +78,10 @@ public class GUIMainController {
 		
 		nextPlayerTurn();
 		
-		Player dealer = model.getCurrentPlayer();
+		Player dealer = model.getDealer();
 		sumd.setText("Sum: "+ (dealer.sum()- dealer.getHand(1).getNumber()));
 		anim.cardFlip(d2, dealer, 2, this);
-		Player player = model.getDealer();
+		Player player = model.getCurrentPlayer();
 		curbal.setText(player.getBalance()+"");
 		anim.cardFlip(p1,player,1,this);
 		anim.cardFlip(p2,player,2,this);
@@ -408,7 +408,7 @@ public class GUIMainController {
 		else if (4 == x) {
 			anim.cardMove(p1, p1Startx, 186);
 			anim.cardMove(p2, p2Startx, 349);
-			anim.cardMove(p3, 624, 509);
+			anim.cardMove(p3, 61, 509);
 			anim.cardDeal(p4, model.getCurrentPlayer(), 4, this, 665,518);
 			p4.setLayoutX(61);
 			p4.setLayoutY(276);			
@@ -416,9 +416,8 @@ public class GUIMainController {
 		else if(5 ==x) {
 			anim.cardMove(p1, p1Startx, 209);
 			anim.cardMove(p2, p2Startx, 316);
-			anim.cardMove(p3, 509, 434);
-			anim.cardMove(p4, 665, 535);
-
+			anim.cardMove(p3, 61, 434);
+			anim.cardMove(p4, 61, 535);
 			anim.cardDeal(p5, model.getCurrentPlayer(), 5, this, 646,518);
 			p5.setLayoutX(61);
 			p5.setLayoutY(276);			
@@ -442,7 +441,9 @@ public class GUIMainController {
 		else if(x ==4) {
 			anim.cardMove(d1, 359, 93);
 			anim.cardMove(d2, 549, 254);
-			anim.cardMove(d3, 416, 588);
+			anim.cardDeal(d3, model.getCurrentPlayer(), 3, this, 416,48);
+			d3.setLayoutX(61);
+			d3.setLayoutY(276);
 			anim.cardDeal(d4, model.getCurrentPlayer(), 4, this, 585,48);
 			d4.setLayoutX(61);
 			d4.setLayoutY(276);
@@ -451,8 +452,12 @@ public class GUIMainController {
 		else if(x ==5) {
 			anim.cardMove(d1, 359, 260);
 			anim.cardMove(d2, 549, 335);
-			anim.cardMove(d3, 588, 417);
-			anim.cardMove(d4, 585, 513);
+			anim.cardDeal(d3, model.getCurrentPlayer(), 3, this, 417,48);
+			d3.setLayoutX(61);
+			d3.setLayoutY(276);
+			anim.cardDeal(d4, model.getCurrentPlayer(), 4, this, 513,48);
+			d4.setLayoutX(61);
+			d4.setLayoutY(276);
 			anim.cardDeal(d5, model.getCurrentPlayer(), 5, this, 584,48);
 			d5.setLayoutX(61);
 			d5.setLayoutY(276);
