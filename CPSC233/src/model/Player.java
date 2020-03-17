@@ -130,7 +130,7 @@ public class Player {
 	}
 
 	/**
-	 * The player decides on the amoutn they want to bet.
+	 * The player decides on the amount they want to bet.
 	 * Their balance decreases by that amount.
 	 * @param amount Betting amount
 	 */

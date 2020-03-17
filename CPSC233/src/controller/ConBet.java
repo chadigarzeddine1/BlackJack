@@ -51,6 +51,11 @@ public class ConBet implements Initializable {
     void standClick(ActionEvent event) {
 
     }
+    
+    @FXML
+    void splitClick(ActionEvent event) {
+    	
+    }
 
     @FXML
     void betClick(ActionEvent event) throws Exception {

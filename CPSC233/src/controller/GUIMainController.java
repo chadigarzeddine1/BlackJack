@@ -39,6 +39,7 @@ public class GUIMainController {
     final int p1Startx = 363;
     final int p2Startx = 549;
 	boolean allowButton = true;
+	boolean splitTurn = false;
 
 	private ImageView p1, p2, p3, p4, p5;
 	private ImageView d1, d2, d3, d4, d5;
@@ -168,12 +169,25 @@ public class GUIMainController {
 	public void standClick() {
 		if (allowButton) {	
 		model.setCurrentPlayerStanding(true);
-		
+		if (splitTurn) {
+			
+		}
 		model.endTurn();
 		nextPlayerTurn();
 			if (model.allPlayersStand() == true) {
 				dealerTurn();
 			}
+		}
+	}
+	
+	public void splitClick() {
+		if (allowButton && model.getCurrentPlayer().isSplittable()) {
+			splitTurn = true;
+			Player player = model.getCurrentPlayer();
+			player.split();
+			curbal.setText(player.getBalance()+"");
+			sump.setText("Sum: " + player.sum());
+			this.p2.setImage(null);
 		}
 	}
 	
@@ -202,7 +216,6 @@ public class GUIMainController {
 			bustLab.setText(model.getCurrentPlayer().getName()+" has busted, Click Okay to progress");
 			model.setCurrentPlayerStanding(true);;
 		}
-
 	}
 	
 	/**

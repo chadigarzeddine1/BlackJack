@@ -48,7 +48,6 @@ public final class Model {
 	 * Ends the current player's turn by incrementing an internal counter.
 	 */
 	public void endTurn() {
-		//getCurrentPlayer().setIsStanding(true);
 		currentPlayerIndex += 1;
 		if (currentPlayerIndex == players.size() + 1) {
 			currentPlayerIndex = 0;
@@ -210,6 +209,7 @@ public final class Model {
 		Card c = deck.draw();
 		getCurrentPlayerObj().addCardToHand(c);
 	}
+	
 	
 	/**
 	 * Deals the current player an additional card to their split hand if there is one.

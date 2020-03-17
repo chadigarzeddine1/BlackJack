@@ -8,11 +8,11 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="761.0" prefWidth="1095.0" style="-fx-background-color: green;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControlerBase">
    <children>
-      <Button fx:id="hit" layoutX="791.0" layoutY="521.0" mnemonicParsing="false" onAction="#hitClick" prefHeight="89.0" prefWidth="228.0" text="Hit">
+      <Button fx:id="hit" layoutX="824.0" layoutY="490.0" mnemonicParsing="false" onAction="#hitClick" prefHeight="75.0" prefWidth="163.0" text="Hit">
          <font>
             <Font size="25.0" />
          </font></Button>
-      <Button fx:id="stand" layoutX="791.0" layoutY="647.0" mnemonicParsing="false" onAction="#standClick" prefHeight="89.0" prefWidth="228.0" text="Stand">
+      <Button fx:id="stand" layoutX="824.0" layoutY="652.0" mnemonicParsing="false" onAction="#standClick" prefHeight="75.0" prefWidth="163.0" text="Stand">
          <font>
             <Font size="25.0" />
          </font></Button>
@@ -50,5 +50,10 @@
             <Image url="@cardimgs/Back%20of%20cards.png" />
          </image>
       </ImageView>
+      <Button fx:id="splitClick" layoutX="824.0" layoutY="571.0" mnemonicParsing="false" onAction="#hitClick" prefHeight="75.0" prefWidth="163.0" text="Split">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

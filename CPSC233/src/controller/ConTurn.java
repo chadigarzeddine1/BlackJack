@@ -130,7 +130,10 @@ public class ConTurn implements Initializable {
 		this.gui = gui;
 	}
 
-	
+	@FXML
+	void splitClick(ActionEvent event) {
+		gui.splitClick();
+	}
 
 
 

@@ -56,7 +56,10 @@ public class ControlerBase implements Initializable{
 
 	}
 
-
+	@FXML
+	void splitClick(ActionEvent event) {
+		
+	}
 
 	@FXML
 	void betClick(ActionEvent event) {
