@@ -173,19 +173,18 @@ public class GUIMainController {
 			splitPlayerTurn();
 			splitPlayed = true;
 		}	
-		else if (model.allPlayersStand() == true && model.getCurrentPlayer().getSplitHand().size() == 0) {
+		else if (model.allPlayersStand() == false && model.getCurrentPlayer().getSplitHand().size() == 0) {
+			
+			model.endTurn(); 
+			nextPlayerTurn(); 
+		}
+		else if (model.allPlayersStand() == true && splitPlayed) {
 			model.endTurn(); 
 			nextPlayerTurn(); 
 			dealerTurn();
-		}
-			else if (model.allPlayersStand() == true && splitPlayed) {
-				model.endTurn(); 
-				nextPlayerTurn(); 
-				dealerTurn();
 			}
 			
 		}
-		//}
 	}
 	
 	public void splitClick() {
@@ -261,7 +260,7 @@ public class GUIMainController {
 		bustButton.setLayoutX(50);
 		bustButton.setVisible(false);
 		bustLab.setLayoutX(-300);
-		if (splitPlayed == false) {
+		if (splitPlayed == true) {
 			model.endTurn();
 		}
 		if (model.allPlayersStand()) {
