@@ -171,16 +171,21 @@ public class GUIMainController {
 		model.setCurrentPlayerStanding(true);
 		if (model.getCurrentPlayer().getSplitStanding() == false) {
 			splitPlayerTurn();
+			splitPlayed = true;
 		}	
-		else { 
+		else if (model.allPlayersStand() == true && model.getCurrentPlayer().getSplitHand().size() == 0) {
 			model.endTurn(); 
-			nextPlayerTurn(); }
-
-
-		if (model.allPlayersStand() == true && model.allPlayerSplitStand() == true && splitPlayed) {
+			nextPlayerTurn(); 
 			dealerTurn();
-			}
 		}
+			else if (model.allPlayersStand() == true && splitPlayed) {
+				model.endTurn(); 
+				nextPlayerTurn(); 
+				dealerTurn();
+			}
+			
+		}
+		//}
 	}
 	
 	public void splitClick() {
@@ -256,7 +261,9 @@ public class GUIMainController {
 		bustButton.setLayoutX(50);
 		bustButton.setVisible(false);
 		bustLab.setLayoutX(-300);
-		model.endTurn();
+		if (splitPlayed == false) {
+			model.endTurn();
+		}
 		if (model.allPlayersStand()) {
 			dealerTurn();
 		} else {
@@ -402,23 +409,66 @@ public class GUIMainController {
 			p2.setVisible(true);
 			this.bustButton = bustButton;
 			this.bustLab = bustLab;
-			if (model.getCurrentPlayer().getIsStanding() && splitPlayed == false) {
-				hitCurrentSplitPlayer();
-			}
+		}
+		if (model.getCurrentPlayer().isSplit() == false) {
+			if (model.getCurrentPlayer().getBusted() == false) {
+			hitCurrentPlayer();
+			}	
+			else if (model.getCurrentPlayer().sum() == 21) {
+				bustButton.setVisible(true);
+				bustButton.setLayoutX(524);
+				bustButton.setLayoutY(387);
+				bustLab.setLayoutX(409);
+				bustLab.setLayoutY(320);
+				bustLab.setText(model.getCurrentPlayer().getName()+" got 21, Click Okay to progress");
+				model.setCurrentPlayerStanding(true);
+				model.endTurn();
+				}
 			else {
-				if (model.getCurrentPlayer().sum() == 21) {
-					bustButton.setVisible(true);
-					bustButton.setLayoutX(524);
-					bustButton.setLayoutY(387);
-					bustLab.setLayoutX(409);
-					bustLab.setLayoutY(320);
-					bustLab.setText(model.getCurrentPlayer().getName()+" got 21, Click Okay to progress");
-					model.setCurrentPlayerStanding(true);model.endTurn();
+				bustButton.setVisible(true);
+				bustButton.setLayoutX(524);
+				bustButton.setLayoutY(387);
+				bustLab.setLayoutX(409);
+				bustLab.setLayoutY(320);
+				bustLab.setText(model.getCurrentPlayer().getName()+" has busted, Click Okay to progress");
+				allowButton = false;
+				model.setCurrentPlayerStanding(true);
+				model.endTurn();
+			}
+		}
+		else if (model.getCurrentPlayer().getIsStanding() == false)
+			if (model.getCurrentPlayer().getBusted() == false) {
+				hitCurrentPlayer();
+			}
+			else if (model.getCurrentPlayer().sum() == 21) { //if the player is split and the players first hand hits 21 - set them to standing and move to split hand 
+				bustButton.setVisible(true);
+				bustButton.setLayoutX(524);
+				bustButton.setLayoutY(387);
+				bustLab.setLayoutX(409);
+				bustLab.setLayoutY(320);
+				bustLab.setText(model.getCurrentPlayer().getName()+" got 21, Click Okay to progress");
+				model.setCurrentPlayerStanding(true);
 				}
-				else if (model.getCurrentPlayer().getBusted() == false) {
-					hitCurrentPlayer();
+			else { //if the player is split and the players first hand hits 21 - set them to standing and move to split hand 
+				bustButton.setVisible(true);
+				bustButton.setLayoutX(524);
+				bustButton.setLayoutY(387);
+				bustLab.setLayoutX(409);
+				bustLab.setLayoutY(320);
+				bustLab.setText(model.getCurrentPlayer().getName()+" has busted, Click Okay to progress");
+				allowButton = false;
+				model.setCurrentPlayerStanding(true);
+		}
+		else {
+			if (model.getCurrentPlayer().getIsStanding() == true) {
+				if(model.getCurrentPlayer().getSplitBusted() == false ) {
+					hitCurrentSplitPlayer();
 				}
-				else{
+				else if (model.getCurrentPlayer().splitSum() == 21) {
+					splitPlayed = true;
+				}
+				else {
+					splitPlayed = true;
 					bustButton.setVisible(true);
 					bustButton.setLayoutX(524);
 					bustButton.setLayoutY(387);
@@ -427,12 +477,15 @@ public class GUIMainController {
 					bustLab.setText(model.getCurrentPlayer().getName()+" has busted, Click Okay to progress");
 					allowButton = false;
 					model.setCurrentPlayerStanding(true);
-					model.endTurn();
 				}
 			}
 		}
+
+
+		//if (model.getCurrentPlayer().getIsStanding() && model.getCurrentPlayer().getSplitHand().size() != 0) {
+		//hitCurrentSplitPlayer();
+		}
 		
-	}
 
 	
 	// MARK: - HELPER METHODS
