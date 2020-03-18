@@ -169,16 +169,15 @@ public class GUIMainController {
 	public void standClick() {
 		if (allowButton) {	
 		model.setCurrentPlayerStanding(true);
-		if (model.getCurrentPlayer().getSplitStanding() == false) {
+		if (model.getCurrentPlayer().getSplitStanding() == false) { //if the player is split, give them another turn
 			splitPlayerTurn();
 			splitPlayed = true;
 		}	
-		else if (model.allPlayersStand() == false && model.getCurrentPlayer().getSplitHand().size() == 0) {
-			
+		else if (model.allPlayersStand() == false && model.getCurrentPlayer().getSplitHand().size() == 0) { //move to the next player's turn if they didnt split 
 			model.endTurn(); 
 			nextPlayerTurn(); 
 		}
-		else if (model.allPlayersStand() == true && splitPlayed) {
+		else if (model.allPlayersStand() == true && splitPlayed) { //if everyone is standing and all the players have played their splits, go to dealers turn
 			model.endTurn(); 
 			nextPlayerTurn(); 
 			dealerTurn();
@@ -260,7 +259,7 @@ public class GUIMainController {
 		bustButton.setLayoutX(50);
 		bustButton.setVisible(false);
 		bustLab.setLayoutX(-300);
-		if (splitPlayed == true) {
+		if (splitPlayed == true) { // if the player is not split - it will move to the players next turn, otherwise it will stay on the same players turn. 
 			model.endTurn();
 		}
 		if (model.allPlayersStand()) {
@@ -409,7 +408,7 @@ public class GUIMainController {
 			this.bustButton = bustButton;
 			this.bustLab = bustLab;
 		}
-		if (model.getCurrentPlayer().isSplit() == false) {
+		if (model.getCurrentPlayer().isSplit() == false) { //This branch will check if the players even split their cards to begin with. If they did it will go down this branch, normal operation
 			if (model.getCurrentPlayer().getBusted() == false) {
 			hitCurrentPlayer();
 			}	
@@ -448,7 +447,7 @@ public class GUIMainController {
 				bustLab.setText(model.getCurrentPlayer().getName()+" got 21, Click Okay to progress");
 				model.setCurrentPlayerStanding(true);
 				}
-			else { //if the player is split and the players first hand hits 21 - set them to standing and move to split hand 
+			else { //if the player is split and the player busts - move them to their split hand 
 				bustButton.setVisible(true);
 				bustButton.setLayoutX(524);
 				bustButton.setLayoutY(387);
@@ -458,7 +457,7 @@ public class GUIMainController {
 				allowButton = false;
 				model.setCurrentPlayerStanding(true);
 		}
-		else {
+		else { //this whole branch is for the player's split hand 
 			if (model.getCurrentPlayer().getIsStanding() == true) {
 				if(model.getCurrentPlayer().getSplitBusted() == false ) {
 					hitCurrentSplitPlayer();
