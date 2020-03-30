@@ -1,243 +1,208 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class-diagram version="1.2.4" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
-  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
-  <class id="1" language="java" name="controller.GUIMainController" project="CPSC233" 
-    file="/CPSC233/src/controller/GUIMainController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="1032" width="926" x="445" y="764"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="2" language="java" name="model.Deck" project="CPSC233" file="/CPSC233/src/model/Deck.java" binary="false" 
+<class-diagram version="1.2.4" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
+  realizations="true" associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="model.Deck" project="CPSC233" file="/CPSC233/src/model/Deck.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="114" width="87" x="641" y="1836"/>    
+    <position height="-1" width="-1" x="511" y="340"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="view.TextGameUI" project="CPSC233" file="/CPSC233/src/view/TextGameUI.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="276" width="216" x="1677" y="764"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <enumeration id="4" language="java" name="controller.PLAYERMOVES" project="CPSC233" 
-    file="/CPSC233/src/controller/GUIMainController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="114" width="142" x="122" y="70"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </enumeration>  
-  <package id="5" language="java" name="model" project="CPSC233" file="/CPSC233/src/model" binary="false" 
+  <class id="2" language="java" name="model.Model" project="CPSC233" file="/CPSC233/src/model/Model.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="46" width="101" x="304" y="70"/>    
-    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
-  </package>  
-  <enumeration id="6" language="java" name="model.PLAYERMOVE" project="CPSC233" 
+    <position height="-1" width="-1" x="816" y="559"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="3" language="java" name="model.PLAYERMOVE" project="CPSC233" 
     file="/CPSC233/src/model/PLAYERMOVE.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="114" width="135" x="1386" y="70"/>    
+    <position height="-1" width="-1" x="949" y="197"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </enumeration>  
-  <interface id="7" language="java" name="controller.GameUI" project="CPSC233" 
-    file="/CPSC233/src/controller/GameUI.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="222" width="216" x="1677" y="1836"/>    
+  <class id="4" language="java" name="model.Card" project="CPSC233" file="/CPSC233/src/model/Card.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="351" y="490"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
-  </interface>  
+  </class>  
+  <class id="5" language="java" name="model.Player" project="CPSC233" file="/CPSC233/src/model/Player.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="550" y="916"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="controller.GUIMainController" project="CPSC233" 
+    file="/CPSC233/src/controller/GUIMainController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1177" y="611"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="controller.ConTurn" project="CPSC233" file="/CPSC233/src/controller/ConTurn.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1760" y="558"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
   <class id="8" language="java" name="controller.ConBet" project="CPSC233" file="/CPSC233/src/controller/ConBet.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="294" width="193" x="445" y="70"/>    
+    <position height="-1" width="-1" x="1522" y="79"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <package id="9" language="java" name="view" project="CPSC233" file="/CPSC233/src/view" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="46" width="101" x="1804" y="70"/>    
-    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
-  </package>  
-  <class id="10" language="java" name="controller.ConTurn" project="CPSC233" file="/CPSC233/src/controller/ConTurn.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="654" width="193" x="678" y="70"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="11" language="java" name="model.GameSystem" project="CPSC233" file="/CPSC233/src/model/GameSystem.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="258" width="226" x="1411" y="764"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="12" language="java" name="model.Card" project="CPSC233" file="/CPSC233/src/model/Card.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="222" width="155" x="543" y="2404"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="13" language="java" name="model.Player" project="CPSC233" file="/CPSC233/src/model/Player.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="528" width="156" x="445" y="1836"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="14" language="java" name="controller.ControlerBase" project="CPSC233" 
+  <class id="9" language="java" name="controller.ControlerBase" project="CPSC233" 
     file="/CPSC233/src/controller/ControlerBase.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="384" width="193" x="911" y="70"/>    
+    <position height="-1" width="-1" x="1502" y="914"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="15" language="java" name="view.GraphicalGameUI" project="CPSC233" 
+  <class id="10" language="java" name="controller.Animations" project="CPSC233" 
+    file="/CPSC233/src/controller/Animations.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1408" y="1318"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="view.TextGameUI" project="CPSC233" file="/CPSC233/src/view/TextGameUI.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="622" y="118"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="view.GraphicalGameUI" project="CPSC233" 
     file="/CPSC233/src/view/GraphicalGameUI.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="294" width="216" x="1933" y="764"/>    
+    <position height="-1" width="-1" x="1965" y="356"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
+  <association id="13">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="14" name="gui"/>      
+      <multiplicity id="15" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
   <association id="16">    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="17" name="dealer"/>      
-      <multiplicity id="18" minimum="0" maximum="1"/>    
+      <attribute id="17" name="cards"/>      
+      <multiplicity id="18" minimum="0" maximum="2147483647"/>    
     </end>    
-    <end type="TARGET" refId="13" navigable="true"/>    
+    <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="19">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="20" name="cards"/>      
-      <multiplicity id="21" minimum="0" maximum="2147483647"/>    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="20" name="gui"/>      
+      <multiplicity id="21" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
+    <end type="TARGET" refId="6" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="22">    
-    <end type="SOURCE" refId="10" navigable="false">      
-      <attribute id="23" name="gui"/>      
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="23" name="model"/>      
       <multiplicity id="24" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="1" navigable="true"/>    
+    <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="25">    
-    <end type="SOURCE" refId="11" navigable="false">      
-      <attribute id="26" name="deck"/>      
-      <multiplicity id="27" minimum="0" maximum="1"/>    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="26" name="hand"/>      
+      <multiplicity id="27" minimum="0" maximum="2147483647"/>    
     </end>    
-    <end type="TARGET" refId="2" navigable="true"/>    
+    <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="28">    
-    <end type="SOURCE" refId="11" navigable="false">      
-      <attribute id="29" name="players"/>      
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="29" name="splitHand"/>      
       <multiplicity id="30" minimum="0" maximum="2147483647"/>    
     </end>    
-    <end type="TARGET" refId="13" navigable="true"/>    
+    <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="31">    
-    <end type="SOURCE" refId="11" navigable="false">      
-      <attribute id="32" name="dealer"/>      
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="32" name="gui"/>      
       <multiplicity id="33" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="13" navigable="true"/>    
+    <end type="TARGET" refId="6" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="34">    
-    <end type="SOURCE" refId="13" navigable="false">      
-      <attribute id="35" name="hand"/>      
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="35" name="players"/>      
       <multiplicity id="36" minimum="0" maximum="2147483647"/>    
     </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
+    <end type="TARGET" refId="5" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="37">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="38" name="gui"/>      
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="38" name="dealer"/>      
       <multiplicity id="39" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="1" navigable="true"/>    
+    <end type="TARGET" refId="5" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="40">    
-    <end type="SOURCE" refId="14" navigable="false">      
-      <attribute id="41" name="gui"/>      
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="41" name="model"/>      
       <multiplicity id="42" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="1" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="43">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="7"/>  
-  </realization>  
-  <association id="44">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="45" name="curplayer"/>      
-      <multiplicity id="46" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="13" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="47">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="48" name="deck"/>      
-      <multiplicity id="49" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="50">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="51" name="players"/>      
-      <multiplicity id="52" minimum="0" maximum="2147483647"/>    
+  <association id="43">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="44" name="deck"/>      
+      <multiplicity id="45" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="13" navigable="true"/>    
+    <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="53">    
-    <end type="SOURCE" refId="15"/>    
-    <end type="TARGET" refId="7"/>  
-  </realization>  
-  <association id="54">    
-    <end type="SOURCE" refId="11" navigable="false">      
-      <attribute id="55" name="uiHandler"/>      
-      <multiplicity id="56" minimum="0" maximum="1"/>    
+  <association id="46">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="47" name="anim"/>      
+      <multiplicity id="48" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
+    <end type="TARGET" refId="10" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
