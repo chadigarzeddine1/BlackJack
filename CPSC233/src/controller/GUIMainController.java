@@ -88,6 +88,18 @@ public class GUIMainController {
 		sump.setText("Sum: " + player.sum());
 	}
 	
+	//Checks if a string is a number
+	//https://stackoverflow.com/questions/1102891/how-to-check-if-a-string-is-numeric-in-java
+	public static boolean IsANumber(String str) {
+		try {
+			Integer.parseInt(str);
+			return true;
+		}
+		catch(NumberFormatException e) {
+			return false;
+		}
+	}
+	
 	/**
 	 * Called when enter is pressed after inputting a number of players.
 	 * @param  event     The click event
@@ -104,11 +116,25 @@ public class GUIMainController {
 
 		ConBet controller = loader.getController();
 		numplayer = numplay.getText();
-		model.setPlayers(Integer.parseInt(numplayer));
-		controller.setPlayers(this);
-		Stage window =(Stage)((Node)event.getSource()).getScene().getWindow();
-		window.setScene(scene);
-		numplayer = numplay.getText();
+		if (IsANumber(numplayer) == false) {
+			Alert invalidNumber = new Alert(AlertType.INFORMATION);
+			invalidNumber.setTitle("Invalid Input");
+			invalidNumber.setHeaderText("Please enter a valid number above 0.");
+			invalidNumber.showAndWait();
+		}
+		else if (Integer.parseInt(numplayer) <= 0 ) {
+			Alert invalidNumber = new Alert(AlertType.INFORMATION);
+			invalidNumber.setTitle("Invalid Input");
+			invalidNumber.setHeaderText("Please enter a valid number above 0.");
+			invalidNumber.showAndWait();
+		}
+		else {
+			model.setPlayers(Integer.parseInt(numplayer));
+			controller.setPlayers(this);
+			Stage window =(Stage)((Node)event.getSource()).getScene().getWindow();
+			window.setScene(scene);
+			numplayer = numplay.getText();
+		}
 	}
 
 	/**
@@ -134,10 +160,26 @@ public class GUIMainController {
 	 * @throws Exception
 	 */
 	public void betClick(ActionEvent event,TextField betamount) throws Exception {
-		model.currentPlayerBet(Integer.parseInt(betamount.getText()));
-		betamount.setText("");
-		curbal.setText(""+model.getCurrentPlayer().getBalance());
-		model.endTurn();
+		if (IsANumber(betamount.getText())==false) {
+			Alert invalidNumber = new Alert(AlertType.INFORMATION);
+			invalidNumber.setTitle("Invalid Input");
+			invalidNumber.setHeaderText("Please enter a valid number above 0.");
+			invalidNumber.showAndWait();
+		}
+		else if (Integer.parseInt(betamount.getText()) > model.getCurrentPlayer().getBalance()) {
+			Alert invalidNumber = new Alert(AlertType.INFORMATION);
+			invalidNumber.setTitle("NEED MORE MONEY!");
+			invalidNumber.setHeaderText("You don't have this much money!!!!");
+			invalidNumber.showAndWait();
+		}
+		else {
+			model.currentPlayerBet(Integer.parseInt(betamount.getText()));
+			betamount.setText("");
+			curbal.setText(""+model.getCurrentPlayer().getBalance());
+			model.endTurn();
+			nextPlayerTurn();
+		}
+
 		if (model.isDealersTurn()){
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(getClass().getResource("/view/ProjectTurn.fxml"));
@@ -151,7 +193,6 @@ public class GUIMainController {
 			window.setScene(scene);
 		}
 
-		nextPlayerTurn();
 	}
 	
 	/**
