@@ -119,13 +119,13 @@ public class GUIMainController {
 		if (IsANumber(numplayer) == false) {
 			Alert invalidNumber = new Alert(AlertType.INFORMATION);
 			invalidNumber.setTitle("Invalid Input");
-			invalidNumber.setHeaderText("Please enter a valid number above 0.");
+			invalidNumber.setHeaderText("Please enter a number between 1 and 7.");
 			invalidNumber.showAndWait();
 		}
-		else if (Integer.parseInt(numplayer) <= 0 ) {
+		else if (Integer.parseInt(numplayer) <= 0 || Integer.parseInt(numplayer) > 7) {
 			Alert invalidNumber = new Alert(AlertType.INFORMATION);
 			invalidNumber.setTitle("Invalid Input");
-			invalidNumber.setHeaderText("Please enter a valid number above 0.");
+			invalidNumber.setHeaderText("Please enter a number between 1 and 7.");
 			invalidNumber.showAndWait();
 		}
 		else {
@@ -172,6 +172,12 @@ public class GUIMainController {
 			invalidNumber.setHeaderText("You don't have this much money!!!!");
 			invalidNumber.showAndWait();
 		}
+		else if (Integer.parseInt(betamount.getText()) < 0) {
+			Alert invalidNumber = new Alert(AlertType.INFORMATION);
+			invalidNumber.setTitle("Invalid bet");
+			invalidNumber.setHeaderText("Please enter a bet greater than 0.");
+			invalidNumber.showAndWait();}
+			
 		else {
 			model.currentPlayerBet(Integer.parseInt(betamount.getText()));
 			betamount.setText("");
