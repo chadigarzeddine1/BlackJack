@@ -88,7 +88,11 @@ public final class Model {
 		}
 		return true;
 	}
-
+	
+	/**
+	 * Check if the player has played their split hands 
+	 * @return true if all players who split have played their turn
+	 */
 	public boolean allPlayerSplitStand() {
 		for (Player p : players) {
 			if (p.getSplitStanding() == false) {
@@ -98,6 +102,10 @@ public final class Model {
 		return true;
 	}
 	
+	/**
+	 * Get information from the Dealer object
+	 * @return return the dealer object 
+	 */
 	public Player getDealer() {
 		return new Player(this.dealer);
 	}
@@ -150,7 +158,7 @@ public final class Model {
 				}
 			}
 		}
-
+		
 		ArrayList<Player> playersToRemove = new ArrayList<Player>();
 		for (Player p : players) {
 			if (p.getBalance() <= 0) {
