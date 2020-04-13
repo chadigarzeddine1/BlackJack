@@ -17,14 +17,14 @@ To be able to play this game a **Java JDK 8 System** is required. <a href  = "ht
 3) Extract files from ZIP file </br>
 > Could look like any of this two: </br>
 \Users\Username\Downloads\BlackJack-05-23-master </br> 
-\Users\Username\Downloads\BlackJack-05-23-Demo1  </br>
+\Users\Username\Downloads\BlackJack-05-23-Final-Demo  </br>
 
 ### Terminal
 1) Open the computer's terminal </br>
 2) Locate the repository you downloaded inside the terminal </br>
 > Terminal: cd Download\BlackJack-05-23-master </br>
-3) Compile: javac Launcher.java </br>
-4) Run: java Launcher </br>
+3) Compile: javac GraphicalGameUI.java </br>
+4) Run: java GraphicalGameUI </br>
 
 ### Eclipse
 1) Download the files from the GitHub **Master** repository</br>
@@ -33,11 +33,22 @@ To be able to play this game a **Java JDK 8 System** is required. <a href  = "ht
 4) Name it as you wish </br>
 5) Go to Import &#8594; General &#8594; File System &#8594; Browse &#8594; Downloads &#8594; BlackJack-05-23-master &#8594; src </br>
 6) Import every file from the src folder to the game </br>
-7) Go to the laucher class "left" click and go to "Run As" then **click** on Java Aplication </br>
+7) Go to the GraphicalGameUI class "left" click and go to "Run As" then **click** on Java Aplication </br>
 
 ## Versions
 **v1.0** </br>
 - Text Based Version of the game</br>
+</br>
+**v2.0** </br>
+- GUI Implementation</br>
+</br>
+**v3.0** </br>
+- Text Based Version working</br>
+- GUI fully implemented</br>
+</br>
+**v4.0** </br>
+- Bug fixes and improvement</br>
+- Errors checked and fixed</br>
 </br>
 
 
@@ -47,4 +58,4 @@ Raymond Vong </br>
 Andrew Barnett </br>
 Chadi Garzeddine </br>
 
-Last updated: March 1, 2020.
+Last updated: April 13, 2020.
