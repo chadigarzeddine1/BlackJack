@@ -323,11 +323,19 @@ public class GUIMainController {
 	public void nextPlayerTurn()  {
 		if (p1 != null && model.getCurrentPlayer().getHand().size() > 0 && !model.isDealersTurn()) {
 			System.out.println("First hand ever: " + model.getCurrentPlayer().getHand());
+			System.out.println(p1.getX());
 			p1.setLayoutX(p1Startx);
 			p2.setLayoutX(p2Startx);
-			p3.setLayoutX(-238);
-			p4.setLayoutX(-238);
-			p5.setLayoutX(-238);
+			anim.cardMove(p1, p1Startx, p1Startx);
+			anim.cardMove(p2, p2Startx, p2Startx);
+//			anim.cardMoveRev(p3, 624,518);
+
+			anim.cardMove(p3, 61, 61);
+			anim.cardMove(p4, 61,61);
+			anim.cardMove(p5, 61,61);
+			anim.cardMoveUp(p3, 276, 276);
+			anim.cardMoveUp(p4, 276,276);
+			anim.cardMoveUp(p5, 276,276);
 			anim.cardFlip(p1,model.getCurrentPlayer(),1,this);
 			anim.cardFlip(p2,model.getCurrentPlayer(),2,this);
 			sump.setText("Sum: "+ model.getCurrentPlayer().sum()+"");
@@ -349,10 +357,14 @@ public class GUIMainController {
 		p2.setVisible(true);
 		p1.setLayoutX(p1Startx);
 		p2.setLayoutX(p2Startx);
-		p2.setLayoutX(-238);
-		p3.setLayoutX(-238);
-		p4.setLayoutX(-238);
-		p5.setLayoutX(-238);
+		anim.cardMove(p1, p1Startx, p1Startx);
+		anim.cardMove(p2, p2Startx, p2Startx);
+		anim.cardMove(p3, 61, 61);
+		anim.cardMove(p4, 61,61);
+		anim.cardMove(p5, 61,61);
+		anim.cardMoveUp(p3, 276, 276);
+		anim.cardMoveUp(p4, 276,276);
+		anim.cardMoveUp(p5, 276,276);
 		//anim.splitCardFlip(p1,model.getCurrentPlayer(),1,this);
 		//anim.splitCardFlip(p2,model.getCurrentPlayer(),2,this);
 		sump.setText("Sum: "+ model.getCurrentPlayer().splitSum()+"");

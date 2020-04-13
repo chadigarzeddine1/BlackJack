@@ -86,6 +86,15 @@ public class Animations {
 		move.play();
 	}
 	
+	public void cardMoveUp(ImageView c,int sx,int ex) {
+		TranslateTransition move = new TranslateTransition();
+		move.setDuration(Duration.millis(2000));
+		move.setCycleCount(1);
+//		move.setFromX(sx-61);
+		move.setToY( ex-sx);
+		move.setNode(c);
+		move.play();
+	}
 	
-	
+
 }
